@@ -25,7 +25,7 @@ if not "%~1" == "" goto debugFile
 
 @echo on 
 
-"D:\Program Files (x86)\IAR Systems\Embedded Workbench 8.0\common\bin\cspybat" -f "C:\Users\ncer\Desktop\Rotor_Code\EWARM\settings\Rotor_Code.Rotor_Code.general.xcl" --backend -f "C:\Users\ncer\Desktop\Rotor_Code\EWARM\settings\Rotor_Code.Rotor_Code.driver.xcl" 
+"D:\Program Files (x86)\IAR Systems\Embedded Workbench 8.0\common\bin\cspybat" -f "C:\Users\ncer\Desktop\Rotor\EWARM\settings\Rotor_Code.Rotor_Code.general.xcl" --backend -f "C:\Users\ncer\Desktop\Rotor\EWARM\settings\Rotor_Code.Rotor_Code.driver.xcl" 
 
 @echo off 
 goto end 
@@ -34,7 +34,7 @@ goto end
 
 @echo on 
 
-"D:\Program Files (x86)\IAR Systems\Embedded Workbench 8.0\common\bin\cspybat" -f "C:\Users\ncer\Desktop\Rotor_Code\EWARM\settings\Rotor_Code.Rotor_Code.general.xcl" "--debug_file=%~1" --backend -f "C:\Users\ncer\Desktop\Rotor_Code\EWARM\settings\Rotor_Code.Rotor_Code.driver.xcl" 
+"D:\Program Files (x86)\IAR Systems\Embedded Workbench 8.0\common\bin\cspybat" -f "C:\Users\ncer\Desktop\Rotor\EWARM\settings\Rotor_Code.Rotor_Code.general.xcl" "--debug_file=%~1" --backend -f "C:\Users\ncer\Desktop\Rotor\EWARM\settings\Rotor_Code.Rotor_Code.driver.xcl" 
 
 @echo off 
 :end

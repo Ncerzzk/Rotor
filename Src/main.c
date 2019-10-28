@@ -30,7 +30,11 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "uart_ext.h"
+#include "i2c_ext.h"
+#include "icm20600.h"
+#include "easy_angle.h"
+#include "control.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -93,20 +97,32 @@ int main(void)
   /* USER CODE END SysInit */
 
   /* Initialize all configured peripherals */
-  
   MX_GPIO_Init();
   MX_DMA_Init();
   MX_ADC1_Init();
   MX_I2C1_Init();
   MX_SPI2_Init();
   MX_TIM1_Init();
-  MX_TIM2_Init();
+  MX_TIM2_Init(); 
   MX_TIM3_Init();
   MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
-  //ESC_Set_Range(3200,9600);
-  TIM3->CCR3=3200;
-  TIM3->CCR4=3200;
+  I2C_EXT_Init(&hi2c1,GPIOB,GPIO_PIN_8,GPIOB,GPIO_PIN_9,(void *)MX_I2C1_Init);
+  MPU9250_Init(&MPU9250);
+  
+  Servors_Init();
+  ESC_Init();
+  
+  
+  HAL_TIM_PWM_Start(&htim2,TIM_CHANNEL_1);
+  HAL_TIM_PWM_Start(&htim2,TIM_CHANNEL_2);
+  
+  HAL_TIM_PWM_Start(&htim3,TIM_CHANNEL_3);
+  HAL_TIM_PWM_Start(&htim3,TIM_CHANNEL_4);
+  
+  HAL_Delay(5000);
+  debug_uart_init(&huart1,BLOCK,DMA);
+  uprintf("hello,world!\r\n");
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -115,6 +131,11 @@ int main(void)
   {
     /* USER CODE END WHILE */
 
+    if(buffer_rx_OK){
+      UART_Command_Analize_And_Call();
+    }
+    Control_Loop();
+    HAL_Delay(5);
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */

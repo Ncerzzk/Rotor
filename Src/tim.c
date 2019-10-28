@@ -137,7 +137,7 @@ void MX_TIM3_Init(void)
     Error_Handler();
   }
   sConfigOC.OCMode = TIM_OCMODE_PWM1;
-  sConfigOC.Pulse = 9600;
+  sConfigOC.Pulse = 0;
   sConfigOC.OCPolarity = TIM_OCPOLARITY_HIGH;
   sConfigOC.OCFastMode = TIM_OCFAST_DISABLE;
   if (HAL_TIM_PWM_ConfigChannel(&htim3, &sConfigOC, TIM_CHANNEL_3) != HAL_OK)
@@ -330,6 +330,17 @@ void ESC_Set_Range(int low,int high){
   TIM3->CCR4=low;
 
   HAL_Delay(1000);
+}
+
+int Caculate_Cnt(TIM_HandleTypeDef * htim,uint8_t pclk,int width){
+  // 脉宽 单位 us
+  // pclk 单位 Mhz
+  uint8_t PSC=htim->Init.Prescaler+1;
+
+  int result=0;
+ 
+  result=width*pclk/PSC;
+  return result;
 }
 /* USER CODE END 1 */
 

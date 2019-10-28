@@ -46,6 +46,7 @@ void HAL_TIM_MspPostInit(TIM_HandleTypeDef *htim);
                                                             
 /* USER CODE BEGIN Prototypes */
 void ESC_Set_Range(int low,int high);
+int Caculate_Cnt(TIM_HandleTypeDef * htim,uint8_t plck,int width);
 /* USER CODE END Prototypes */
 
 #ifdef __cplusplus
