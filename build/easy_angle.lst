@@ -1,0 +1,437 @@
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccA8VHqm.s 			page 1
+
+
+   1              		.cpu cortex-m3
+   2              		.eabi_attribute 20, 1
+   3              		.eabi_attribute 21, 1
+   4              		.eabi_attribute 23, 3
+   5              		.eabi_attribute 24, 1
+   6              		.eabi_attribute 25, 1
+   7              		.eabi_attribute 26, 1
+   8              		.eabi_attribute 30, 1
+   9              		.eabi_attribute 34, 1
+  10              		.eabi_attribute 18, 4
+  11              		.file	"easy_angle.c"
+  12              		.text
+  13              	.Ltext0:
+  14              		.cfi_sections	.debug_frame
+  15              		.global	__aeabi_i2f
+  16              		.global	__aeabi_fmul
+  17              		.global	__aeabi_fadd
+  18              		.global	__aeabi_fcmplt
+  19              		.global	__aeabi_fdiv
+  20              		.global	__aeabi_f2d
+  21              		.global	__aeabi_ddiv
+  22              		.global	__aeabi_d2f
+  23              		.global	__aeabi_fsub
+  24              		.global	__aeabi_dmul
+  25              		.global	__aeabi_dadd
+  26              		.global	__aeabi_dsub
+  27              		.section	.text.get_angle,"ax",%progbits
+  28              		.align	1
+  29              		.global	get_angle
+  30              		.arch armv7-m
+  31              		.syntax unified
+  32              		.thumb
+  33              		.thumb_func
+  34              		.fpu softvfp
+  36              	get_angle:
+  37              	.LVL0:
+  38              	.LFB0:
+  39              		.file 1 "mylib/easy_angle.c"
+   1:mylib/easy_angle.c **** #include "easy_angle.h"
+   2:mylib/easy_angle.c **** #include "math.h"
+   3:mylib/easy_angle.c **** 
+   4:mylib/easy_angle.c **** float gyro_k[3]={0.97,0.97,0.9};
+   5:mylib/easy_angle.c **** 
+   6:mylib/easy_angle.c **** void get_angle(int16_t * ac,float * angle_speed,float * angle,float *ac_angle){
+  40              		.loc 1 6 79 view -0
+  41              		.cfi_startproc
+  42              		@ args = 0, pretend = 0, frame = 16
+  43              		@ frame_needed = 0, uses_anonymous_args = 0
+   7:mylib/easy_angle.c ****   float R=0;
+  44              		.loc 1 7 3 view .LVU1
+   8:mylib/easy_angle.c ****   float delta[3];
+  45              		.loc 1 8 3 view .LVU2
+   9:mylib/easy_angle.c ****   if(!ac){
+  46              		.loc 1 9 3 view .LVU3
+  47              		.loc 1 9 5 is_stmt 0 view .LVU4
+  48 0000 0028     		cmp	r0, #0
+  49 0002 00F0B680 		beq	.L9
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccA8VHqm.s 			page 2
+
+
+   6:mylib/easy_angle.c ****   float R=0;
+  50              		.loc 1 6 79 view .LVU5
+  51 0006 2DE9F043 		push	{r4, r5, r6, r7, r8, r9, lr}
+  52              	.LCFI0:
+  53              		.cfi_def_cfa_offset 28
+  54              		.cfi_offset 4, -28
+  55              		.cfi_offset 5, -24
+  56              		.cfi_offset 6, -20
+  57              		.cfi_offset 7, -16
+  58              		.cfi_offset 8, -12
+  59              		.cfi_offset 9, -8
+  60              		.cfi_offset 14, -4
+  61 000a 85B0     		sub	sp, sp, #20
+  62              	.LCFI1:
+  63              		.cfi_def_cfa_offset 48
+  64 000c 8846     		mov	r8, r1
+  65 000e 1546     		mov	r5, r2
+  66 0010 1E46     		mov	r6, r3
+  67 0012 0746     		mov	r7, r0
+  10:mylib/easy_angle.c ****     return ;
+  11:mylib/easy_angle.c ****   }
+  12:mylib/easy_angle.c ****   
+  13:mylib/easy_angle.c ****   R=sqrtf(((float)ac[0]*ac[0]+ac[1]*ac[1]+ac[2]*ac[2]));  //表达式中有float，会自动类型转化为float
+  68              		.loc 1 13 3 is_stmt 1 view .LVU6
+  69              		.loc 1 13 12 is_stmt 0 view .LVU7
+  70 0014 B0F90000 		ldrsh	r0, [r0]
+  71              	.LVL1:
+  72              		.loc 1 13 12 view .LVU8
+  73 0018 FFF7FEFF 		bl	__aeabi_i2f
+  74              	.LVL2:
+  75              		.loc 1 13 12 view .LVU9
+  76 001c 0146     		mov	r1, r0
+  77              		.loc 1 13 24 view .LVU10
+  78 001e FFF7FEFF 		bl	__aeabi_fmul
+  79              	.LVL3:
+  80 0022 0446     		mov	r4, r0
+  81              		.loc 1 13 33 view .LVU11
+  82 0024 B7F90200 		ldrsh	r0, [r7, #2]
+  83              		.loc 1 13 30 view .LVU12
+  84 0028 00FB00F0 		mul	r0, r0, r0
+  85 002c FFF7FEFF 		bl	__aeabi_i2f
+  86              	.LVL4:
+  87 0030 2146     		mov	r1, r4
+  88 0032 FFF7FEFF 		bl	__aeabi_fadd
+  89              	.LVL5:
+  90 0036 0446     		mov	r4, r0
+  91              		.loc 1 13 45 view .LVU13
+  92 0038 B7F90400 		ldrsh	r0, [r7, #4]
+  93              		.loc 1 13 5 view .LVU14
+  94 003c 00FB00F0 		mul	r0, r0, r0
+  95 0040 FFF7FEFF 		bl	__aeabi_i2f
+  96              	.LVL6:
+  97 0044 2146     		mov	r1, r4
+  98 0046 FFF7FEFF 		bl	__aeabi_fadd
+  99              	.LVL7:
+ 100 004a FFF7FEFF 		bl	sqrtf
+ 101              	.LVL8:
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccA8VHqm.s 			page 3
+
+
+ 102 004e 8146     		mov	r9, r0
+ 103              	.LVL9:
+  14:mylib/easy_angle.c ****   //原来的写法
+  15:mylib/easy_angle.c ****   //R=sqrtf((float)(ac[0]*ac[0]+ac[1]*ac[1]+ac[2]*ac[2]));
+  16:mylib/easy_angle.c ****   //有问题，当数比较大时，如0x7FFF，相乘之后会超过uint16_t范围，而转化为float是在溢出发生后，所以没
+  17:mylib/easy_angle.c ****   
+  18:mylib/easy_angle.c ****   if(fabs(R)<1e-6f){
+ 104              		.loc 1 18 3 is_stmt 1 view .LVU15
+ 105              		.loc 1 18 6 is_stmt 0 view .LVU16
+ 106 0050 20F00040 		bic	r0, r0, #-2147483648
+ 107              	.LVL10:
+ 108              		.loc 1 18 5 view .LVU17
+ 109 0054 4C49     		ldr	r1, .L12+16
+ 110 0056 FFF7FEFF 		bl	__aeabi_fcmplt
+ 111              	.LVL11:
+ 112 005a 0028     		cmp	r0, #0
+ 113 005c 40F08680 		bne	.L1
+ 114              	.LBB2:
+  19:mylib/easy_angle.c ****     return ;
+  20:mylib/easy_angle.c ****   }
+  21:mylib/easy_angle.c ****   for(int i=0;i<3;++i){
+ 115              		.loc 1 21 11 view .LVU18
+ 116 0060 0024     		movs	r4, #0
+ 117 0062 17E0     		b	.L3
+ 118              	.LVL12:
+ 119              	.L4:
+  22:mylib/easy_angle.c ****     ac_angle[i]=acosf((float)ac[i]/R)*180/3.14;
+ 120              		.loc 1 22 5 is_stmt 1 discriminator 3 view .LVU19
+ 121              		.loc 1 22 23 is_stmt 0 discriminator 3 view .LVU20
+ 122 0064 37F91400 		ldrsh	r0, [r7, r4, lsl #1]
+ 123 0068 FFF7FEFF 		bl	__aeabi_i2f
+ 124              	.LVL13:
+ 125              		.loc 1 22 17 discriminator 3 view .LVU21
+ 126 006c 4946     		mov	r1, r9
+ 127 006e FFF7FEFF 		bl	__aeabi_fdiv
+ 128              	.LVL14:
+ 129 0072 FFF7FEFF 		bl	acosf
+ 130              	.LVL15:
+ 131              		.loc 1 22 38 discriminator 3 view .LVU22
+ 132 0076 4549     		ldr	r1, .L12+20
+ 133 0078 FFF7FEFF 		bl	__aeabi_fmul
+ 134              	.LVL16:
+ 135 007c FFF7FEFF 		bl	__aeabi_f2d
+ 136              	.LVL17:
+ 137              		.loc 1 22 42 discriminator 3 view .LVU23
+ 138 0080 3DA3     		adr	r3, .L12
+ 139 0082 D3E90023 		ldrd	r2, [r3]
+ 140 0086 FFF7FEFF 		bl	__aeabi_ddiv
+ 141              	.LVL18:
+ 142 008a FFF7FEFF 		bl	__aeabi_d2f
+ 143              	.LVL19:
+ 144              		.loc 1 22 16 discriminator 3 view .LVU24
+ 145 008e 46F82400 		str	r0, [r6, r4, lsl #2]	@ float
+  21:mylib/easy_angle.c ****     ac_angle[i]=acosf((float)ac[i]/R)*180/3.14;
+ 146              		.loc 1 21 19 is_stmt 1 discriminator 3 view .LVU25
+ 147 0092 0134     		adds	r4, r4, #1
+ 148              	.LVL20:
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccA8VHqm.s 			page 4
+
+
+ 149              	.L3:
+  21:mylib/easy_angle.c ****     ac_angle[i]=acosf((float)ac[i]/R)*180/3.14;
+ 150              		.loc 1 21 15 discriminator 1 view .LVU26
+  21:mylib/easy_angle.c ****     ac_angle[i]=acosf((float)ac[i]/R)*180/3.14;
+ 151              		.loc 1 21 3 is_stmt 0 discriminator 1 view .LVU27
+ 152 0094 022C     		cmp	r4, #2
+ 153 0096 E5DD     		ble	.L4
+ 154              	.LBE2:
+ 155              	.LBB3:
+  23:mylib/easy_angle.c ****   }
+  24:mylib/easy_angle.c ****   
+  25:mylib/easy_angle.c ****   for(int i=0;i<3;++i){
+ 156              		.loc 1 25 11 view .LVU28
+ 157 0098 0024     		movs	r4, #0
+ 158              	.LVL21:
+ 159              		.loc 1 25 11 view .LVU29
+ 160 009a 0BE0     		b	.L5
+ 161              	.LVL22:
+ 162              	.L6:
+  26:mylib/easy_angle.c ****     delta[i]=ac_angle[i]-angle[i];
+ 163              		.loc 1 26 5 is_stmt 1 discriminator 3 view .LVU30
+ 164              		.loc 1 26 22 is_stmt 0 discriminator 3 view .LVU31
+ 165 009c A700     		lsls	r7, r4, #2
+ 166              		.loc 1 26 25 discriminator 3 view .LVU32
+ 167 009e 55F82410 		ldr	r1, [r5, r4, lsl #2]	@ float
+ 168 00a2 56F82400 		ldr	r0, [r6, r4, lsl #2]	@ float
+ 169 00a6 FFF7FEFF 		bl	__aeabi_fsub
+ 170              	.LVL23:
+ 171              		.loc 1 26 13 discriminator 3 view .LVU33
+ 172 00aa 04AB     		add	r3, sp, #16
+ 173 00ac 1F44     		add	r7, r7, r3
+ 174 00ae 47F80C0C 		str	r0, [r7, #-12]	@ float
+  25:mylib/easy_angle.c ****     delta[i]=ac_angle[i]-angle[i];
+ 175              		.loc 1 25 19 is_stmt 1 discriminator 3 view .LVU34
+ 176 00b2 0134     		adds	r4, r4, #1
+ 177              	.LVL24:
+ 178              	.L5:
+  25:mylib/easy_angle.c ****     delta[i]=ac_angle[i]-angle[i];
+ 179              		.loc 1 25 15 discriminator 1 view .LVU35
+  25:mylib/easy_angle.c ****     delta[i]=ac_angle[i]-angle[i];
+ 180              		.loc 1 25 3 is_stmt 0 discriminator 1 view .LVU36
+ 181 00b4 022C     		cmp	r4, #2
+ 182 00b6 F1DD     		ble	.L6
+ 183              	.LBE3:
+  27:mylib/easy_angle.c ****   }
+  28:mylib/easy_angle.c **** 
+  29:mylib/easy_angle.c ****   /*
+  30:mylib/easy_angle.c ****     需要注意，这里angle[0]到底是加上angle_speed[1]还是angle_speed[2]还是angle_speed[0]与板子
+  31:mylib/easy_angle.c ****     的安装位置息息相关。
+  32:mylib/easy_angle.c ****     
+  33:mylib/easy_angle.c ****     另外，积分的符号，即angle[0]+=angle_speed，还是angle[0]-=angle_speed，也与安装有关
+  34:mylib/easy_angle.c ****     如果angle_speed的方向与角度方向相反，这里就要用-的。
+  35:mylib/easy_angle.c ****   */
+  36:mylib/easy_angle.c ****   angle[0]+=delta[0]*(1-gyro_k[0])+angle_speed[1]*gyro_k[0]*0.005;
+ 184              		.loc 1 36 3 is_stmt 1 view .LVU37
+ 185              		.loc 1 36 31 is_stmt 0 view .LVU38
+ 186 00b8 354C     		ldr	r4, .L12+24
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccA8VHqm.s 			page 5
+
+
+ 187              	.LVL25:
+ 188              		.loc 1 36 31 view .LVU39
+ 189 00ba D4F80090 		ldr	r9, [r4]	@ float
+ 190              	.LVL26:
+ 191              		.loc 1 36 24 view .LVU40
+ 192 00be 4946     		mov	r1, r9
+ 193 00c0 4FF07E50 		mov	r0, #1065353216
+ 194 00c4 FFF7FEFF 		bl	__aeabi_fsub
+ 195              	.LVL27:
+ 196 00c8 0146     		mov	r1, r0
+ 197              		.loc 1 36 21 view .LVU41
+ 198 00ca 0198     		ldr	r0, [sp, #4]	@ float
+ 199 00cc FFF7FEFF 		bl	__aeabi_fmul
+ 200              	.LVL28:
+ 201 00d0 FFF7FEFF 		bl	__aeabi_f2d
+ 202              	.LVL29:
+ 203 00d4 0646     		mov	r6, r0
+ 204              	.LVL30:
+ 205              		.loc 1 36 21 view .LVU42
+ 206 00d6 0F46     		mov	r7, r1
+ 207              		.loc 1 36 50 view .LVU43
+ 208 00d8 D8F80410 		ldr	r1, [r8, #4]	@ float
+ 209 00dc 4846     		mov	r0, r9
+ 210 00de FFF7FEFF 		bl	__aeabi_fmul
+ 211              	.LVL31:
+ 212 00e2 FFF7FEFF 		bl	__aeabi_f2d
+ 213              	.LVL32:
+ 214              		.loc 1 36 60 view .LVU44
+ 215 00e6 26A3     		adr	r3, .L12+8
+ 216 00e8 D3E90023 		ldrd	r2, [r3]
+ 217 00ec FFF7FEFF 		bl	__aeabi_dmul
+ 218              	.LVL33:
+ 219 00f0 0246     		mov	r2, r0
+ 220 00f2 0B46     		mov	r3, r1
+ 221              		.loc 1 36 35 view .LVU45
+ 222 00f4 3046     		mov	r0, r6
+ 223 00f6 3946     		mov	r1, r7
+ 224 00f8 FFF7FEFF 		bl	__aeabi_dadd
+ 225              	.LVL34:
+ 226 00fc 0646     		mov	r6, r0
+ 227 00fe 0F46     		mov	r7, r1
+ 228              		.loc 1 36 11 view .LVU46
+ 229 0100 2868     		ldr	r0, [r5]	@ float
+ 230 0102 FFF7FEFF 		bl	__aeabi_f2d
+ 231              	.LVL35:
+ 232 0106 3246     		mov	r2, r6
+ 233 0108 3B46     		mov	r3, r7
+ 234 010a FFF7FEFF 		bl	__aeabi_dadd
+ 235              	.LVL36:
+ 236 010e FFF7FEFF 		bl	__aeabi_d2f
+ 237              	.LVL37:
+ 238 0112 2860     		str	r0, [r5]	@ float
+  37:mylib/easy_angle.c ****   angle[1]+=delta[1]*(1-gyro_k[1])-angle_speed[0]*gyro_k[1]*0.005;
+ 239              		.loc 1 37 3 is_stmt 1 view .LVU47
+ 240              		.loc 1 37 31 is_stmt 0 view .LVU48
+ 241 0114 6468     		ldr	r4, [r4, #4]	@ float
+ 242              		.loc 1 37 24 view .LVU49
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccA8VHqm.s 			page 6
+
+
+ 243 0116 2146     		mov	r1, r4
+ 244 0118 4FF07E50 		mov	r0, #1065353216
+ 245 011c FFF7FEFF 		bl	__aeabi_fsub
+ 246              	.LVL38:
+ 247 0120 0146     		mov	r1, r0
+ 248              		.loc 1 37 21 view .LVU50
+ 249 0122 0298     		ldr	r0, [sp, #8]	@ float
+ 250 0124 FFF7FEFF 		bl	__aeabi_fmul
+ 251              	.LVL39:
+ 252 0128 FFF7FEFF 		bl	__aeabi_f2d
+ 253              	.LVL40:
+ 254 012c 0646     		mov	r6, r0
+ 255 012e 0F46     		mov	r7, r1
+ 256              		.loc 1 37 50 view .LVU51
+ 257 0130 D8F80010 		ldr	r1, [r8]	@ float
+ 258 0134 2046     		mov	r0, r4
+ 259 0136 FFF7FEFF 		bl	__aeabi_fmul
+ 260              	.LVL41:
+ 261 013a FFF7FEFF 		bl	__aeabi_f2d
+ 262              	.LVL42:
+ 263              		.loc 1 37 60 view .LVU52
+ 264 013e 10A3     		adr	r3, .L12+8
+ 265 0140 D3E90023 		ldrd	r2, [r3]
+ 266 0144 FFF7FEFF 		bl	__aeabi_dmul
+ 267              	.LVL43:
+ 268 0148 0246     		mov	r2, r0
+ 269 014a 0B46     		mov	r3, r1
+ 270              		.loc 1 37 35 view .LVU53
+ 271 014c 3046     		mov	r0, r6
+ 272 014e 3946     		mov	r1, r7
+ 273 0150 FFF7FEFF 		bl	__aeabi_dsub
+ 274              	.LVL44:
+ 275 0154 0646     		mov	r6, r0
+ 276 0156 0F46     		mov	r7, r1
+ 277              		.loc 1 37 11 view .LVU54
+ 278 0158 6868     		ldr	r0, [r5, #4]	@ float
+ 279 015a FFF7FEFF 		bl	__aeabi_f2d
+ 280              	.LVL45:
+ 281 015e 3246     		mov	r2, r6
+ 282 0160 3B46     		mov	r3, r7
+ 283 0162 FFF7FEFF 		bl	__aeabi_dadd
+ 284              	.LVL46:
+ 285 0166 FFF7FEFF 		bl	__aeabi_d2f
+ 286              	.LVL47:
+ 287 016a 6860     		str	r0, [r5, #4]	@ float
+ 288              	.L1:
+  38:mylib/easy_angle.c ****   /* 偏航角计算
+  39:mylib/easy_angle.c ****   float temp1=sin((angle[0]-90)/180.0f*3.14);
+  40:mylib/easy_angle.c ****   float temp2=sin((angle[1]-90)/180.0f*3.14);
+  41:mylib/easy_angle.c ****   
+  42:mylib/easy_angle.c ****   float temp3=cos((angle[0]-90)/180.0f*3.14);
+  43:mylib/easy_angle.c ****   float temp4=cos((angle[1]-90)/180.0f*3.14);
+  44:mylib/easy_angle.c ****   angle[2]+=(angle_speed[0]*temp1+angle_speed[0]*temp2+\
+  45:mylib/easy_angle.c ****   angle_speed[1]*temp1+angle_speed[1]*temp2+\
+  46:mylib/easy_angle.c ****   angle_speed[2]*temp3+angle_speed[2]*temp4)*0.005;
+  47:mylib/easy_angle.c ****   */
+  48:mylib/easy_angle.c **** }...
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccA8VHqm.s 			page 7
+
+
+ 289              		.loc 1 48 1 view .LVU55
+ 290 016c 05B0     		add	sp, sp, #20
+ 291              	.LCFI2:
+ 292              		.cfi_def_cfa_offset 28
+ 293              		@ sp needed
+ 294 016e BDE8F083 		pop	{r4, r5, r6, r7, r8, r9, pc}
+ 295              	.LVL48:
+ 296              	.L9:
+ 297              	.LCFI3:
+ 298              		.cfi_def_cfa_offset 0
+ 299              		.cfi_restore 4
+ 300              		.cfi_restore 5
+ 301              		.cfi_restore 6
+ 302              		.cfi_restore 7
+ 303              		.cfi_restore 8
+ 304              		.cfi_restore 9
+ 305              		.cfi_restore 14
+ 306              		.loc 1 48 1 view .LVU56
+ 307 0172 7047     		bx	lr
+ 308              	.L13:
+ 309 0174 AFF30080 		.align	3
+ 310              	.L12:
+ 311 0178 1F85EB51 		.word	1374389535
+ 312 017c B81E0940 		.word	1074339512
+ 313 0180 7B14AE47 		.word	1202590843
+ 314 0184 E17A743F 		.word	1064598241
+ 315 0188 BD378635 		.word	897988541
+ 316 018c 00003443 		.word	1127481344
+ 317 0190 00000000 		.word	.LANCHOR0
+ 318              		.cfi_endproc
+ 319              	.LFE0:
+ 321              		.global	gyro_k
+ 322              		.section	.data.gyro_k,"aw"
+ 323              		.align	2
+ 324              		.set	.LANCHOR0,. + 0
+ 327              	gyro_k:
+ 328 0000 EC51783F 		.word	1064849900
+ 329 0004 EC51783F 		.word	1064849900
+ 330 0008 6666663F 		.word	1063675494
+ 331              		.text
+ 332              	.Letext0:
+ 333              		.file 2 "c:\\arm_gcc\\arm-none-eabi\\include\\machine\\_default_types.h"
+ 334              		.file 3 "c:\\arm_gcc\\arm-none-eabi\\include\\sys\\_stdint.h"
+ 335              		.file 4 "c:\\arm_gcc\\arm-none-eabi\\include\\sys\\lock.h"
+ 336              		.file 5 "c:\\arm_gcc\\arm-none-eabi\\include\\sys\\_types.h"
+ 337              		.file 6 "c:\\arm_gcc\\lib\\gcc\\arm-none-eabi\\9.2.1\\include\\stddef.h"
+ 338              		.file 7 "c:\\arm_gcc\\arm-none-eabi\\include\\sys\\reent.h"
+ 339              		.file 8 "c:\\arm_gcc\\arm-none-eabi\\include\\math.h"
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccA8VHqm.s 			page 8
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 easy_angle.c
+C:\Users\ncer\AppData\Local\Temp\ccA8VHqm.s:28     .text.get_angle:00000000 $t
+C:\Users\ncer\AppData\Local\Temp\ccA8VHqm.s:36     .text.get_angle:00000000 get_angle
+C:\Users\ncer\AppData\Local\Temp\ccA8VHqm.s:311    .text.get_angle:00000178 $d
+C:\Users\ncer\AppData\Local\Temp\ccA8VHqm.s:327    .data.gyro_k:00000000 gyro_k
+C:\Users\ncer\AppData\Local\Temp\ccA8VHqm.s:323    .data.gyro_k:00000000 $d
+
+UNDEFINED SYMBOLS
+__aeabi_i2f
+__aeabi_fmul
+__aeabi_fadd
+__aeabi_fcmplt
+__aeabi_fdiv
+__aeabi_f2d
+__aeabi_ddiv
+__aeabi_d2f
+__aeabi_fsub
+__aeabi_dmul
+__aeabi_dadd
+__aeabi_dsub
+sqrtf
+acosf

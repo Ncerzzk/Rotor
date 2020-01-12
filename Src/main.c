@@ -35,6 +35,7 @@
 #include "icm20600.h"
 #include "easy_angle.h"
 #include "control.h"
+#include "nrf24l01.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -119,9 +120,19 @@ int main(void)
   
   HAL_TIM_PWM_Start(&htim3,TIM_CHANNEL_3);
   HAL_TIM_PWM_Start(&htim3,TIM_CHANNEL_4);
+
+  NRF_Init(&hspi2,1,CSN_GPIO_Port,CSN_Pin,CE_GPIO_Port,CE_Pin);
+  uint8_t Rx_Addr[3][5]={
+    {0x10,0x10,0x10,0x10,0x11},
+    {0,0,0,0,0},
+    {0,0,0,0,0}
+  };
+  NRF_Set_Rx_Addr(Rx_Addr,sizeof(Rx_Addr));
   
   HAL_Delay(5000);
   debug_uart_init(&huart1,BLOCK,DMA);
+  Set_Servor(L_Servor,0);
+  Set_Servor(R_Servor,0);
   uprintf("hello,world!\r\n");
   /* USER CODE END 2 */
 
@@ -134,8 +145,9 @@ int main(void)
     if(buffer_rx_OK){
       UART_Command_Analize_And_Call();
     }
+
+    NRF_Receive();
     Control_Loop();
-    HAL_Delay(5);
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */

@@ -1,0 +1,268 @@
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccPWJWoB.s 			page 1
+
+
+   1              		.cpu cortex-m3
+   2              		.eabi_attribute 20, 1
+   3              		.eabi_attribute 21, 1
+   4              		.eabi_attribute 23, 3
+   5              		.eabi_attribute 24, 1
+   6              		.eabi_attribute 25, 1
+   7              		.eabi_attribute 26, 1
+   8              		.eabi_attribute 30, 1
+   9              		.eabi_attribute 34, 1
+  10              		.eabi_attribute 18, 4
+  11              		.file	"pid.c"
+  12              		.text
+  13              	.Ltext0:
+  14              		.cfi_sections	.debug_frame
+  15              		.global	__aeabi_fsub
+  16              		.global	__aeabi_fmul
+  17              		.global	__aeabi_fadd
+  18              		.global	__aeabi_fcmpgt
+  19              		.global	__aeabi_fcmplt
+  20              		.section	.text.PID_Control,"ax",%progbits
+  21              		.align	1
+  22              		.global	PID_Control
+  23              		.arch armv7-m
+  24              		.syntax unified
+  25              		.thumb
+  26              		.thumb_func
+  27              		.fpu softvfp
+  29              	PID_Control:
+  30              	.LVL0:
+  31              	.LFB0:
+  32              		.file 1 "mylib/pid.c"
+   1:mylib/pid.c   **** #include "pid.h"
+   2:mylib/pid.c   **** 
+   3:mylib/pid.c   **** #define Limit(value,max)     if(value>max)value=max;else if(value<-max)value=-max
+   4:mylib/pid.c   **** float PID_Control(PID_S *PID,float target,float now){
+  33              		.loc 1 4 53 view -0
+  34              		.cfi_startproc
+  35              		@ args = 0, pretend = 0, frame = 0
+  36              		@ frame_needed = 0, uses_anonymous_args = 0
+  37              		.loc 1 4 53 is_stmt 0 view .LVU1
+  38 0000 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
+  39              	.LCFI0:
+  40              		.cfi_def_cfa_offset 24
+  41              		.cfi_offset 4, -24
+  42              		.cfi_offset 5, -20
+  43              		.cfi_offset 6, -16
+  44              		.cfi_offset 7, -12
+  45              		.cfi_offset 8, -8
+  46              		.cfi_offset 14, -4
+  47 0004 0446     		mov	r4, r0
+  48 0006 0846     		mov	r0, r1
+  49              	.LVL1:
+   5:mylib/pid.c   ****   float err;
+  50              		.loc 1 5 3 is_stmt 1 view .LVU2
+   6:mylib/pid.c   ****   float err_dt;
+  51              		.loc 1 6 3 view .LVU3
+   7:mylib/pid.c   ****   float result;
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccPWJWoB.s 			page 2
+
+
+  52              		.loc 1 7 3 view .LVU4
+   8:mylib/pid.c   ****   
+   9:mylib/pid.c   ****   err=target-now;
+  53              		.loc 1 9 3 view .LVU5
+  54              		.loc 1 9 6 is_stmt 0 view .LVU6
+  55 0008 1146     		mov	r1, r2
+  56              	.LVL2:
+  57              		.loc 1 9 6 view .LVU7
+  58 000a FFF7FEFF 		bl	__aeabi_fsub
+  59              	.LVL3:
+  60              		.loc 1 9 6 view .LVU8
+  61 000e 0546     		mov	r5, r0
+  62              	.LVL4:
+  10:mylib/pid.c   ****   
+  11:mylib/pid.c   ****   err_dt=err-PID->last_err;
+  63              		.loc 1 11 3 is_stmt 1 view .LVU9
+  64              		.loc 1 11 9 is_stmt 0 view .LVU10
+  65 0010 2169     		ldr	r1, [r4, #16]	@ float
+  66 0012 FFF7FEFF 		bl	__aeabi_fsub
+  67              	.LVL5:
+  12:mylib/pid.c   ****   
+  13:mylib/pid.c   ****   
+  14:mylib/pid.c   ****   err_dt*=0.384f;
+  68              		.loc 1 14 3 is_stmt 1 view .LVU11
+  69              		.loc 1 14 9 is_stmt 0 view .LVU12
+  70 0016 2149     		ldr	r1, .L10
+  71 0018 FFF7FEFF 		bl	__aeabi_fmul
+  72              	.LVL6:
+  73              		.loc 1 14 9 view .LVU13
+  74 001c 0646     		mov	r6, r0
+  75              	.LVL7:
+  15:mylib/pid.c   ****   err_dt+=PID->last_d*0.615f;   //µÍÍ¨ÂË²¨
+  76              		.loc 1 15 3 is_stmt 1 view .LVU14
+  77              		.loc 1 15 22 is_stmt 0 view .LVU15
+  78 001e 2049     		ldr	r1, .L10+4
+  79 0020 A069     		ldr	r0, [r4, #24]	@ float
+  80              	.LVL8:
+  81              		.loc 1 15 22 view .LVU16
+  82 0022 FFF7FEFF 		bl	__aeabi_fmul
+  83              	.LVL9:
+  84              		.loc 1 15 9 view .LVU17
+  85 0026 3146     		mov	r1, r6
+  86 0028 FFF7FEFF 		bl	__aeabi_fadd
+  87              	.LVL10:
+  88 002c 0646     		mov	r6, r0
+  89              	.LVL11:
+  16:mylib/pid.c   ****   
+  17:mylib/pid.c   ****   
+  18:mylib/pid.c   ****   PID->last_err=err;
+  90              		.loc 1 18 3 is_stmt 1 view .LVU18
+  91              		.loc 1 18 16 is_stmt 0 view .LVU19
+  92 002e 2561     		str	r5, [r4, #16]	@ float
+  19:mylib/pid.c   ****   
+  20:mylib/pid.c   ****   PID->i+=err*PID->I_TIME;
+  93              		.loc 1 20 3 is_stmt 1 view .LVU20
+  94              		.loc 1 20 14 is_stmt 0 view .LVU21
+  95 0030 2946     		mov	r1, r5
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccPWJWoB.s 			page 3
+
+
+  96 0032 E069     		ldr	r0, [r4, #28]	@ float
+  97              	.LVL12:
+  98              		.loc 1 20 14 view .LVU22
+  99 0034 FFF7FEFF 		bl	__aeabi_fmul
+ 100              	.LVL13:
+ 101              		.loc 1 20 9 view .LVU23
+ 102 0038 E168     		ldr	r1, [r4, #12]	@ float
+ 103 003a FFF7FEFF 		bl	__aeabi_fadd
+ 104              	.LVL14:
+ 105 003e 0746     		mov	r7, r0
+ 106 0040 E060     		str	r0, [r4, #12]	@ float
+  21:mylib/pid.c   ****   
+  22:mylib/pid.c   ****   Limit(PID->i,PID->i_max);
+ 107              		.loc 1 22 3 is_stmt 1 view .LVU24
+ 108 0042 D4F81480 		ldr	r8, [r4, #20]	@ float
+ 109 0046 4146     		mov	r1, r8
+ 110 0048 FFF7FEFF 		bl	__aeabi_fcmpgt
+ 111              	.LVL15:
+ 112 004c D0B1     		cbz	r0, .L8
+ 113              		.loc 1 22 3 discriminator 1 view .LVU25
+ 114 004e C4F80C80 		str	r8, [r4, #12]	@ float
+ 115              	.L4:
+  23:mylib/pid.c   ****   PID->last_d=err_dt;
+ 116              		.loc 1 23 3 view .LVU26
+ 117              		.loc 1 23 14 is_stmt 0 view .LVU27
+ 118 0052 A661     		str	r6, [r4, #24]	@ float
+  24:mylib/pid.c   ****   
+  25:mylib/pid.c   ****   result = err * PID->KP  +   err_dt * PID->KD   +   PID->i * PID->KI;
+ 119              		.loc 1 25 3 is_stmt 1 view .LVU28
+ 120              		.loc 1 25 16 is_stmt 0 view .LVU29
+ 121 0054 2946     		mov	r1, r5
+ 122 0056 2068     		ldr	r0, [r4]	@ float
+ 123 0058 FFF7FEFF 		bl	__aeabi_fmul
+ 124              	.LVL16:
+ 125 005c 0546     		mov	r5, r0
+ 126              	.LVL17:
+ 127              		.loc 1 25 38 view .LVU30
+ 128 005e 3146     		mov	r1, r6
+ 129 0060 6068     		ldr	r0, [r4, #4]	@ float
+ 130 0062 FFF7FEFF 		bl	__aeabi_fmul
+ 131              	.LVL18:
+ 132 0066 0146     		mov	r1, r0
+ 133              		.loc 1 25 27 view .LVU31
+ 134 0068 2846     		mov	r0, r5
+ 135 006a FFF7FEFF 		bl	__aeabi_fadd
+ 136              	.LVL19:
+ 137 006e 0546     		mov	r5, r0
+ 138              		.loc 1 25 61 view .LVU32
+ 139 0070 A168     		ldr	r1, [r4, #8]	@ float
+ 140 0072 E068     		ldr	r0, [r4, #12]	@ float
+ 141 0074 FFF7FEFF 		bl	__aeabi_fmul
+ 142              	.LVL20:
+ 143 0078 0146     		mov	r1, r0
+ 144              		.loc 1 25 10 view .LVU33
+ 145 007a 2846     		mov	r0, r5
+ 146 007c FFF7FEFF 		bl	__aeabi_fadd
+ 147              	.LVL21:
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccPWJWoB.s 			page 4
+
+
+  26:mylib/pid.c   ****   return result;
+ 148              		.loc 1 26 3 is_stmt 1 view .LVU34
+  27:mylib/pid.c   **** }
+ 149              		.loc 1 27 1 is_stmt 0 view .LVU35
+ 150 0080 BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 151              	.LVL22:
+ 152              	.L8:
+  22:mylib/pid.c   ****   PID->last_d=err_dt;
+ 153              		.loc 1 22 3 is_stmt 1 discriminator 2 view .LVU36
+ 154 0084 08F10048 		add	r8, r8, #-2147483648
+ 155 0088 4146     		mov	r1, r8
+ 156 008a 3846     		mov	r0, r7
+ 157 008c FFF7FEFF 		bl	__aeabi_fcmplt
+ 158              	.LVL23:
+ 159 0090 0028     		cmp	r0, #0
+ 160 0092 DED0     		beq	.L4
+  22:mylib/pid.c   ****   PID->last_d=err_dt;
+ 161              		.loc 1 22 3 discriminator 3 view .LVU37
+ 162 0094 C4F80C80 		str	r8, [r4, #12]	@ float
+ 163 0098 DBE7     		b	.L4
+ 164              	.L11:
+ 165 009a 00BF     		.align	2
+ 166              	.L10:
+ 167 009c A69BC43E 		.word	1053072294
+ 168 00a0 A4701D3F 		.word	1058893988
+ 169              		.cfi_endproc
+ 170              	.LFE0:
+ 172              		.section	.text.reset_PID,"ax",%progbits
+ 173              		.align	1
+ 174              		.global	reset_PID
+ 175              		.syntax unified
+ 176              		.thumb
+ 177              		.thumb_func
+ 178              		.fpu softvfp
+ 180              	reset_PID:
+ 181              	.LVL24:
+ 182              	.LFB1:
+  28:mylib/pid.c   **** 
+  29:mylib/pid.c   **** void reset_PID(PID_S * s){
+ 183              		.loc 1 29 26 view -0
+ 184              		.cfi_startproc
+ 185              		@ args = 0, pretend = 0, frame = 0
+ 186              		@ frame_needed = 0, uses_anonymous_args = 0
+ 187              		@ link register save eliminated.
+  30:mylib/pid.c   ****   s->i=0;
+ 188              		.loc 1 30 3 view .LVU39
+ 189              		.loc 1 30 7 is_stmt 0 view .LVU40
+ 190 0000 0023     		movs	r3, #0
+ 191 0002 C360     		str	r3, [r0, #12]	@ float
+  31:mylib/pid.c   ****   s->last_err=0;
+ 192              		.loc 1 31 3 is_stmt 1 view .LVU41
+ 193              		.loc 1 31 14 is_stmt 0 view .LVU42
+ 194 0004 0361     		str	r3, [r0, #16]	@ float
+  32:mylib/pid.c   ****   s->last_d=0;
+ 195              		.loc 1 32 3 is_stmt 1 view .LVU43
+ 196              		.loc 1 32 12 is_stmt 0 view .LVU44
+ 197 0006 8361     		str	r3, [r0, #24]	@ float
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccPWJWoB.s 			page 5
+
+
+  33:mylib/pid.c   **** }...
+ 198              		.loc 1 33 1 view .LVU45
+ 199 0008 7047     		bx	lr
+ 200              		.cfi_endproc
+ 201              	.LFE1:
+ 203              		.text
+ 204              	.Letext0:
+ 205              		.file 2 "mylib/pid.h"
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccPWJWoB.s 			page 6
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 pid.c
+C:\Users\ncer\AppData\Local\Temp\ccPWJWoB.s:21     .text.PID_Control:00000000 $t
+C:\Users\ncer\AppData\Local\Temp\ccPWJWoB.s:29     .text.PID_Control:00000000 PID_Control
+C:\Users\ncer\AppData\Local\Temp\ccPWJWoB.s:167    .text.PID_Control:0000009c $d
+C:\Users\ncer\AppData\Local\Temp\ccPWJWoB.s:173    .text.reset_PID:00000000 $t
+C:\Users\ncer\AppData\Local\Temp\ccPWJWoB.s:180    .text.reset_PID:00000000 reset_PID
+
+UNDEFINED SYMBOLS
+__aeabi_fsub
+__aeabi_fmul
+__aeabi_fadd
+__aeabi_fcmpgt
+__aeabi_fcmplt

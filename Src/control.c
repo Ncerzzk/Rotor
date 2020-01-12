@@ -26,8 +26,12 @@ int Servor_Width_Limit=0; // 舵机脉宽限制
 // Roll 右倾为正
 float Pitch,Roll;   
 
-PID_S Roll_PID={0.2,1,0};
+PID_S Roll_PID={0,0,0};
 PID_S Pitch_PID={0,0,0};
+
+enum Modes Aircraft_Mode=Mode_Wait;
+
+uint8_t MS_5_Flag=0; // 5ms flag
 
 float BAT_Voltage=0;
 
@@ -105,6 +109,10 @@ void Control_Loop(){
   float Roll_Out=0;
   float result[4]={0};
   static int loop_cnt=0;
+
+  if(!MS_5_Flag){
+    return ;
+  }
   MPU_Read6500(&MPU9250,ac,gy);
   Gyroraw_to_Angle_Speed(&MPU9250,gy,angle_speed);
   get_angle(ac,angle_speed,angle,ac_angle);
@@ -115,10 +123,22 @@ void Control_Loop(){
   Roll_Out=PID_Control(&Roll_PID,Roll_Stable,Roll);
   
   Control_Caculate(1,Roll_Out,0,0,result);
-  Set_ESC(L_ESC,Transform_N_to_Duty(result[0]));
-  Set_ESC(R_ESC,Transform_N_to_Duty(result[1]));
-  Set_Servor(L_Servor,Transform_Rad_to_Dgree(result[2]));
-  Set_Servor(R_Servor,Transform_Rad_to_Dgree(result[3]));
+  if (Aircraft_Mode==Mode_Arm){
+    Set_Servor(L_Servor,0);
+    Set_Servor(R_Servor,0);
+    Set_ESC(L_ESC,50);
+    Set_ESC(R_ESC,50);
+  }else if (Aircraft_Mode==Mode_Takeoff){
+    Set_ESC(L_ESC, Transform_N_to_Duty(result[0]));
+    Set_ESC(R_ESC,Transform_N_to_Duty(result[1]));
+    Set_Servor(L_Servor,Transform_Rad_to_Dgree(result[2]));
+    Set_Servor(R_Servor,Transform_Rad_to_Dgree(result[3]));
+  }else if(Aircraft_Mode==Mode_Stop){
+    Set_Servor(L_Servor,0);
+    Set_Servor(R_Servor,0);
+    Set_ESC(L_ESC,0);
+    Set_ESC(R_ESC,0); 
+  }
   
   loop_cnt++;
   if(loop_cnt>10){
@@ -129,6 +149,8 @@ void Control_Loop(){
     loop_cnt=0;
   }
   send_wave(angle[0],angle[1],BAT_Voltage/100,0);
+
+  MS_5_Flag=0;
 }
 
 
@@ -184,4 +206,28 @@ where
   result[1]=F2;
   result[2]=theta1;
   result[3]=theta2;
+}
+
+void NRF_Receive_Callback(uint8_t * data,int len){
+  
+  uint16_t state=0;
+  if(len==10){
+   memcpy(&state,data+8,2);
+   state&=0x3FFF;
+   if(state==1){
+     Aircraft_Mode=Mode_Arm;
+   }else if(state==8){
+     Aircraft_Mode=Mode_Stop;
+   }
+  }
+}
+
+void Ms_IRQ_Handler(){
+  static int Ms_Cnt=0;
+  if(Ms_Cnt==5){
+    MS_5_Flag=1;
+    Ms_Cnt=0;
+  }
+
+  Ms_Cnt++;
 }

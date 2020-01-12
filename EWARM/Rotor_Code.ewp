@@ -1052,6 +1052,9 @@
                 <name>$PROJ_DIR$\..\mylib\icm20600.c</name>
             </file>
             <file>
+                <name>$PROJ_DIR$\..\mylib\nrf24l01.c</name>
+            </file>
+            <file>
                 <name>$PROJ_DIR$\..\mylib\pid.c</name>
             </file>
             <file>

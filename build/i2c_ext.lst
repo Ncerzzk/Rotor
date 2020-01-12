@@ -1,0 +1,628 @@
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccAKAKPH.s 			page 1
+
+
+   1              		.cpu cortex-m3
+   2              		.eabi_attribute 20, 1
+   3              		.eabi_attribute 21, 1
+   4              		.eabi_attribute 23, 3
+   5              		.eabi_attribute 24, 1
+   6              		.eabi_attribute 25, 1
+   7              		.eabi_attribute 26, 1
+   8              		.eabi_attribute 30, 1
+   9              		.eabi_attribute 34, 1
+  10              		.eabi_attribute 18, 4
+  11              		.file	"i2c_ext.c"
+  12              		.text
+  13              	.Ltext0:
+  14              		.cfi_sections	.debug_frame
+  15              		.section	.text.I2C_EXT_Init,"ax",%progbits
+  16              		.align	1
+  17              		.global	I2C_EXT_Init
+  18              		.arch armv7-m
+  19              		.syntax unified
+  20              		.thumb
+  21              		.thumb_func
+  22              		.fpu softvfp
+  24              	I2C_EXT_Init:
+  25              	.LVL0:
+  26              	.LFB65:
+  27              		.file 1 "mylib/i2c_ext.c"
+   1:mylib/i2c_ext.c **** #include "i2c_ext.h"
+   2:mylib/i2c_ext.c **** 
+   3:mylib/i2c_ext.c **** #define OUTTIME 10
+   4:mylib/i2c_ext.c **** I2C_HandleTypeDef * I2C_USE;
+   5:mylib/i2c_ext.c **** GPIO_TypeDef * SCL_GPIO_PORT;
+   6:mylib/i2c_ext.c **** GPIO_TypeDef * SDA_GPIO_PORT;
+   7:mylib/i2c_ext.c **** uint32_t SCL_GPIO_PIN;
+   8:mylib/i2c_ext.c **** uint32_t SDA_GPIO_PIN;
+   9:mylib/i2c_ext.c **** 
+  10:mylib/i2c_ext.c **** void * I2C_Init_Func;
+  11:mylib/i2c_ext.c **** 
+  12:mylib/i2c_ext.c **** void I2C_EXT_Init(I2C_HandleTypeDef * i2c,GPIO_TypeDef * scl_gpio_port,uint32_t scl_gpio_pin,\
+  13:mylib/i2c_ext.c **** GPIO_TypeDef * sda_gpio_port,uint32_t sda_gpio_pin,void * i2c_init_func){
+  28              		.loc 1 13 73 view -0
+  29              		.cfi_startproc
+  30              		@ args = 8, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32              		@ link register save eliminated.
+  33              		.loc 1 13 73 is_stmt 0 view .LVU1
+  34 0000 10B4     		push	{r4}
+  35              	.LCFI0:
+  36              		.cfi_def_cfa_offset 4
+  37              		.cfi_offset 4, -4
+  14:mylib/i2c_ext.c ****     I2C_USE=i2c;
+  38              		.loc 1 14 5 is_stmt 1 view .LVU2
+  39              		.loc 1 14 12 is_stmt 0 view .LVU3
+  40 0002 084C     		ldr	r4, .L3
+  41 0004 2060     		str	r0, [r4]
+  15:mylib/i2c_ext.c ****     SCL_GPIO_PORT=scl_gpio_port;
+  42              		.loc 1 15 5 is_stmt 1 view .LVU4
+  43              		.loc 1 15 18 is_stmt 0 view .LVU5
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccAKAKPH.s 			page 2
+
+
+  44 0006 0848     		ldr	r0, .L3+4
+  45              	.LVL1:
+  46              		.loc 1 15 18 view .LVU6
+  47 0008 0160     		str	r1, [r0]
+  16:mylib/i2c_ext.c ****     SCL_GPIO_PIN=scl_gpio_pin;
+  48              		.loc 1 16 5 is_stmt 1 view .LVU7
+  49              		.loc 1 16 17 is_stmt 0 view .LVU8
+  50 000a 0849     		ldr	r1, .L3+8
+  51              	.LVL2:
+  52              		.loc 1 16 17 view .LVU9
+  53 000c 0A60     		str	r2, [r1]
+  17:mylib/i2c_ext.c **** 
+  18:mylib/i2c_ext.c ****     SDA_GPIO_PORT=sda_gpio_port;
+  54              		.loc 1 18 5 is_stmt 1 view .LVU10
+  55              		.loc 1 18 18 is_stmt 0 view .LVU11
+  56 000e 084A     		ldr	r2, .L3+12
+  57              	.LVL3:
+  58              		.loc 1 18 18 view .LVU12
+  59 0010 1360     		str	r3, [r2]
+  19:mylib/i2c_ext.c ****     SDA_GPIO_PIN=sda_gpio_pin;
+  60              		.loc 1 19 5 is_stmt 1 view .LVU13
+  61              		.loc 1 19 17 is_stmt 0 view .LVU14
+  62 0012 019A     		ldr	r2, [sp, #4]
+  63 0014 074B     		ldr	r3, .L3+16
+  64              	.LVL4:
+  65              		.loc 1 19 17 view .LVU15
+  66 0016 1A60     		str	r2, [r3]
+  20:mylib/i2c_ext.c **** 
+  21:mylib/i2c_ext.c ****     I2C_Init_Func=i2c_init_func;
+  67              		.loc 1 21 5 is_stmt 1 view .LVU16
+  68              		.loc 1 21 18 is_stmt 0 view .LVU17
+  69 0018 029A     		ldr	r2, [sp, #8]
+  70 001a 074B     		ldr	r3, .L3+20
+  71 001c 1A60     		str	r2, [r3]
+  22:mylib/i2c_ext.c **** }
+  72              		.loc 1 22 1 view .LVU18
+  73 001e 10BC     		pop	{r4}
+  74              	.LCFI1:
+  75              		.cfi_restore 4
+  76              		.cfi_def_cfa_offset 0
+  77              	.LVL5:
+  78              		.loc 1 22 1 view .LVU19
+  79 0020 7047     		bx	lr
+  80              	.L4:
+  81 0022 00BF     		.align	2
+  82              	.L3:
+  83 0024 00000000 		.word	I2C_USE
+  84 0028 00000000 		.word	SCL_GPIO_PORT
+  85 002c 00000000 		.word	SCL_GPIO_PIN
+  86 0030 00000000 		.word	SDA_GPIO_PORT
+  87 0034 00000000 		.word	SDA_GPIO_PIN
+  88 0038 00000000 		.word	I2C_Init_Func
+  89              		.cfi_endproc
+  90              	.LFE65:
+  92              		.section	.text.I2C_Read_Buffer,"ax",%progbits
+  93              		.align	1
+  94              		.global	I2C_Read_Buffer
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccAKAKPH.s 			page 3
+
+
+  95              		.syntax unified
+  96              		.thumb
+  97              		.thumb_func
+  98              		.fpu softvfp
+ 100              	I2C_Read_Buffer:
+ 101              	.LVL6:
+ 102              	.LFB66:
+  23:mylib/i2c_ext.c **** 
+  24:mylib/i2c_ext.c **** 
+  25:mylib/i2c_ext.c **** uint8_t I2C_Read_Buffer(uint8_t slaveAddr,uint8_t readAddr,uint8_t *pBuffer,uint16_t len){
+ 103              		.loc 1 25 90 is_stmt 1 view -0
+ 104              		.cfi_startproc
+ 105              		@ args = 0, pretend = 0, frame = 8
+ 106              		@ frame_needed = 0, uses_anonymous_args = 0
+ 107              		.loc 1 25 90 is_stmt 0 view .LVU21
+ 108 0000 70B5     		push	{r4, r5, r6, lr}
+ 109              	.LCFI2:
+ 110              		.cfi_def_cfa_offset 16
+ 111              		.cfi_offset 4, -16
+ 112              		.cfi_offset 5, -12
+ 113              		.cfi_offset 6, -8
+ 114              		.cfi_offset 14, -4
+ 115 0002 84B0     		sub	sp, sp, #16
+ 116              	.LCFI3:
+ 117              		.cfi_def_cfa_offset 32
+ 118 0004 1546     		mov	r5, r2
+ 119 0006 1E46     		mov	r6, r3
+ 120 0008 8DF80F10 		strb	r1, [sp, #15]
+  26:mylib/i2c_ext.c ****   uint8_t result;
+ 121              		.loc 1 26 3 is_stmt 1 view .LVU22
+  27:mylib/i2c_ext.c ****   result=HAL_I2C_Master_Transmit(I2C_USE,slaveAddr,&readAddr,1,OUTTIME);
+ 122              		.loc 1 27 3 view .LVU23
+ 123              		.loc 1 27 10 is_stmt 0 view .LVU24
+ 124 000c 0446     		mov	r4, r0
+ 125 000e 0A23     		movs	r3, #10
+ 126              	.LVL7:
+ 127              		.loc 1 27 10 view .LVU25
+ 128 0010 0093     		str	r3, [sp]
+ 129 0012 0123     		movs	r3, #1
+ 130 0014 0DF10F02 		add	r2, sp, #15
+ 131              	.LVL8:
+ 132              		.loc 1 27 10 view .LVU26
+ 133 0018 0146     		mov	r1, r0
+ 134              	.LVL9:
+ 135              		.loc 1 27 10 view .LVU27
+ 136 001a 0848     		ldr	r0, .L9
+ 137              	.LVL10:
+ 138              		.loc 1 27 10 view .LVU28
+ 139 001c 0068     		ldr	r0, [r0]
+ 140 001e FFF7FEFF 		bl	HAL_I2C_Master_Transmit
+ 141              	.LVL11:
+  28:mylib/i2c_ext.c ****   if(result!=HAL_OK){
+ 142              		.loc 1 28 3 is_stmt 1 view .LVU29
+ 143              		.loc 1 28 5 is_stmt 0 view .LVU30
+ 144 0022 08B1     		cbz	r0, .L8
+ 145              	.L6:
+  29:mylib/i2c_ext.c ****     return result;
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccAKAKPH.s 			page 4
+
+
+  30:mylib/i2c_ext.c ****   }
+  31:mylib/i2c_ext.c ****   return HAL_I2C_Master_Receive(I2C_USE,slaveAddr,pBuffer,len,OUTTIME);		 
+  32:mylib/i2c_ext.c **** }
+ 146              		.loc 1 32 1 view .LVU31
+ 147 0024 04B0     		add	sp, sp, #16
+ 148              	.LCFI4:
+ 149              		.cfi_remember_state
+ 150              		.cfi_def_cfa_offset 16
+ 151              		@ sp needed
+ 152 0026 70BD     		pop	{r4, r5, r6, pc}
+ 153              	.LVL12:
+ 154              	.L8:
+ 155              	.LCFI5:
+ 156              		.cfi_restore_state
+  31:mylib/i2c_ext.c **** }
+ 157              		.loc 1 31 3 is_stmt 1 view .LVU32
+  31:mylib/i2c_ext.c **** }
+ 158              		.loc 1 31 10 is_stmt 0 view .LVU33
+ 159 0028 0A23     		movs	r3, #10
+ 160 002a 0093     		str	r3, [sp]
+ 161 002c 3346     		mov	r3, r6
+ 162 002e 2A46     		mov	r2, r5
+ 163 0030 2146     		mov	r1, r4
+ 164 0032 0248     		ldr	r0, .L9
+ 165 0034 0068     		ldr	r0, [r0]
+ 166 0036 FFF7FEFF 		bl	HAL_I2C_Master_Receive
+ 167              	.LVL13:
+ 168 003a F3E7     		b	.L6
+ 169              	.L10:
+ 170              		.align	2
+ 171              	.L9:
+ 172 003c 00000000 		.word	I2C_USE
+ 173              		.cfi_endproc
+ 174              	.LFE66:
+ 176              		.section	.text.I2C_Write_Buffer,"ax",%progbits
+ 177              		.align	1
+ 178              		.global	I2C_Write_Buffer
+ 179              		.syntax unified
+ 180              		.thumb
+ 181              		.thumb_func
+ 182              		.fpu softvfp
+ 184              	I2C_Write_Buffer:
+ 185              	.LVL14:
+ 186              	.LFB67:
+  33:mylib/i2c_ext.c **** 
+  34:mylib/i2c_ext.c **** 
+  35:mylib/i2c_ext.c **** uint8_t I2C_Write_Buffer(uint8_t slaveAddr, uint8_t writeAddr, uint8_t *pBuffer,uint16_t len){
+ 187              		.loc 1 35 94 is_stmt 1 view -0
+ 188              		.cfi_startproc
+ 189              		@ args = 0, pretend = 0, frame = 0
+ 190              		@ frame_needed = 0, uses_anonymous_args = 0
+ 191              		.loc 1 35 94 is_stmt 0 view .LVU35
+ 192 0000 2DE9F043 		push	{r4, r5, r6, r7, r8, r9, lr}
+ 193              	.LCFI6:
+ 194              		.cfi_def_cfa_offset 28
+ 195              		.cfi_offset 4, -28
+ 196              		.cfi_offset 5, -24
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccAKAKPH.s 			page 5
+
+
+ 197              		.cfi_offset 6, -20
+ 198              		.cfi_offset 7, -16
+ 199              		.cfi_offset 8, -12
+ 200              		.cfi_offset 9, -8
+ 201              		.cfi_offset 14, -4
+ 202 0004 83B0     		sub	sp, sp, #12
+ 203              	.LCFI7:
+ 204              		.cfi_def_cfa_offset 40
+ 205 0006 0646     		mov	r6, r0
+ 206 0008 0F46     		mov	r7, r1
+ 207 000a 9046     		mov	r8, r2
+ 208 000c 1D46     		mov	r5, r3
+  36:mylib/i2c_ext.c ****   uint8_t * data;
+ 209              		.loc 1 36 3 is_stmt 1 view .LVU36
+  37:mylib/i2c_ext.c ****   uint8_t result;
+ 210              		.loc 1 37 3 view .LVU37
+  38:mylib/i2c_ext.c ****   data=(uint8_t *)malloc((len+1)*sizeof(uint8_t));
+ 211              		.loc 1 38 3 view .LVU38
+ 212              		.loc 1 38 30 is_stmt 0 view .LVU39
+ 213 000e 03F10109 		add	r9, r3, #1
+ 214              		.loc 1 38 19 view .LVU40
+ 215 0012 4846     		mov	r0, r9
+ 216              	.LVL15:
+ 217              		.loc 1 38 19 view .LVU41
+ 218 0014 FFF7FEFF 		bl	malloc
+ 219              	.LVL16:
+ 220              		.loc 1 38 19 view .LVU42
+ 221 0018 0446     		mov	r4, r0
+ 222              	.LVL17:
+  39:mylib/i2c_ext.c ****   memcpy(data+1,pBuffer,len);
+ 223              		.loc 1 39 3 is_stmt 1 view .LVU43
+ 224 001a 2A46     		mov	r2, r5
+ 225 001c 4146     		mov	r1, r8
+ 226 001e 0130     		adds	r0, r0, #1
+ 227              	.LVL18:
+ 228              		.loc 1 39 3 is_stmt 0 view .LVU44
+ 229 0020 FFF7FEFF 		bl	memcpy
+ 230              	.LVL19:
+  40:mylib/i2c_ext.c ****   data[0]=writeAddr;
+ 231              		.loc 1 40 3 is_stmt 1 view .LVU45
+ 232              		.loc 1 40 10 is_stmt 0 view .LVU46
+ 233 0024 2770     		strb	r7, [r4]
+  41:mylib/i2c_ext.c ****   result=HAL_I2C_Master_Transmit(I2C_USE,slaveAddr,data,len+1,OUTTIME);
+ 234              		.loc 1 41 3 is_stmt 1 view .LVU47
+ 235              		.loc 1 41 10 is_stmt 0 view .LVU48
+ 236 0026 0A23     		movs	r3, #10
+ 237 0028 0093     		str	r3, [sp]
+ 238 002a 1FFA89F3 		uxth	r3, r9
+ 239 002e 2246     		mov	r2, r4
+ 240 0030 3146     		mov	r1, r6
+ 241 0032 0648     		ldr	r0, .L13
+ 242 0034 0068     		ldr	r0, [r0]
+ 243 0036 FFF7FEFF 		bl	HAL_I2C_Master_Transmit
+ 244              	.LVL20:
+ 245 003a 0546     		mov	r5, r0
+ 246              	.LVL21:
+  42:mylib/i2c_ext.c ****   free(data);
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccAKAKPH.s 			page 6
+
+
+ 247              		.loc 1 42 3 is_stmt 1 view .LVU49
+ 248 003c 2046     		mov	r0, r4
+ 249 003e FFF7FEFF 		bl	free
+ 250              	.LVL22:
+  43:mylib/i2c_ext.c ****   return result;
+ 251              		.loc 1 43 3 view .LVU50
+  44:mylib/i2c_ext.c **** }
+ 252              		.loc 1 44 1 is_stmt 0 view .LVU51
+ 253 0042 2846     		mov	r0, r5
+ 254 0044 03B0     		add	sp, sp, #12
+ 255              	.LCFI8:
+ 256              		.cfi_def_cfa_offset 28
+ 257              		@ sp needed
+ 258 0046 BDE8F083 		pop	{r4, r5, r6, r7, r8, r9, pc}
+ 259              	.LVL23:
+ 260              	.L14:
+ 261              		.loc 1 44 1 view .LVU52
+ 262 004a 00BF     		.align	2
+ 263              	.L13:
+ 264 004c 00000000 		.word	I2C_USE
+ 265              		.cfi_endproc
+ 266              	.LFE67:
+ 268              		.section	.text.Delay_Us,"ax",%progbits
+ 269              		.align	1
+ 270              		.global	Delay_Us
+ 271              		.syntax unified
+ 272              		.thumb
+ 273              		.thumb_func
+ 274              		.fpu softvfp
+ 276              	Delay_Us:
+ 277              	.LVL24:
+ 278              	.LFB68:
+  45:mylib/i2c_ext.c **** 
+  46:mylib/i2c_ext.c **** void Delay_Us(uint32_t nus){
+ 279              		.loc 1 46 28 is_stmt 1 view -0
+ 280              		.cfi_startproc
+ 281              		@ args = 0, pretend = 0, frame = 0
+ 282              		@ frame_needed = 0, uses_anonymous_args = 0
+ 283              		@ link register save eliminated.
+  47:mylib/i2c_ext.c ****     // 主频按72M 计算，其他主频略有误差
+  48:mylib/i2c_ext.c ****     uint32_t cnt=nus*72;
+ 284              		.loc 1 48 5 view .LVU54
+ 285              		.loc 1 48 14 is_stmt 0 view .LVU55
+ 286 0000 00EBC000 		add	r0, r0, r0, lsl #3
+ 287              	.LVL25:
+ 288              		.loc 1 48 14 view .LVU56
+ 289 0004 C000     		lsls	r0, r0, #3
+ 290              	.LVL26:
+  49:mylib/i2c_ext.c **** 
+  50:mylib/i2c_ext.c ****     while(cnt--);
+ 291              		.loc 1 50 5 is_stmt 1 view .LVU57
+ 292              	.L16:
+ 293              		.loc 1 50 17 discriminator 1 view .LVU58
+ 294              		.loc 1 50 10 discriminator 1 view .LVU59
+ 295 0006 0346     		mov	r3, r0
+ 296              		.loc 1 50 14 is_stmt 0 discriminator 1 view .LVU60
+ 297 0008 0138     		subs	r0, r0, #1
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccAKAKPH.s 			page 7
+
+
+ 298              	.LVL27:
+ 299              		.loc 1 50 10 discriminator 1 view .LVU61
+ 300 000a 002B     		cmp	r3, #0
+ 301 000c FBD1     		bne	.L16
+  51:mylib/i2c_ext.c **** }
+ 302              		.loc 1 51 1 view .LVU62
+ 303 000e 7047     		bx	lr
+ 304              		.cfi_endproc
+ 305              	.LFE68:
+ 307              		.section	.text.I2C_Reset,"ax",%progbits
+ 308              		.align	1
+ 309              		.global	I2C_Reset
+ 310              		.syntax unified
+ 311              		.thumb
+ 312              		.thumb_func
+ 313              		.fpu softvfp
+ 315              	I2C_Reset:
+ 316              	.LFB69:
+  52:mylib/i2c_ext.c **** 
+  53:mylib/i2c_ext.c **** void I2C_Reset(){
+ 317              		.loc 1 53 17 is_stmt 1 view -0
+ 318              		.cfi_startproc
+ 319              		@ args = 0, pretend = 0, frame = 16
+ 320              		@ frame_needed = 0, uses_anonymous_args = 0
+ 321 0000 70B5     		push	{r4, r5, r6, lr}
+ 322              	.LCFI9:
+ 323              		.cfi_def_cfa_offset 16
+ 324              		.cfi_offset 4, -16
+ 325              		.cfi_offset 5, -12
+ 326              		.cfi_offset 6, -8
+ 327              		.cfi_offset 14, -4
+ 328 0002 84B0     		sub	sp, sp, #16
+ 329              	.LCFI10:
+ 330              		.cfi_def_cfa_offset 32
+  54:mylib/i2c_ext.c ****     
+  55:mylib/i2c_ext.c **** 
+  56:mylib/i2c_ext.c ****     GPIO_InitTypeDef GPIO_InitStruct;
+ 331              		.loc 1 56 5 view .LVU64
+  57:mylib/i2c_ext.c **** 
+  58:mylib/i2c_ext.c **** 
+  59:mylib/i2c_ext.c ****     GPIO_InitStruct.Pin = SCL_GPIO_PIN;
+ 332              		.loc 1 59 5 view .LVU65
+ 333              		.loc 1 59 25 is_stmt 0 view .LVU66
+ 334 0004 234B     		ldr	r3, .L22
+ 335 0006 1B68     		ldr	r3, [r3]
+ 336 0008 0093     		str	r3, [sp]
+  60:mylib/i2c_ext.c ****     GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_OD;
+ 337              		.loc 1 60 5 is_stmt 1 view .LVU67
+ 338              		.loc 1 60 26 is_stmt 0 view .LVU68
+ 339 000a 1123     		movs	r3, #17
+ 340 000c 0193     		str	r3, [sp, #4]
+  61:mylib/i2c_ext.c ****     GPIO_InitStruct.Pull = GPIO_PULLUP;
+ 341              		.loc 1 61 5 is_stmt 1 view .LVU69
+ 342              		.loc 1 61 26 is_stmt 0 view .LVU70
+ 343 000e 0123     		movs	r3, #1
+ 344 0010 0293     		str	r3, [sp, #8]
+  62:mylib/i2c_ext.c ****     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccAKAKPH.s 			page 8
+
+
+ 345              		.loc 1 62 5 is_stmt 1 view .LVU71
+ 346              		.loc 1 62 27 is_stmt 0 view .LVU72
+ 347 0012 0323     		movs	r3, #3
+ 348 0014 0393     		str	r3, [sp, #12]
+  63:mylib/i2c_ext.c ****     HAL_GPIO_Init(SCL_GPIO_PORT, &GPIO_InitStruct); 
+ 349              		.loc 1 63 5 is_stmt 1 view .LVU73
+ 350 0016 6946     		mov	r1, sp
+ 351 0018 1F4B     		ldr	r3, .L22+4
+ 352 001a 1868     		ldr	r0, [r3]
+ 353 001c FFF7FEFF 		bl	HAL_GPIO_Init
+ 354              	.LVL28:
+  64:mylib/i2c_ext.c **** 
+  65:mylib/i2c_ext.c ****     GPIO_InitStruct.Pin = SDA_GPIO_PIN;
+ 355              		.loc 1 65 5 view .LVU74
+ 356              		.loc 1 65 25 is_stmt 0 view .LVU75
+ 357 0020 1E4B     		ldr	r3, .L22+8
+ 358 0022 1B68     		ldr	r3, [r3]
+ 359 0024 0093     		str	r3, [sp]
+  66:mylib/i2c_ext.c ****     HAL_GPIO_Init(SDA_GPIO_PORT, &GPIO_InitStruct); 
+ 360              		.loc 1 66 5 is_stmt 1 view .LVU76
+ 361 0026 6946     		mov	r1, sp
+ 362 0028 1D4B     		ldr	r3, .L22+12
+ 363 002a 1868     		ldr	r0, [r3]
+ 364 002c FFF7FEFF 		bl	HAL_GPIO_Init
+ 365              	.LVL29:
+  67:mylib/i2c_ext.c ****     
+  68:mylib/i2c_ext.c ****     for(int i=0;i<9;++i){
+ 366              		.loc 1 68 5 view .LVU77
+ 367              	.LBB2:
+ 368              		.loc 1 68 9 view .LVU78
+ 369              		.loc 1 68 13 is_stmt 0 view .LVU79
+ 370 0030 0024     		movs	r4, #0
+ 371              	.LVL30:
+ 372              	.L18:
+ 373              		.loc 1 68 17 is_stmt 1 discriminator 1 view .LVU80
+ 374              		.loc 1 68 5 is_stmt 0 discriminator 1 view .LVU81
+ 375 0032 082C     		cmp	r4, #8
+ 376 0034 15DC     		bgt	.L19
+  69:mylib/i2c_ext.c ****       if(HAL_GPIO_ReadPin(SDA_GPIO_PORT,SDA_GPIO_PIN)!=GPIO_PIN_SET){
+ 377              		.loc 1 69 7 is_stmt 1 view .LVU82
+ 378              		.loc 1 69 10 is_stmt 0 view .LVU83
+ 379 0036 194B     		ldr	r3, .L22+8
+ 380 0038 1988     		ldrh	r1, [r3]
+ 381 003a 194B     		ldr	r3, .L22+12
+ 382 003c 1868     		ldr	r0, [r3]
+ 383 003e FFF7FEFF 		bl	HAL_GPIO_ReadPin
+ 384              	.LVL31:
+ 385              		.loc 1 69 9 view .LVU84
+ 386 0042 0128     		cmp	r0, #1
+ 387 0044 0DD0     		beq	.L19
+  70:mylib/i2c_ext.c ****         HAL_GPIO_WritePin(SCL_GPIO_PORT,SCL_GPIO_PIN,GPIO_PIN_SET);
+ 388              		.loc 1 70 9 is_stmt 1 discriminator 2 view .LVU85
+ 389 0046 134E     		ldr	r6, .L22
+ 390 0048 134D     		ldr	r5, .L22+4
+ 391 004a 0122     		movs	r2, #1
+ 392 004c 3188     		ldrh	r1, [r6]
+ 393 004e 2868     		ldr	r0, [r5]
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccAKAKPH.s 			page 9
+
+
+ 394 0050 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 395              	.LVL32:
+  71:mylib/i2c_ext.c ****         Delay_Us(10);
+ 396              		.loc 1 71 9 discriminator 2 view .LVU86
+  72:mylib/i2c_ext.c ****         HAL_GPIO_WritePin(SCL_GPIO_PORT,SCL_GPIO_PIN,GPIO_PIN_RESET);
+ 397              		.loc 1 72 9 discriminator 2 view .LVU87
+ 398 0054 0022     		movs	r2, #0
+ 399 0056 3188     		ldrh	r1, [r6]
+ 400 0058 2868     		ldr	r0, [r5]
+ 401 005a FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 402              	.LVL33:
+  73:mylib/i2c_ext.c ****         Delay_Us(10);
+ 403              		.loc 1 73 9 discriminator 2 view .LVU88
+  68:mylib/i2c_ext.c ****       if(HAL_GPIO_ReadPin(SDA_GPIO_PORT,SDA_GPIO_PIN)!=GPIO_PIN_SET){
+ 404              		.loc 1 68 21 discriminator 2 view .LVU89
+ 405 005e 0134     		adds	r4, r4, #1
+ 406              	.LVL34:
+  68:mylib/i2c_ext.c ****       if(HAL_GPIO_ReadPin(SDA_GPIO_PORT,SDA_GPIO_PIN)!=GPIO_PIN_SET){
+ 407              		.loc 1 68 21 is_stmt 0 discriminator 2 view .LVU90
+ 408 0060 E7E7     		b	.L18
+ 409              	.L19:
+  68:mylib/i2c_ext.c ****       if(HAL_GPIO_ReadPin(SDA_GPIO_PORT,SDA_GPIO_PIN)!=GPIO_PIN_SET){
+ 410              		.loc 1 68 21 discriminator 2 view .LVU91
+ 411              	.LBE2:
+  74:mylib/i2c_ext.c ****       }else{
+  75:mylib/i2c_ext.c ****         break;
+  76:mylib/i2c_ext.c ****       }
+  77:mylib/i2c_ext.c ****     }
+  78:mylib/i2c_ext.c **** 
+  79:mylib/i2c_ext.c ****     HAL_GPIO_WritePin(SDA_GPIO_PORT,SDA_GPIO_PIN,GPIO_PIN_SET);
+ 412              		.loc 1 79 5 is_stmt 1 view .LVU92
+ 413 0062 0122     		movs	r2, #1
+ 414 0064 0D4B     		ldr	r3, .L22+8
+ 415 0066 1988     		ldrh	r1, [r3]
+ 416 0068 0D4B     		ldr	r3, .L22+12
+ 417 006a 1868     		ldr	r0, [r3]
+ 418 006c FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 419              	.LVL35:
+  80:mylib/i2c_ext.c ****     HAL_GPIO_WritePin(SCL_GPIO_PORT,SCL_GPIO_PIN,GPIO_PIN_SET);
+ 420              		.loc 1 80 5 view .LVU93
+ 421 0070 0122     		movs	r2, #1
+ 422 0072 084B     		ldr	r3, .L22
+ 423 0074 1988     		ldrh	r1, [r3]
+ 424 0076 084B     		ldr	r3, .L22+4
+ 425 0078 1868     		ldr	r0, [r3]
+ 426 007a FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 427              	.LVL36:
+  81:mylib/i2c_ext.c **** 
+  82:mylib/i2c_ext.c ****     I2C_USE->State = HAL_I2C_STATE_RESET;
+ 428              		.loc 1 82 5 view .LVU94
+ 429              		.loc 1 82 12 is_stmt 0 view .LVU95
+ 430 007e 094B     		ldr	r3, .L22+16
+ 431 0080 1B68     		ldr	r3, [r3]
+ 432              		.loc 1 82 20 view .LVU96
+ 433 0082 0022     		movs	r2, #0
+ 434 0084 83F83D20 		strb	r2, [r3, #61]
+  83:mylib/i2c_ext.c ****     (*(void (*)(void))  I2C_Init_Func)();
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccAKAKPH.s 			page 10
+
+
+ 435              		.loc 1 83 5 is_stmt 1 view .LVU97
+ 436              		.loc 1 83 6 is_stmt 0 view .LVU98
+ 437 0088 074B     		ldr	r3, .L22+20
+ 438 008a 1B68     		ldr	r3, [r3]
+ 439 008c 9847     		blx	r3
+ 440              	.LVL37:
+  84:mylib/i2c_ext.c **** }...
+ 441              		.loc 1 84 1 view .LVU99
+ 442 008e 04B0     		add	sp, sp, #16
+ 443              	.LCFI11:
+ 444              		.cfi_def_cfa_offset 16
+ 445              		@ sp needed
+ 446 0090 70BD     		pop	{r4, r5, r6, pc}
+ 447              	.LVL38:
+ 448              	.L23:
+ 449              		.loc 1 84 1 view .LVU100
+ 450 0092 00BF     		.align	2
+ 451              	.L22:
+ 452 0094 00000000 		.word	SCL_GPIO_PIN
+ 453 0098 00000000 		.word	SCL_GPIO_PORT
+ 454 009c 00000000 		.word	SDA_GPIO_PIN
+ 455 00a0 00000000 		.word	SDA_GPIO_PORT
+ 456 00a4 00000000 		.word	I2C_USE
+ 457 00a8 00000000 		.word	I2C_Init_Func
+ 458              		.cfi_endproc
+ 459              	.LFE69:
+ 461              		.comm	I2C_Init_Func,4,4
+ 462              		.comm	SDA_GPIO_PIN,4,4
+ 463              		.comm	SCL_GPIO_PIN,4,4
+ 464              		.comm	SDA_GPIO_PORT,4,4
+ 465              		.comm	SCL_GPIO_PORT,4,4
+ 466              		.comm	I2C_USE,4,4
+ 467              		.text
+ 468              	.Letext0:
+ 469              		.file 2 "c:\\arm_gcc\\arm-none-eabi\\include\\machine\\_default_types.h"
+ 470              		.file 3 "c:\\arm_gcc\\arm-none-eabi\\include\\sys\\_stdint.h"
+ 471              		.file 4 "c:\\arm_gcc\\arm-none-eabi\\include\\sys\\lock.h"
+ 472              		.file 5 "c:\\arm_gcc\\arm-none-eabi\\include\\sys\\_types.h"
+ 473              		.file 6 "c:\\arm_gcc\\lib\\gcc\\arm-none-eabi\\9.2.1\\include\\stddef.h"
+ 474              		.file 7 "c:\\arm_gcc\\arm-none-eabi\\include\\sys\\reent.h"
+ 475              		.file 8 "c:\\arm_gcc\\arm-none-eabi\\include\\stdlib.h"
+ 476              		.file 9 "Drivers/CMSIS/Include/core_cm3.h"
+ 477              		.file 10 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h"
+ 478              		.file 11 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xb.h"
+ 479              		.file 12 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h"
+ 480              		.file 13 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h"
+ 481              		.file 14 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h"
+ 482              		.file 15 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_i2c.h"
+ 483              		.file 16 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h"
+ 484              		.file 17 "<built-in>"
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccAKAKPH.s 			page 11
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 i2c_ext.c
+C:\Users\ncer\AppData\Local\Temp\ccAKAKPH.s:16     .text.I2C_EXT_Init:00000000 $t
+C:\Users\ncer\AppData\Local\Temp\ccAKAKPH.s:24     .text.I2C_EXT_Init:00000000 I2C_EXT_Init
+C:\Users\ncer\AppData\Local\Temp\ccAKAKPH.s:83     .text.I2C_EXT_Init:00000024 $d
+                            *COM*:00000004 I2C_USE
+                            *COM*:00000004 SCL_GPIO_PORT
+                            *COM*:00000004 SCL_GPIO_PIN
+                            *COM*:00000004 SDA_GPIO_PORT
+                            *COM*:00000004 SDA_GPIO_PIN
+                            *COM*:00000004 I2C_Init_Func
+C:\Users\ncer\AppData\Local\Temp\ccAKAKPH.s:93     .text.I2C_Read_Buffer:00000000 $t
+C:\Users\ncer\AppData\Local\Temp\ccAKAKPH.s:100    .text.I2C_Read_Buffer:00000000 I2C_Read_Buffer
+C:\Users\ncer\AppData\Local\Temp\ccAKAKPH.s:172    .text.I2C_Read_Buffer:0000003c $d
+C:\Users\ncer\AppData\Local\Temp\ccAKAKPH.s:177    .text.I2C_Write_Buffer:00000000 $t
+C:\Users\ncer\AppData\Local\Temp\ccAKAKPH.s:184    .text.I2C_Write_Buffer:00000000 I2C_Write_Buffer
+C:\Users\ncer\AppData\Local\Temp\ccAKAKPH.s:264    .text.I2C_Write_Buffer:0000004c $d
+C:\Users\ncer\AppData\Local\Temp\ccAKAKPH.s:269    .text.Delay_Us:00000000 $t
+C:\Users\ncer\AppData\Local\Temp\ccAKAKPH.s:276    .text.Delay_Us:00000000 Delay_Us
+C:\Users\ncer\AppData\Local\Temp\ccAKAKPH.s:308    .text.I2C_Reset:00000000 $t
+C:\Users\ncer\AppData\Local\Temp\ccAKAKPH.s:315    .text.I2C_Reset:00000000 I2C_Reset
+C:\Users\ncer\AppData\Local\Temp\ccAKAKPH.s:452    .text.I2C_Reset:00000094 $d
+
+UNDEFINED SYMBOLS
+HAL_I2C_Master_Transmit
+HAL_I2C_Master_Receive
+malloc
+memcpy
+free
+HAL_GPIO_Init
+HAL_GPIO_ReadPin
+HAL_GPIO_WritePin
