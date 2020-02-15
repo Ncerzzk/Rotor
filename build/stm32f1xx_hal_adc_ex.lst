@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s 			page 1
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccdH5j06.s 			page 1
 
 
    1              		.cpu cortex-m3
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s 			page 1
   29:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c ****   *
   30:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c ****   * This software component is licensed by ST under BSD 3-Clause license,
   31:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c ****   * the "License"; You may not use this file except in compliance with the
-ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s 			page 2
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccdH5j06.s 			page 2
 
 
   32:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c ****   * License. You may obtain a copy of the License at:
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s 			page 1
   86:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c **** /** @defgroup ADCEx_Exported_Functions ADCEx Exported Functions
   87:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c ****   * @{
   88:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c ****   */
-ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s 			page 3
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccdH5j06.s 			page 3
 
 
   89:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c **** 
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s 			page 1
  128:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c ****   HAL_StatusTypeDef tmp_hal_status = HAL_OK;
   43              		.loc 1 128 3 is_stmt 1 view .LVU2
   44              	.LVL1:
-ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s 			page 4
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccdH5j06.s 			page 4
 
 
  129:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c ****   uint32_t tickstart;
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s 			page 1
  157:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c ****                         / HAL_RCCEx_GetPeriphCLKFreq(RCC_PERIPHCLK_ADC))
  158:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c ****                        * ADC_PRECALIBRATION_DELAY_ADCCLOCKCYCLES        );
  159:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c **** 
-ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s 			page 5
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccdH5j06.s 			page 5
 
 
  160:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c ****     while(wait_loop_index != 0U)
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s 			page 1
  214:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c ****     ADC_STATE_CLR_SET(hadc->State,
  215:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c ****                       HAL_ADC_STATE_BUSY_INTERNAL,
  216:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c ****                       HAL_ADC_STATE_READY);
-ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s 			page 6
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccdH5j06.s 			page 6
 
 
  217:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c ****   }
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s 			page 1
  110 004a 7600     		lsls	r6, r6, #1
  156:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c ****                         / HAL_RCCEx_GetPeriphCLKFreq(RCC_PERIPHCLK_ADC))
  111              		.loc 1 156 21 view .LVU27
-ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s 			page 7
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccdH5j06.s 			page 7
 
 
  112 004c 0196     		str	r6, [sp, #4]
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s 			page 1
  151              		.loc 1 176 7 is_stmt 1 view .LVU42
  176:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c ****       {
  152              		.loc 1 176 11 is_stmt 0 view .LVU43
-ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s 			page 8
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccdH5j06.s 			page 8
 
 
  153 007a FFF7FEFF 		bl	HAL_GetTick
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s 			page 1
  192 00ac 13F0040F 		tst	r3, #4
  193 00b0 0FD0     		beq	.L15
  199:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c ****       {
-ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s 			page 9
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccdH5j06.s 			page 9
 
 
  194              		.loc 1 199 7 is_stmt 1 view .LVU59
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s 			page 1
  238              		.global	HAL_ADCEx_InjectedStart
  239              		.syntax unified
  240              		.thumb
-ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s 			page 10
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccdH5j06.s 			page 10
 
 
  241              		.thumb_func
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s 			page 1
  273              		.loc 1 246 3 is_stmt 1 discriminator 2 view .LVU81
  274              		.loc 1 246 6 is_stmt 0 discriminator 2 view .LVU82
  275 0016 0028     		cmp	r0, #0
-ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s 			page 11
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccdH5j06.s 			page 11
 
 
  276 0018 45D1     		bne	.L20
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s 			page 1
  303 0042 0023     		movs	r3, #0
  304 0044 E362     		str	r3, [r4, #44]
  305              	.L24:
-ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s 			page 12
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccdH5j06.s 			page 12
 
 
  274:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c ****     }
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s 			page 1
  305:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c ****         SET_BIT(hadc->Instance->CR2, ADC_CR2_JEXTTRIG);
  329              		.loc 1 305 9 is_stmt 1 view .LVU102
  330 0068 9A68     		ldr	r2, [r3, #8]
-ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s 			page 13
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccdH5j06.s 			page 13
 
 
  331 006a 42F40042 		orr	r2, r2, #32768
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s 			page 1
  315:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c ****   /* Return function status */
  316:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c ****   return tmp_hal_status;
  317:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c **** }
-ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s 			page 14
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccdH5j06.s 			page 14
 
 
  370              		.loc 1 317 1 is_stmt 0 view .LVU111
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s 			page 1
  406              		.loc 1 336 3 view .LVU116
  337:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c **** 
  338:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c ****   /* Process locked */
-ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s 			page 15
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccdH5j06.s 			page 15
 
 
  339:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c ****   __HAL_LOCK(hadc);
@@ -898,7 +898,7 @@ ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s 			page 1
  362:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c ****   }
  363:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c ****   else
  364:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c ****   {
-ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s 			page 16
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccdH5j06.s 			page 16
 
 
  365:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c ****     /* Update ADC state machine to error */
@@ -958,7 +958,7 @@ ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s 			page 1
  473              	.LCFI7:
  474              		.cfi_def_cfa_offset 0
  475              		.cfi_restore 4
-ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s 			page 17
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccdH5j06.s 			page 17
 
 
  476              		.cfi_restore 14
@@ -1018,7 +1018,7 @@ ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s 			page 1
  517 0008 0023     		movs	r3, #0
  518 000a 0193     		str	r3, [sp, #4]
  391:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c ****   uint32_t Conversion_Timeout_CPU_cycles_max = 0U;
-ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s 			page 18
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccdH5j06.s 			page 18
 
 
  519              		.loc 1 391 3 is_stmt 1 view .LVU147
@@ -1078,7 +1078,7 @@ ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s 			page 1
  419:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c ****     {
  420:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c ****       /* Check if timeout is disabled (set to infinite wait) */
  421:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c ****       if(Timeout != HAL_MAX_DELAY)
-ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s 			page 19
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccdH5j06.s 			page 19
 
 
  546              		.loc 1 421 7 is_stmt 1 view .LVU159
@@ -1138,7 +1138,7 @@ ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s 			page 1
  578              		.loc 1 443 43 is_stmt 0 view .LVU173
  579 004a 424B     		ldr	r3, .L76
  580 004c 1F68     		ldr	r7, [r3]
-ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s 			page 20
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccdH5j06.s 			page 20
 
 
  581              		.loc 1 443 45 view .LVU174
@@ -1198,7 +1198,7 @@ ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s 			page 1
  634 00a0 5BB1     		cbz	r3, .L67
  635              		.loc 1 444 44 view .LVU186
  636 00a2 FC27     		movs	r7, #252
-ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s 			page 21
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccdH5j06.s 			page 21
 
 
  637 00a4 06E0     		b	.L56
@@ -1258,7 +1258,7 @@ ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s 			page 1
  446:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c ****     {
  670              		.loc 1 446 41 is_stmt 0 view .LVU194
  671 00c4 019B     		ldr	r3, [sp, #4]
-ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s 			page 22
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccdH5j06.s 			page 22
 
 
  446:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c ****     {
@@ -1318,7 +1318,7 @@ ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s 			page 1
  469:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c ****   __HAL_ADC_CLEAR_FLAG(hadc, ADC_FLAG_JSTRT | ADC_FLAG_JEOC | ADC_FLAG_EOC);
  706              		.loc 1 469 3 is_stmt 1 view .LVU209
  707 00ee 2B68     		ldr	r3, [r5]
-ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s 			page 23
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccdH5j06.s 			page 23
 
 
  708 00f0 6FF00E02 		mvn	r2, #14
@@ -1378,7 +1378,7 @@ ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s 			page 1
  480:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c ****       (hadc->Init.ContinuousConvMode == DISABLE)   )        )   )
  737              		.loc 1 480 18 view .LVU219
  738 0124 2B7B     		ldrb	r3, [r5, #12]	@ zero_extendqisi2
-ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s 			page 24
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccdH5j06.s 			page 24
 
 
  479:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c ****      (ADC_IS_SOFTWARE_START_REGULAR(hadc)        &&
@@ -1438,7 +1438,7 @@ ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s 			page 1
  784 0154 00000000 		.word	SystemCoreClock
  785 0158 24499224 		.word	613566756
  786 015c 92244912 		.word	306783378
-ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s 			page 25
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccdH5j06.s 			page 25
 
 
  787 0160 92244900 		.word	4793490
@@ -1498,7 +1498,7 @@ ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s 			page 1
  511:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c ****     
  512:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c ****   /* Enable the ADC peripheral */
  513:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c ****   tmp_hal_status = ADC_Enable(hadc);
-ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s 			page 26
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccdH5j06.s 			page 26
 
 
  825              		.loc 1 513 3 discriminator 2 view .LVU239
@@ -1558,7 +1558,7 @@ ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s 			page 1
  852              		.loc 1 540 5 view .LVU248
  853              		.loc 1 540 9 is_stmt 0 view .LVU249
  854 003a A36A     		ldr	r3, [r4, #40]
-ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s 			page 27
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccdH5j06.s 			page 27
 
 
  855              		.loc 1 540 8 view .LVU250
@@ -1618,7 +1618,7 @@ ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s 			page 1
  883              		.loc 1 566 11 is_stmt 0 view .LVU261
  884 0066 9A68     		ldr	r2, [r3, #8]
  885 0068 02F4E042 		and	r2, r2, #28672
-ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s 			page 28
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccdH5j06.s 			page 28
 
 
  886              		.loc 1 566 10 view .LVU262
@@ -1678,7 +1678,7 @@ ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s 			page 1
  925              	.L80:
  576:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c ****       }
  577:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c ****     }
-ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s 			page 29
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccdH5j06.s 			page 29
 
 
  578:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c ****   }
@@ -1738,7 +1738,7 @@ ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s 			page 1
  597:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c ****   *         function HAL_ADC_Stop must be used.
  598:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c ****   * @param  hadc: ADC handle
  599:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c ****   * @retval None
-ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s 			page 30
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccdH5j06.s 			page 30
 
 
  600:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c ****   */
@@ -1798,7 +1798,7 @@ ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s 			page 1
  995 0022 08D0     		beq	.L106
  996              	.L99:
  619:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c ****   {
-ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s 			page 31
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccdH5j06.s 			page 31
 
 
  620:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c ****     /* Stop potential conversion on going, on regular and injected groups */
@@ -1858,7 +1858,7 @@ ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s 			page 1
  1019 0036 FFF7FEFF 		bl	ADC_ConversionStop_Disable
  1020              	.LVL50:
  625:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c ****     {
-ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s 			page 32
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccdH5j06.s 			page 32
 
 
  1021              		.loc 1 625 5 is_stmt 1 view .LVU298
@@ -1918,7 +1918,7 @@ ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s 			page 1
  661:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c ****   * @note:  On STM32F1 devices, ADC slave regular group must be configured 
  662:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c ****   *         with conversion trigger ADC_SOFTWARE_START.
  663:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c ****   * @note:  ADC slave can be enabled preliminarily using single-mode  
-ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s 			page 33
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccdH5j06.s 			page 33
 
 
  664:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c ****   *         HAL_ADC_Start() function.
@@ -1978,7 +1978,7 @@ ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s 			page 1
  1096 0018 314B     		ldr	r3, .L118
  1097 001a 0093     		str	r3, [sp]
  684:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c ****   
-ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s 			page 34
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccdH5j06.s 			page 34
 
 
  685:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c ****   /* On STM32F1 devices, ADC slave regular group must be configured with      */
@@ -2038,7 +2038,7 @@ ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s 			page 1
  718:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c ****     /* If conversions on group regular are also triggering group injected,    */
  719:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c ****     /* update ADC state.                                                      */
  720:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c ****     if (READ_BIT(hadc->Instance->CR1, ADC_CR1_JAUTO) != RESET)
-ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s 			page 35
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccdH5j06.s 			page 35
 
 
  721:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c ****     {
@@ -2098,7 +2098,7 @@ ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s 			page 1
  775:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c ****     /* Process unlocked */
  776:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c ****     __HAL_UNLOCK(hadc);
  777:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c ****   }
-ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s 			page 36
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccdH5j06.s 			page 36
 
 
  778:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c ****   
@@ -2158,7 +2158,7 @@ ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s 			page 1
  722:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c ****     }
  1159              		.loc 1 722 7 is_stmt 1 view .LVU335
  1160 0062 A36A     		ldr	r3, [r4, #40]
-ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s 			page 37
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccdH5j06.s 			page 37
 
 
  1161 0064 23F44053 		bic	r3, r3, #12288
@@ -2218,7 +2218,7 @@ ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s 			page 1
  1199              		.loc 1 755 5 view .LVU351
  755:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c ****     
  1200              		.loc 1 755 55 is_stmt 0 view .LVU352
-ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s 			page 38
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccdH5j06.s 			page 38
 
 
  1201 009a 2168     		ldr	r1, [r4]
@@ -2278,7 +2278,7 @@ ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s 			page 1
  1243              		.loc 1 776 5 view .LVU364
  1244 00d4 0023     		movs	r3, #0
  1245 00d6 84F82430 		strb	r3, [r4, #36]
-ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s 			page 39
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccdH5j06.s 			page 39
 
 
  1246 00da ADE7     		b	.L108
@@ -2338,7 +2338,7 @@ ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s 			page 1
  1280              		.loc 1 802 3 view .LVU369
  803:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c ****   
  804:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c ****   /* Process locked */
-ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s 			page 40
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccdH5j06.s 			page 40
 
 
  805:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c ****   __HAL_LOCK(hadc);
@@ -2398,7 +2398,7 @@ ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s 			page 1
  831:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c ****     }
  832:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c **** 
  833:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c ****     /* Disable ADC DMA mode */
-ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s 			page 41
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccdH5j06.s 			page 41
 
 
  834:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c ****     CLEAR_BIT(hadc->Instance->CR2, ADC_CR2_DMA);
@@ -2458,7 +2458,7 @@ ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s 			page 1
  822:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c ****     {
  1337              		.loc 1 822 5 is_stmt 1 view .LVU388
  822:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c ****     {
-ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s 			page 42
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccdH5j06.s 			page 42
 
 
  1338              		.loc 1 822 7 is_stmt 0 view .LVU389
@@ -2518,7 +2518,7 @@ ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s 			page 1
  1379 006a A362     		str	r3, [r4, #40]
  1380 006c D5E7     		b	.L122
  1381              	.LVL75:
-ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s 			page 43
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccdH5j06.s 			page 43
 
 
  1382              	.L124:
@@ -2578,7 +2578,7 @@ ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s 			page 1
  882:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c ****   *            @arg ADC_INJECTED_RANK_4: Injected Channel4 selected
  883:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c ****   * @retval ADC group injected conversion data
  884:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c ****   */
-ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s 			page 44
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccdH5j06.s 			page 44
 
 
  885:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c **** uint32_t HAL_ADCEx_InjectedGetValue(ADC_HandleTypeDef* hadc, uint32_t InjectedRank)
@@ -2638,7 +2638,7 @@ ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s 			page 1
  1435              	.LVL79:
  1436              	.L134:
  897:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c ****       break;
-ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s 			page 45
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccdH5j06.s 			page 45
 
 
  1437              		.loc 1 897 7 is_stmt 1 view .LVU416
@@ -2698,7 +2698,7 @@ ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s 			page 1
  917:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c ****   * @brief  Returns the last ADC Master&Slave regular conversions results data
  918:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c ****   *         in the selected multi mode.
  919:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c ****   * @param  hadc: ADC handle of ADC master (handle of ADC slave must not be used)
-ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s 			page 46
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccdH5j06.s 			page 46
 
 
  920:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c ****   * @retval The converted data value.
@@ -2758,7 +2758,7 @@ ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s 			page 1
  1507              		.loc 1 945 3 is_stmt 1 view .LVU441
  1508              	.L140:
  946:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c **** }
-ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s 			page 47
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccdH5j06.s 			page 47
 
 
  1509              		.loc 1 946 1 is_stmt 0 view .LVU442
@@ -2818,7 +2818,7 @@ ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s 			page 1
  962:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c **** 
  963:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c **** /**
  964:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c ****   * @}
-ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s 			page 48
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccdH5j06.s 			page 48
 
 
  965:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c ****   */
@@ -2878,7 +2878,7 @@ ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s 			page 1
  1571              		.loc 1 999 3 view .LVU449
  1572              		.loc 1 999 17 is_stmt 0 view .LVU450
  1573 0006 0022     		movs	r2, #0
-ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s 			page 49
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccdH5j06.s 			page 49
 
 
  1574 0008 0192     		str	r2, [sp, #4]
@@ -2938,7 +2938,7 @@ ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s 			page 1
  1599 001c 0028     		cmp	r0, #0
  1600 001e 4CD1     		bne	.L147
 1029:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c ****   {
-ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s 			page 50
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccdH5j06.s 			page 50
 
 
 1030:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c ****     if (sConfigInjected->InjectedRank == ADC_INJECTED_RANK_1)
@@ -2998,7 +2998,7 @@ ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s 			page 1
 1068:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c ****                  
 1069:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c ****                  ADC_JSQR_JL_SHIFT(sConfigInjected->InjectedNbrOfConversion) |
 1070:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c ****                  ADC_JSQR_RK_JL(sConfigInjected->InjectedChannel,      
-ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s 			page 51
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccdH5j06.s 			page 51
 
 
 1071:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c ****                                   sConfigInjected->InjectedRank,         
@@ -3058,7 +3058,7 @@ ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s 			page 1
 1110:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c ****     /* Automatic injected conversion can be enabled if injected group         */
 1111:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c ****     /* external triggers are disabled.                                        */
 1112:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c ****     if (sConfigInjected->AutoInjectedConv == ENABLE)
-ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s 			page 52
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccdH5j06.s 			page 52
 
 
  1632              		.loc 1 1112 5 view .LVU478
@@ -3118,7 +3118,7 @@ ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s 			page 1
  1651              		.loc 1 1147 6 view .LVU486
  1652 0058 092A     		cmp	r2, #9
  1653 005a 76D9     		bls	.L156
-ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s 			page 53
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccdH5j06.s 			page 53
 
 
 1148:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c ****   {
@@ -3178,7 +3178,7 @@ ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s 			page 1
  1685 0090 6FD0     		beq	.L173
 1171:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c ****   {
 1172:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c ****     case 1:
-ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s 			page 54
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccdH5j06.s 			page 54
 
 
 1173:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c ****       /* Set injected channel 1 offset */
@@ -3238,7 +3238,7 @@ ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s 			page 1
 1058:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c ****     {
  1713              		.loc 1 1058 57 view .LVU501
  1714 00bc 0C69     		ldr	r4, [r1, #16]
-ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s 			page 55
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccdH5j06.s 			page 55
 
 
 1058:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c ****     {
@@ -3298,7 +3298,7 @@ ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s 			page 1
  1760              		.loc 1 1121 9 is_stmt 1 view .LVU510
  1761 0116 986A     		ldr	r0, [r3, #40]
  1762              	.LVL98:
-ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s 			page 56
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccdH5j06.s 			page 56
 
 
 1121:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c ****         
@@ -3358,7 +3358,7 @@ ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s 			page 1
 1155:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c ****                ADC_SMPR2(ADC_SMPR2_SMP0, sConfigInjected->InjectedChannel)                       ,
  1805              		.loc 1 1155 5 is_stmt 1 view .LVU523
  1806 014a 1E68     		ldr	r6, [r3]
-ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s 			page 57
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccdH5j06.s 			page 57
 
 
  1807 014c 3469     		ldr	r4, [r6, #16]
@@ -3418,7 +3418,7 @@ ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s 			page 1
 1209:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c ****       {
 1210:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c ****         SET_BIT(hadc->Instance->CR2, ADC_CR2_TSVREFE);
 1211:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c ****         
-ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s 			page 58
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccdH5j06.s 			page 58
 
 
 1212:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c ****         if ((sConfigInjected->InjectedChannel == ADC_CHANNEL_TEMPSENSOR))
@@ -3478,7 +3478,7 @@ ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s 			page 1
  1871              		.loc 1 1180 7 is_stmt 1 view .LVU536
  1872 0198 1C68     		ldr	r4, [r3]
  1873 019a A269     		ldr	r2, [r4, #24]
-ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s 			page 59
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccdH5j06.s 			page 59
 
 
  1874 019c 22F47F62 		bic	r2, r2, #4080
@@ -3538,7 +3538,7 @@ ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s 			page 1
  1916 01da D7D1     		bne	.L163
 1210:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c ****         
  1917              		.loc 1 1210 9 is_stmt 1 view .LVU549
-ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s 			page 60
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccdH5j06.s 			page 60
 
 
  1918 01dc 9468     		ldr	r4, [r2, #8]
@@ -3598,7 +3598,7 @@ ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s 			page 1
  1957 020c BEE7     		b	.L163
  1958              	.LVL110:
  1959              	.L167:
-ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s 			page 61
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccdH5j06.s 			page 61
 
 
 1017:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c ****   
@@ -3658,7 +3658,7 @@ ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s 			page 1
 1261:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c ****   
 1262:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c ****   /* Check the parameters */
 1263:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c ****   assert_param(IS_ADC_MULTIMODE_MASTER_INSTANCE(hadc->Instance));
-ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s 			page 62
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccdH5j06.s 			page 62
 
 
  1993              		.loc 1 1263 3 view .LVU570
@@ -3718,7 +3718,7 @@ ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s 			page 1
 1286:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c ****                multimode->Mode     );
 1287:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c ****   }
 1288:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c ****   /* If one of the ADC sharing the same common group is enabled, no update    */
-ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s 			page 63
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccdH5j06.s 			page 63
 
 
 1289:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c ****   /* could be done on neither of the multimode structure parameters.          */
@@ -3778,7 +3778,7 @@ ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s 			page 1
  2058              		.loc 1 1267 3 view .LVU595
  2059 004c 0220     		movs	r0, #2
  2060              	.LVL119:
-ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s 			page 64
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccdH5j06.s 			page 64
 
 
 1304:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c **** } 
@@ -3805,46 +3805,46 @@ ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s 			page 1
  2082              		.file 11 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_adc_ex.h"
  2083              		.file 12 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h"
  2084              		.file 13 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc_ex.h"
-ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s 			page 65
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccdH5j06.s 			page 65
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 stm32f1xx_hal_adc_ex.c
-C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s:16     .text.HAL_ADCEx_Calibration_Start:00000000 $t
-C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s:24     .text.HAL_ADCEx_Calibration_Start:00000000 HAL_ADCEx_Calibration_Start
-C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s:232    .text.HAL_ADCEx_Calibration_Start:000000e4 $d
-C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s:237    .text.HAL_ADCEx_InjectedStart:00000000 $t
-C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s:244    .text.HAL_ADCEx_InjectedStart:00000000 HAL_ADCEx_InjectedStart
-C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s:386    .text.HAL_ADCEx_InjectedStart:000000b4 $d
-C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s:391    .text.HAL_ADCEx_InjectedStop:00000000 $t
-C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s:398    .text.HAL_ADCEx_InjectedStop:00000000 HAL_ADCEx_InjectedStop
-C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s:486    .text.HAL_ADCEx_InjectedPollForConversion:00000000 $t
-C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s:493    .text.HAL_ADCEx_InjectedPollForConversion:00000000 HAL_ADCEx_InjectedPollForConversion
-C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s:784    .text.HAL_ADCEx_InjectedPollForConversion:00000154 $d
-C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s:793    .text.HAL_ADCEx_InjectedStart_IT:00000000 $t
-C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s:800    .text.HAL_ADCEx_InjectedStart_IT:00000000 HAL_ADCEx_InjectedStart_IT
-C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s:947    .text.HAL_ADCEx_InjectedStart_IT:000000bc $d
-C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s:952    .text.HAL_ADCEx_InjectedStop_IT:00000000 $t
-C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s:959    .text.HAL_ADCEx_InjectedStop_IT:00000000 HAL_ADCEx_InjectedStop_IT
-C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s:1052   .text.HAL_ADCEx_MultiModeStart_DMA:00000000 $t
-C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s:1059   .text.HAL_ADCEx_MultiModeStart_DMA:00000000 HAL_ADCEx_MultiModeStart_DMA
-C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s:1255   .text.HAL_ADCEx_MultiModeStart_DMA:000000e0 $d
-C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s:1264   .text.HAL_ADCEx_MultiModeStop_DMA:00000000 $t
-C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s:1271   .text.HAL_ADCEx_MultiModeStop_DMA:00000000 HAL_ADCEx_MultiModeStop_DMA
-C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s:1395   .text.HAL_ADCEx_MultiModeStop_DMA:00000074 $d
-C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s:1400   .text.HAL_ADCEx_InjectedGetValue:00000000 $t
-C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s:1407   .text.HAL_ADCEx_InjectedGetValue:00000000 HAL_ADCEx_InjectedGetValue
-C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s:1469   .text.HAL_ADCEx_MultiModeGetValue:00000000 $t
-C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s:1476   .text.HAL_ADCEx_MultiModeGetValue:00000000 HAL_ADCEx_MultiModeGetValue
-C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s:1514   .text.HAL_ADCEx_MultiModeGetValue:00000018 $d
-C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s:1520   .text.HAL_ADCEx_InjectedConvCpltCallback:00000000 $t
-C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s:1527   .text.HAL_ADCEx_InjectedConvCpltCallback:00000000 HAL_ADCEx_InjectedConvCpltCallback
-C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s:1542   .text.HAL_ADCEx_InjectedConfigChannel:00000000 $t
-C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s:1549   .text.HAL_ADCEx_InjectedConfigChannel:00000000 HAL_ADCEx_InjectedConfigChannel
-C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s:1966   .text.HAL_ADCEx_InjectedConfigChannel:00000214 $d
-C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s:1973   .text.HAL_ADCEx_MultiModeConfigChannel:00000000 $t
-C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s:1980   .text.HAL_ADCEx_MultiModeConfigChannel:00000000 HAL_ADCEx_MultiModeConfigChannel
-C:\Users\ncer\AppData\Local\Temp\ccjMdjbz.s:2066   .text.HAL_ADCEx_MultiModeConfigChannel:00000050 $d
+C:\Users\ncer\AppData\Local\Temp\ccdH5j06.s:16     .text.HAL_ADCEx_Calibration_Start:00000000 $t
+C:\Users\ncer\AppData\Local\Temp\ccdH5j06.s:24     .text.HAL_ADCEx_Calibration_Start:00000000 HAL_ADCEx_Calibration_Start
+C:\Users\ncer\AppData\Local\Temp\ccdH5j06.s:232    .text.HAL_ADCEx_Calibration_Start:000000e4 $d
+C:\Users\ncer\AppData\Local\Temp\ccdH5j06.s:237    .text.HAL_ADCEx_InjectedStart:00000000 $t
+C:\Users\ncer\AppData\Local\Temp\ccdH5j06.s:244    .text.HAL_ADCEx_InjectedStart:00000000 HAL_ADCEx_InjectedStart
+C:\Users\ncer\AppData\Local\Temp\ccdH5j06.s:386    .text.HAL_ADCEx_InjectedStart:000000b4 $d
+C:\Users\ncer\AppData\Local\Temp\ccdH5j06.s:391    .text.HAL_ADCEx_InjectedStop:00000000 $t
+C:\Users\ncer\AppData\Local\Temp\ccdH5j06.s:398    .text.HAL_ADCEx_InjectedStop:00000000 HAL_ADCEx_InjectedStop
+C:\Users\ncer\AppData\Local\Temp\ccdH5j06.s:486    .text.HAL_ADCEx_InjectedPollForConversion:00000000 $t
+C:\Users\ncer\AppData\Local\Temp\ccdH5j06.s:493    .text.HAL_ADCEx_InjectedPollForConversion:00000000 HAL_ADCEx_InjectedPollForConversion
+C:\Users\ncer\AppData\Local\Temp\ccdH5j06.s:784    .text.HAL_ADCEx_InjectedPollForConversion:00000154 $d
+C:\Users\ncer\AppData\Local\Temp\ccdH5j06.s:793    .text.HAL_ADCEx_InjectedStart_IT:00000000 $t
+C:\Users\ncer\AppData\Local\Temp\ccdH5j06.s:800    .text.HAL_ADCEx_InjectedStart_IT:00000000 HAL_ADCEx_InjectedStart_IT
+C:\Users\ncer\AppData\Local\Temp\ccdH5j06.s:947    .text.HAL_ADCEx_InjectedStart_IT:000000bc $d
+C:\Users\ncer\AppData\Local\Temp\ccdH5j06.s:952    .text.HAL_ADCEx_InjectedStop_IT:00000000 $t
+C:\Users\ncer\AppData\Local\Temp\ccdH5j06.s:959    .text.HAL_ADCEx_InjectedStop_IT:00000000 HAL_ADCEx_InjectedStop_IT
+C:\Users\ncer\AppData\Local\Temp\ccdH5j06.s:1052   .text.HAL_ADCEx_MultiModeStart_DMA:00000000 $t
+C:\Users\ncer\AppData\Local\Temp\ccdH5j06.s:1059   .text.HAL_ADCEx_MultiModeStart_DMA:00000000 HAL_ADCEx_MultiModeStart_DMA
+C:\Users\ncer\AppData\Local\Temp\ccdH5j06.s:1255   .text.HAL_ADCEx_MultiModeStart_DMA:000000e0 $d
+C:\Users\ncer\AppData\Local\Temp\ccdH5j06.s:1264   .text.HAL_ADCEx_MultiModeStop_DMA:00000000 $t
+C:\Users\ncer\AppData\Local\Temp\ccdH5j06.s:1271   .text.HAL_ADCEx_MultiModeStop_DMA:00000000 HAL_ADCEx_MultiModeStop_DMA
+C:\Users\ncer\AppData\Local\Temp\ccdH5j06.s:1395   .text.HAL_ADCEx_MultiModeStop_DMA:00000074 $d
+C:\Users\ncer\AppData\Local\Temp\ccdH5j06.s:1400   .text.HAL_ADCEx_InjectedGetValue:00000000 $t
+C:\Users\ncer\AppData\Local\Temp\ccdH5j06.s:1407   .text.HAL_ADCEx_InjectedGetValue:00000000 HAL_ADCEx_InjectedGetValue
+C:\Users\ncer\AppData\Local\Temp\ccdH5j06.s:1469   .text.HAL_ADCEx_MultiModeGetValue:00000000 $t
+C:\Users\ncer\AppData\Local\Temp\ccdH5j06.s:1476   .text.HAL_ADCEx_MultiModeGetValue:00000000 HAL_ADCEx_MultiModeGetValue
+C:\Users\ncer\AppData\Local\Temp\ccdH5j06.s:1514   .text.HAL_ADCEx_MultiModeGetValue:00000018 $d
+C:\Users\ncer\AppData\Local\Temp\ccdH5j06.s:1520   .text.HAL_ADCEx_InjectedConvCpltCallback:00000000 $t
+C:\Users\ncer\AppData\Local\Temp\ccdH5j06.s:1527   .text.HAL_ADCEx_InjectedConvCpltCallback:00000000 HAL_ADCEx_InjectedConvCpltCallback
+C:\Users\ncer\AppData\Local\Temp\ccdH5j06.s:1542   .text.HAL_ADCEx_InjectedConfigChannel:00000000 $t
+C:\Users\ncer\AppData\Local\Temp\ccdH5j06.s:1549   .text.HAL_ADCEx_InjectedConfigChannel:00000000 HAL_ADCEx_InjectedConfigChannel
+C:\Users\ncer\AppData\Local\Temp\ccdH5j06.s:1966   .text.HAL_ADCEx_InjectedConfigChannel:00000214 $d
+C:\Users\ncer\AppData\Local\Temp\ccdH5j06.s:1973   .text.HAL_ADCEx_MultiModeConfigChannel:00000000 $t
+C:\Users\ncer\AppData\Local\Temp\ccdH5j06.s:1980   .text.HAL_ADCEx_MultiModeConfigChannel:00000000 HAL_ADCEx_MultiModeConfigChannel
+C:\Users\ncer\AppData\Local\Temp\ccdH5j06.s:2066   .text.HAL_ADCEx_MultiModeConfigChannel:00000050 $d
 
 UNDEFINED SYMBOLS
 ADC_ConversionStop_Disable

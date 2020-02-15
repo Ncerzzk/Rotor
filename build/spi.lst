@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccBzTUC2.s 			page 1
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\cc4btt5G.s 			page 1
 
 
    1              		.cpu cortex-m3
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccBzTUC2.s 			page 1
   30:Src/spi.c     **** void MX_SPI2_Init(void)
   31:Src/spi.c     **** {
   27              		.loc 1 31 1 view -0
-ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccBzTUC2.s 			page 2
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\cc4btt5G.s 			page 2
 
 
   28              		.cfi_startproc
@@ -73,8 +73,8 @@ ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccBzTUC2.s 			page 1
   33:Src/spi.c     ****   hspi2.Instance = SPI2;
   36              		.loc 1 33 3 view .LVU1
   37              		.loc 1 33 18 is_stmt 0 view .LVU2
-  38 0002 0D48     		ldr	r0, .L5
-  39 0004 0D4B     		ldr	r3, .L5+4
+  38 0002 0E48     		ldr	r0, .L5
+  39 0004 0E4B     		ldr	r3, .L5+4
   40 0006 0360     		str	r3, [r0]
   34:Src/spi.c     ****   hspi2.Init.Mode = SPI_MODE_MASTER;
   41              		.loc 1 34 3 is_stmt 1 view .LVU3
@@ -103,107 +103,108 @@ ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccBzTUC2.s 			page 1
   59              		.loc 1 39 18 is_stmt 0 view .LVU14
   60 0018 4FF40072 		mov	r2, #512
   61 001c 8261     		str	r2, [r0, #24]
-  40:Src/spi.c     ****   hspi2.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_2;
+  40:Src/spi.c     ****   hspi2.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_4;
   62              		.loc 1 40 3 is_stmt 1 view .LVU15
   63              		.loc 1 40 32 is_stmt 0 view .LVU16
-  64 001e C361     		str	r3, [r0, #28]
+  64 001e 0822     		movs	r2, #8
+  65 0020 C261     		str	r2, [r0, #28]
   41:Src/spi.c     ****   hspi2.Init.FirstBit = SPI_FIRSTBIT_MSB;
-  65              		.loc 1 41 3 is_stmt 1 view .LVU17
-  66              		.loc 1 41 23 is_stmt 0 view .LVU18
-  67 0020 0362     		str	r3, [r0, #32]
+  66              		.loc 1 41 3 is_stmt 1 view .LVU17
+  67              		.loc 1 41 23 is_stmt 0 view .LVU18
+  68 0022 0362     		str	r3, [r0, #32]
   42:Src/spi.c     ****   hspi2.Init.TIMode = SPI_TIMODE_DISABLE;
-  68              		.loc 1 42 3 is_stmt 1 view .LVU19
-  69              		.loc 1 42 21 is_stmt 0 view .LVU20
-  70 0022 4362     		str	r3, [r0, #36]
+  69              		.loc 1 42 3 is_stmt 1 view .LVU19
+  70              		.loc 1 42 21 is_stmt 0 view .LVU20
+  71 0024 4362     		str	r3, [r0, #36]
   43:Src/spi.c     ****   hspi2.Init.CRCCalculation = SPI_CRCCALCULATION_DISABLE;
-  71              		.loc 1 43 3 is_stmt 1 view .LVU21
-  72              		.loc 1 43 29 is_stmt 0 view .LVU22
-ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccBzTUC2.s 			page 3
+  72              		.loc 1 43 3 is_stmt 1 view .LVU21
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\cc4btt5G.s 			page 3
 
 
-  73 0024 8362     		str	r3, [r0, #40]
+  73              		.loc 1 43 29 is_stmt 0 view .LVU22
+  74 0026 8362     		str	r3, [r0, #40]
   44:Src/spi.c     ****   hspi2.Init.CRCPolynomial = 10;
-  74              		.loc 1 44 3 is_stmt 1 view .LVU23
-  75              		.loc 1 44 28 is_stmt 0 view .LVU24
-  76 0026 0A23     		movs	r3, #10
-  77 0028 C362     		str	r3, [r0, #44]
+  75              		.loc 1 44 3 is_stmt 1 view .LVU23
+  76              		.loc 1 44 28 is_stmt 0 view .LVU24
+  77 0028 0A23     		movs	r3, #10
+  78 002a C362     		str	r3, [r0, #44]
   45:Src/spi.c     ****   if (HAL_SPI_Init(&hspi2) != HAL_OK)
-  78              		.loc 1 45 3 is_stmt 1 view .LVU25
-  79              		.loc 1 45 7 is_stmt 0 view .LVU26
-  80 002a FFF7FEFF 		bl	HAL_SPI_Init
-  81              	.LVL0:
-  82              		.loc 1 45 6 view .LVU27
-  83 002e 00B9     		cbnz	r0, .L4
-  84              	.L1:
+  79              		.loc 1 45 3 is_stmt 1 view .LVU25
+  80              		.loc 1 45 7 is_stmt 0 view .LVU26
+  81 002c FFF7FEFF 		bl	HAL_SPI_Init
+  82              	.LVL0:
+  83              		.loc 1 45 6 view .LVU27
+  84 0030 00B9     		cbnz	r0, .L4
+  85              	.L1:
   46:Src/spi.c     ****   {
   47:Src/spi.c     ****     Error_Handler();
   48:Src/spi.c     ****   }
   49:Src/spi.c     **** 
   50:Src/spi.c     **** }
-  85              		.loc 1 50 1 view .LVU28
-  86 0030 08BD     		pop	{r3, pc}
-  87              	.L4:
+  86              		.loc 1 50 1 view .LVU28
+  87 0032 08BD     		pop	{r3, pc}
+  88              	.L4:
   47:Src/spi.c     ****   }
-  88              		.loc 1 47 5 is_stmt 1 view .LVU29
-  89 0032 FFF7FEFF 		bl	Error_Handler
-  90              	.LVL1:
-  91              		.loc 1 50 1 is_stmt 0 view .LVU30
-  92 0036 FBE7     		b	.L1
-  93              	.L6:
-  94              		.align	2
-  95              	.L5:
-  96 0038 00000000 		.word	hspi2
-  97 003c 00380040 		.word	1073756160
-  98              		.cfi_endproc
-  99              	.LFE65:
- 101              		.section	.text.HAL_SPI_MspInit,"ax",%progbits
- 102              		.align	1
- 103              		.global	HAL_SPI_MspInit
- 104              		.syntax unified
- 105              		.thumb
- 106              		.thumb_func
- 107              		.fpu softvfp
- 109              	HAL_SPI_MspInit:
- 110              	.LVL2:
- 111              	.LFB66:
+  89              		.loc 1 47 5 is_stmt 1 view .LVU29
+  90 0034 FFF7FEFF 		bl	Error_Handler
+  91              	.LVL1:
+  92              		.loc 1 50 1 is_stmt 0 view .LVU30
+  93 0038 FBE7     		b	.L1
+  94              	.L6:
+  95 003a 00BF     		.align	2
+  96              	.L5:
+  97 003c 00000000 		.word	hspi2
+  98 0040 00380040 		.word	1073756160
+  99              		.cfi_endproc
+ 100              	.LFE65:
+ 102              		.section	.text.HAL_SPI_MspInit,"ax",%progbits
+ 103              		.align	1
+ 104              		.global	HAL_SPI_MspInit
+ 105              		.syntax unified
+ 106              		.thumb
+ 107              		.thumb_func
+ 108              		.fpu softvfp
+ 110              	HAL_SPI_MspInit:
+ 111              	.LVL2:
+ 112              	.LFB66:
   51:Src/spi.c     **** 
   52:Src/spi.c     **** void HAL_SPI_MspInit(SPI_HandleTypeDef* spiHandle)
   53:Src/spi.c     **** {
- 112              		.loc 1 53 1 is_stmt 1 view -0
- 113              		.cfi_startproc
- 114              		@ args = 0, pretend = 0, frame = 24
- 115              		@ frame_needed = 0, uses_anonymous_args = 0
- 116              		.loc 1 53 1 is_stmt 0 view .LVU32
- 117 0000 10B5     		push	{r4, lr}
- 118              	.LCFI1:
- 119              		.cfi_def_cfa_offset 8
- 120              		.cfi_offset 4, -8
-ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccBzTUC2.s 			page 4
+ 113              		.loc 1 53 1 is_stmt 1 view -0
+ 114              		.cfi_startproc
+ 115              		@ args = 0, pretend = 0, frame = 24
+ 116              		@ frame_needed = 0, uses_anonymous_args = 0
+ 117              		.loc 1 53 1 is_stmt 0 view .LVU32
+ 118 0000 10B5     		push	{r4, lr}
+ 119              	.LCFI1:
+ 120              		.cfi_def_cfa_offset 8
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\cc4btt5G.s 			page 4
 
 
- 121              		.cfi_offset 14, -4
- 122 0002 86B0     		sub	sp, sp, #24
- 123              	.LCFI2:
- 124              		.cfi_def_cfa_offset 32
+ 121              		.cfi_offset 4, -8
+ 122              		.cfi_offset 14, -4
+ 123 0002 86B0     		sub	sp, sp, #24
+ 124              	.LCFI2:
+ 125              		.cfi_def_cfa_offset 32
   54:Src/spi.c     **** 
   55:Src/spi.c     ****   GPIO_InitTypeDef GPIO_InitStruct = {0};
- 125              		.loc 1 55 3 is_stmt 1 view .LVU33
- 126              		.loc 1 55 20 is_stmt 0 view .LVU34
- 127 0004 0023     		movs	r3, #0
- 128 0006 0293     		str	r3, [sp, #8]
- 129 0008 0393     		str	r3, [sp, #12]
- 130 000a 0493     		str	r3, [sp, #16]
- 131 000c 0593     		str	r3, [sp, #20]
+ 126              		.loc 1 55 3 is_stmt 1 view .LVU33
+ 127              		.loc 1 55 20 is_stmt 0 view .LVU34
+ 128 0004 0023     		movs	r3, #0
+ 129 0006 0293     		str	r3, [sp, #8]
+ 130 0008 0393     		str	r3, [sp, #12]
+ 131 000a 0493     		str	r3, [sp, #16]
+ 132 000c 0593     		str	r3, [sp, #20]
   56:Src/spi.c     ****   if(spiHandle->Instance==SPI2)
- 132              		.loc 1 56 3 is_stmt 1 view .LVU35
- 133              		.loc 1 56 15 is_stmt 0 view .LVU36
- 134 000e 0268     		ldr	r2, [r0]
- 135              		.loc 1 56 5 view .LVU37
- 136 0010 174B     		ldr	r3, .L11
- 137 0012 9A42     		cmp	r2, r3
- 138 0014 01D0     		beq	.L10
- 139              	.LVL3:
- 140              	.L7:
+ 133              		.loc 1 56 3 is_stmt 1 view .LVU35
+ 134              		.loc 1 56 15 is_stmt 0 view .LVU36
+ 135 000e 0268     		ldr	r2, [r0]
+ 136              		.loc 1 56 5 view .LVU37
+ 137 0010 174B     		ldr	r3, .L11
+ 138 0012 9A42     		cmp	r2, r3
+ 139 0014 01D0     		beq	.L10
+ 140              	.LVL3:
+ 141              	.L7:
   57:Src/spi.c     ****   {
   58:Src/spi.c     ****   /* USER CODE BEGIN SPI2_MspInit 0 */
   59:Src/spi.c     **** 
@@ -232,163 +233,163 @@ ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccBzTUC2.s 			page 1
   82:Src/spi.c     ****   /* USER CODE END SPI2_MspInit 1 */
   83:Src/spi.c     ****   }
   84:Src/spi.c     **** }
- 141              		.loc 1 84 1 view .LVU38
- 142 0016 06B0     		add	sp, sp, #24
- 143              	.LCFI3:
- 144              		.cfi_remember_state
- 145              		.cfi_def_cfa_offset 8
- 146              		@ sp needed
-ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccBzTUC2.s 			page 5
+ 142              		.loc 1 84 1 view .LVU38
+ 143 0016 06B0     		add	sp, sp, #24
+ 144              	.LCFI3:
+ 145              		.cfi_remember_state
+ 146              		.cfi_def_cfa_offset 8
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\cc4btt5G.s 			page 5
 
 
- 147 0018 10BD     		pop	{r4, pc}
- 148              	.LVL4:
- 149              	.L10:
- 150              	.LCFI4:
- 151              		.cfi_restore_state
+ 147              		@ sp needed
+ 148 0018 10BD     		pop	{r4, pc}
+ 149              	.LVL4:
+ 150              	.L10:
+ 151              	.LCFI4:
+ 152              		.cfi_restore_state
   62:Src/spi.c     ****   
- 152              		.loc 1 62 5 is_stmt 1 view .LVU39
- 153              	.LBB2:
+ 153              		.loc 1 62 5 is_stmt 1 view .LVU39
+ 154              	.LBB2:
   62:Src/spi.c     ****   
- 154              		.loc 1 62 5 view .LVU40
+ 155              		.loc 1 62 5 view .LVU40
   62:Src/spi.c     ****   
- 155              		.loc 1 62 5 view .LVU41
- 156 001a 03F5EC33 		add	r3, r3, #120832
- 157 001e DA69     		ldr	r2, [r3, #28]
- 158 0020 42F48042 		orr	r2, r2, #16384
- 159 0024 DA61     		str	r2, [r3, #28]
+ 156              		.loc 1 62 5 view .LVU41
+ 157 001a 03F5EC33 		add	r3, r3, #120832
+ 158 001e DA69     		ldr	r2, [r3, #28]
+ 159 0020 42F48042 		orr	r2, r2, #16384
+ 160 0024 DA61     		str	r2, [r3, #28]
   62:Src/spi.c     ****   
- 160              		.loc 1 62 5 view .LVU42
- 161 0026 DA69     		ldr	r2, [r3, #28]
- 162 0028 02F48042 		and	r2, r2, #16384
- 163 002c 0092     		str	r2, [sp]
+ 161              		.loc 1 62 5 view .LVU42
+ 162 0026 DA69     		ldr	r2, [r3, #28]
+ 163 0028 02F48042 		and	r2, r2, #16384
+ 164 002c 0092     		str	r2, [sp]
   62:Src/spi.c     ****   
- 164              		.loc 1 62 5 view .LVU43
- 165 002e 009A     		ldr	r2, [sp]
- 166              	.LBE2:
+ 165              		.loc 1 62 5 view .LVU43
+ 166 002e 009A     		ldr	r2, [sp]
+ 167              	.LBE2:
   62:Src/spi.c     ****   
- 167              		.loc 1 62 5 view .LVU44
+ 168              		.loc 1 62 5 view .LVU44
   64:Src/spi.c     ****     /**SPI2 GPIO Configuration    
- 168              		.loc 1 64 5 view .LVU45
- 169              	.LBB3:
+ 169              		.loc 1 64 5 view .LVU45
+ 170              	.LBB3:
   64:Src/spi.c     ****     /**SPI2 GPIO Configuration    
- 170              		.loc 1 64 5 view .LVU46
+ 171              		.loc 1 64 5 view .LVU46
   64:Src/spi.c     ****     /**SPI2 GPIO Configuration    
- 171              		.loc 1 64 5 view .LVU47
- 172 0030 9A69     		ldr	r2, [r3, #24]
- 173 0032 42F00802 		orr	r2, r2, #8
- 174 0036 9A61     		str	r2, [r3, #24]
+ 172              		.loc 1 64 5 view .LVU47
+ 173 0030 9A69     		ldr	r2, [r3, #24]
+ 174 0032 42F00802 		orr	r2, r2, #8
+ 175 0036 9A61     		str	r2, [r3, #24]
   64:Src/spi.c     ****     /**SPI2 GPIO Configuration    
- 175              		.loc 1 64 5 view .LVU48
- 176 0038 9B69     		ldr	r3, [r3, #24]
- 177 003a 03F00803 		and	r3, r3, #8
- 178 003e 0193     		str	r3, [sp, #4]
+ 176              		.loc 1 64 5 view .LVU48
+ 177 0038 9B69     		ldr	r3, [r3, #24]
+ 178 003a 03F00803 		and	r3, r3, #8
+ 179 003e 0193     		str	r3, [sp, #4]
   64:Src/spi.c     ****     /**SPI2 GPIO Configuration    
- 179              		.loc 1 64 5 view .LVU49
- 180 0040 019B     		ldr	r3, [sp, #4]
- 181              	.LBE3:
+ 180              		.loc 1 64 5 view .LVU49
+ 181 0040 019B     		ldr	r3, [sp, #4]
+ 182              	.LBE3:
   64:Src/spi.c     ****     /**SPI2 GPIO Configuration    
- 182              		.loc 1 64 5 view .LVU50
+ 183              		.loc 1 64 5 view .LVU50
   70:Src/spi.c     ****     GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
- 183              		.loc 1 70 5 view .LVU51
+ 184              		.loc 1 70 5 view .LVU51
   70:Src/spi.c     ****     GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
- 184              		.loc 1 70 25 is_stmt 0 view .LVU52
- 185 0042 4FF42043 		mov	r3, #40960
- 186 0046 0293     		str	r3, [sp, #8]
+ 185              		.loc 1 70 25 is_stmt 0 view .LVU52
+ 186 0042 4FF42043 		mov	r3, #40960
+ 187 0046 0293     		str	r3, [sp, #8]
   71:Src/spi.c     ****     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
- 187              		.loc 1 71 5 is_stmt 1 view .LVU53
-  71:Src/spi.c     ****     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
-ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccBzTUC2.s 			page 6
+ 188              		.loc 1 71 5 is_stmt 1 view .LVU53
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\cc4btt5G.s 			page 6
 
 
- 188              		.loc 1 71 26 is_stmt 0 view .LVU54
- 189 0048 0223     		movs	r3, #2
- 190 004a 0393     		str	r3, [sp, #12]
+  71:Src/spi.c     ****     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
+ 189              		.loc 1 71 26 is_stmt 0 view .LVU54
+ 190 0048 0223     		movs	r3, #2
+ 191 004a 0393     		str	r3, [sp, #12]
   72:Src/spi.c     ****     HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
- 191              		.loc 1 72 5 is_stmt 1 view .LVU55
+ 192              		.loc 1 72 5 is_stmt 1 view .LVU55
   72:Src/spi.c     ****     HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
- 192              		.loc 1 72 27 is_stmt 0 view .LVU56
- 193 004c 0323     		movs	r3, #3
- 194 004e 0593     		str	r3, [sp, #20]
+ 193              		.loc 1 72 27 is_stmt 0 view .LVU56
+ 194 004c 0323     		movs	r3, #3
+ 195 004e 0593     		str	r3, [sp, #20]
   73:Src/spi.c     **** 
- 195              		.loc 1 73 5 is_stmt 1 view .LVU57
- 196 0050 084C     		ldr	r4, .L11+4
- 197 0052 02A9     		add	r1, sp, #8
- 198 0054 2046     		mov	r0, r4
- 199              	.LVL5:
+ 196              		.loc 1 73 5 is_stmt 1 view .LVU57
+ 197 0050 084C     		ldr	r4, .L11+4
+ 198 0052 02A9     		add	r1, sp, #8
+ 199 0054 2046     		mov	r0, r4
+ 200              	.LVL5:
   73:Src/spi.c     **** 
- 200              		.loc 1 73 5 is_stmt 0 view .LVU58
- 201 0056 FFF7FEFF 		bl	HAL_GPIO_Init
- 202              	.LVL6:
+ 201              		.loc 1 73 5 is_stmt 0 view .LVU58
+ 202 0056 FFF7FEFF 		bl	HAL_GPIO_Init
+ 203              	.LVL6:
   75:Src/spi.c     ****     GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
- 203              		.loc 1 75 5 is_stmt 1 view .LVU59
+ 204              		.loc 1 75 5 is_stmt 1 view .LVU59
   75:Src/spi.c     ****     GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
- 204              		.loc 1 75 25 is_stmt 0 view .LVU60
- 205 005a 4FF48043 		mov	r3, #16384
- 206 005e 0293     		str	r3, [sp, #8]
+ 205              		.loc 1 75 25 is_stmt 0 view .LVU60
+ 206 005a 4FF48043 		mov	r3, #16384
+ 207 005e 0293     		str	r3, [sp, #8]
   76:Src/spi.c     ****     GPIO_InitStruct.Pull = GPIO_NOPULL;
- 207              		.loc 1 76 5 is_stmt 1 view .LVU61
+ 208              		.loc 1 76 5 is_stmt 1 view .LVU61
   76:Src/spi.c     ****     GPIO_InitStruct.Pull = GPIO_NOPULL;
- 208              		.loc 1 76 26 is_stmt 0 view .LVU62
- 209 0060 0023     		movs	r3, #0
- 210 0062 0393     		str	r3, [sp, #12]
+ 209              		.loc 1 76 26 is_stmt 0 view .LVU62
+ 210 0060 0023     		movs	r3, #0
+ 211 0062 0393     		str	r3, [sp, #12]
   77:Src/spi.c     ****     HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
- 211              		.loc 1 77 5 is_stmt 1 view .LVU63
+ 212              		.loc 1 77 5 is_stmt 1 view .LVU63
   77:Src/spi.c     ****     HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
- 212              		.loc 1 77 26 is_stmt 0 view .LVU64
- 213 0064 0493     		str	r3, [sp, #16]
+ 213              		.loc 1 77 26 is_stmt 0 view .LVU64
+ 214 0064 0493     		str	r3, [sp, #16]
   78:Src/spi.c     **** 
- 214              		.loc 1 78 5 is_stmt 1 view .LVU65
- 215 0066 02A9     		add	r1, sp, #8
- 216 0068 2046     		mov	r0, r4
- 217 006a FFF7FEFF 		bl	HAL_GPIO_Init
- 218              	.LVL7:
- 219              		.loc 1 84 1 is_stmt 0 view .LVU66
- 220 006e D2E7     		b	.L7
- 221              	.L12:
- 222              		.align	2
- 223              	.L11:
- 224 0070 00380040 		.word	1073756160
- 225 0074 000C0140 		.word	1073810432
- 226              		.cfi_endproc
- 227              	.LFE66:
- 229              		.section	.text.HAL_SPI_MspDeInit,"ax",%progbits
- 230              		.align	1
- 231              		.global	HAL_SPI_MspDeInit
- 232              		.syntax unified
- 233              		.thumb
- 234              		.thumb_func
-ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccBzTUC2.s 			page 7
+ 215              		.loc 1 78 5 is_stmt 1 view .LVU65
+ 216 0066 02A9     		add	r1, sp, #8
+ 217 0068 2046     		mov	r0, r4
+ 218 006a FFF7FEFF 		bl	HAL_GPIO_Init
+ 219              	.LVL7:
+ 220              		.loc 1 84 1 is_stmt 0 view .LVU66
+ 221 006e D2E7     		b	.L7
+ 222              	.L12:
+ 223              		.align	2
+ 224              	.L11:
+ 225 0070 00380040 		.word	1073756160
+ 226 0074 000C0140 		.word	1073810432
+ 227              		.cfi_endproc
+ 228              	.LFE66:
+ 230              		.section	.text.HAL_SPI_MspDeInit,"ax",%progbits
+ 231              		.align	1
+ 232              		.global	HAL_SPI_MspDeInit
+ 233              		.syntax unified
+ 234              		.thumb
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\cc4btt5G.s 			page 7
 
 
- 235              		.fpu softvfp
- 237              	HAL_SPI_MspDeInit:
- 238              	.LVL8:
- 239              	.LFB67:
+ 235              		.thumb_func
+ 236              		.fpu softvfp
+ 238              	HAL_SPI_MspDeInit:
+ 239              	.LVL8:
+ 240              	.LFB67:
   85:Src/spi.c     **** 
   86:Src/spi.c     **** void HAL_SPI_MspDeInit(SPI_HandleTypeDef* spiHandle)
   87:Src/spi.c     **** {
- 240              		.loc 1 87 1 is_stmt 1 view -0
- 241              		.cfi_startproc
- 242              		@ args = 0, pretend = 0, frame = 0
- 243              		@ frame_needed = 0, uses_anonymous_args = 0
- 244              		.loc 1 87 1 is_stmt 0 view .LVU68
- 245 0000 08B5     		push	{r3, lr}
- 246              	.LCFI5:
- 247              		.cfi_def_cfa_offset 8
- 248              		.cfi_offset 3, -8
- 249              		.cfi_offset 14, -4
+ 241              		.loc 1 87 1 is_stmt 1 view -0
+ 242              		.cfi_startproc
+ 243              		@ args = 0, pretend = 0, frame = 0
+ 244              		@ frame_needed = 0, uses_anonymous_args = 0
+ 245              		.loc 1 87 1 is_stmt 0 view .LVU68
+ 246 0000 08B5     		push	{r3, lr}
+ 247              	.LCFI5:
+ 248              		.cfi_def_cfa_offset 8
+ 249              		.cfi_offset 3, -8
+ 250              		.cfi_offset 14, -4
   88:Src/spi.c     **** 
   89:Src/spi.c     ****   if(spiHandle->Instance==SPI2)
- 250              		.loc 1 89 3 is_stmt 1 view .LVU69
- 251              		.loc 1 89 15 is_stmt 0 view .LVU70
- 252 0002 0268     		ldr	r2, [r0]
- 253              		.loc 1 89 5 view .LVU71
- 254 0004 074B     		ldr	r3, .L17
- 255 0006 9A42     		cmp	r2, r3
- 256 0008 00D0     		beq	.L16
- 257              	.LVL9:
- 258              	.L13:
+ 251              		.loc 1 89 3 is_stmt 1 view .LVU69
+ 252              		.loc 1 89 15 is_stmt 0 view .LVU70
+ 253 0002 0268     		ldr	r2, [r0]
+ 254              		.loc 1 89 5 view .LVU71
+ 255 0004 074B     		ldr	r3, .L17
+ 256 0006 9A42     		cmp	r2, r3
+ 257 0008 00D0     		beq	.L16
+ 258              	.LVL9:
+ 259              	.L13:
   90:Src/spi.c     ****   {
   91:Src/spi.c     ****   /* USER CODE BEGIN SPI2_MspDeInit 0 */
   92:Src/spi.c     **** 
@@ -408,68 +409,68 @@ ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccBzTUC2.s 			page 1
  106:Src/spi.c     ****   /* USER CODE END SPI2_MspDeInit 1 */
  107:Src/spi.c     ****   }
  108:Src/spi.c     **** } 
- 259              		.loc 1 108 1 view .LVU72
- 260 000a 08BD     		pop	{r3, pc}
- 261              	.LVL10:
- 262              	.L16:
+ 260              		.loc 1 108 1 view .LVU72
+ 261 000a 08BD     		pop	{r3, pc}
+ 262              	.LVL10:
+ 263              	.L16:
   95:Src/spi.c     ****   
- 263              		.loc 1 95 5 is_stmt 1 view .LVU73
- 264 000c 064A     		ldr	r2, .L17+4
- 265 000e D369     		ldr	r3, [r2, #28]
- 266 0010 23F48043 		bic	r3, r3, #16384
- 267 0014 D361     		str	r3, [r2, #28]
-ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccBzTUC2.s 			page 8
+ 264              		.loc 1 95 5 is_stmt 1 view .LVU73
+ 265 000c 064A     		ldr	r2, .L17+4
+ 266 000e D369     		ldr	r3, [r2, #28]
+ 267 0010 23F48043 		bic	r3, r3, #16384
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\cc4btt5G.s 			page 8
 
 
+ 268 0014 D361     		str	r3, [r2, #28]
  102:Src/spi.c     **** 
- 268              		.loc 1 102 5 view .LVU74
- 269 0016 4FF46041 		mov	r1, #57344
- 270 001a 0448     		ldr	r0, .L17+8
- 271              	.LVL11:
+ 269              		.loc 1 102 5 view .LVU74
+ 270 0016 4FF46041 		mov	r1, #57344
+ 271 001a 0448     		ldr	r0, .L17+8
+ 272              	.LVL11:
  102:Src/spi.c     **** 
- 272              		.loc 1 102 5 is_stmt 0 view .LVU75
- 273 001c FFF7FEFF 		bl	HAL_GPIO_DeInit
- 274              	.LVL12:
- 275              		.loc 1 108 1 view .LVU76
- 276 0020 F3E7     		b	.L13
- 277              	.L18:
- 278 0022 00BF     		.align	2
- 279              	.L17:
- 280 0024 00380040 		.word	1073756160
- 281 0028 00100240 		.word	1073876992
- 282 002c 000C0140 		.word	1073810432
- 283              		.cfi_endproc
- 284              	.LFE67:
- 286              		.comm	hspi2,88,4
- 287              		.text
- 288              	.Letext0:
- 289              		.file 2 "c:\\arm_gcc\\arm-none-eabi\\include\\machine\\_default_types.h"
- 290              		.file 3 "c:\\arm_gcc\\arm-none-eabi\\include\\sys\\_stdint.h"
- 291              		.file 4 "Drivers/CMSIS/Include/core_cm3.h"
- 292              		.file 5 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h"
- 293              		.file 6 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xb.h"
- 294              		.file 7 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h"
- 295              		.file 8 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h"
- 296              		.file 9 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h"
- 297              		.file 10 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h"
- 298              		.file 11 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h"
- 299              		.file 12 "Inc/spi.h"
- 300              		.file 13 "Inc/main.h"
-ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccBzTUC2.s 			page 9
+ 273              		.loc 1 102 5 is_stmt 0 view .LVU75
+ 274 001c FFF7FEFF 		bl	HAL_GPIO_DeInit
+ 275              	.LVL12:
+ 276              		.loc 1 108 1 view .LVU76
+ 277 0020 F3E7     		b	.L13
+ 278              	.L18:
+ 279 0022 00BF     		.align	2
+ 280              	.L17:
+ 281 0024 00380040 		.word	1073756160
+ 282 0028 00100240 		.word	1073876992
+ 283 002c 000C0140 		.word	1073810432
+ 284              		.cfi_endproc
+ 285              	.LFE67:
+ 287              		.comm	hspi2,88,4
+ 288              		.text
+ 289              	.Letext0:
+ 290              		.file 2 "c:\\arm_gcc\\arm-none-eabi\\include\\machine\\_default_types.h"
+ 291              		.file 3 "c:\\arm_gcc\\arm-none-eabi\\include\\sys\\_stdint.h"
+ 292              		.file 4 "Drivers/CMSIS/Include/core_cm3.h"
+ 293              		.file 5 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h"
+ 294              		.file 6 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xb.h"
+ 295              		.file 7 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h"
+ 296              		.file 8 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h"
+ 297              		.file 9 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h"
+ 298              		.file 10 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h"
+ 299              		.file 11 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h"
+ 300              		.file 12 "Inc/spi.h"
+ 301              		.file 13 "Inc/main.h"
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\cc4btt5G.s 			page 9
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 spi.c
-C:\Users\ncer\AppData\Local\Temp\ccBzTUC2.s:16     .text.MX_SPI2_Init:00000000 $t
-C:\Users\ncer\AppData\Local\Temp\ccBzTUC2.s:24     .text.MX_SPI2_Init:00000000 MX_SPI2_Init
-C:\Users\ncer\AppData\Local\Temp\ccBzTUC2.s:96     .text.MX_SPI2_Init:00000038 $d
+C:\Users\ncer\AppData\Local\Temp\cc4btt5G.s:16     .text.MX_SPI2_Init:00000000 $t
+C:\Users\ncer\AppData\Local\Temp\cc4btt5G.s:24     .text.MX_SPI2_Init:00000000 MX_SPI2_Init
+C:\Users\ncer\AppData\Local\Temp\cc4btt5G.s:97     .text.MX_SPI2_Init:0000003c $d
                             *COM*:00000058 hspi2
-C:\Users\ncer\AppData\Local\Temp\ccBzTUC2.s:102    .text.HAL_SPI_MspInit:00000000 $t
-C:\Users\ncer\AppData\Local\Temp\ccBzTUC2.s:109    .text.HAL_SPI_MspInit:00000000 HAL_SPI_MspInit
-C:\Users\ncer\AppData\Local\Temp\ccBzTUC2.s:224    .text.HAL_SPI_MspInit:00000070 $d
-C:\Users\ncer\AppData\Local\Temp\ccBzTUC2.s:230    .text.HAL_SPI_MspDeInit:00000000 $t
-C:\Users\ncer\AppData\Local\Temp\ccBzTUC2.s:237    .text.HAL_SPI_MspDeInit:00000000 HAL_SPI_MspDeInit
-C:\Users\ncer\AppData\Local\Temp\ccBzTUC2.s:280    .text.HAL_SPI_MspDeInit:00000024 $d
+C:\Users\ncer\AppData\Local\Temp\cc4btt5G.s:103    .text.HAL_SPI_MspInit:00000000 $t
+C:\Users\ncer\AppData\Local\Temp\cc4btt5G.s:110    .text.HAL_SPI_MspInit:00000000 HAL_SPI_MspInit
+C:\Users\ncer\AppData\Local\Temp\cc4btt5G.s:225    .text.HAL_SPI_MspInit:00000070 $d
+C:\Users\ncer\AppData\Local\Temp\cc4btt5G.s:231    .text.HAL_SPI_MspDeInit:00000000 $t
+C:\Users\ncer\AppData\Local\Temp\cc4btt5G.s:238    .text.HAL_SPI_MspDeInit:00000000 HAL_SPI_MspDeInit
+C:\Users\ncer\AppData\Local\Temp\cc4btt5G.s:281    .text.HAL_SPI_MspDeInit:00000024 $d
 
 UNDEFINED SYMBOLS
 HAL_SPI_Init

@@ -25,7 +25,7 @@ build/stm32f1xx_it.o: Src/stm32f1xx_it.c Inc/main.h \
  Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h \
  Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h \
  Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h Inc/stm32f1xx_it.h \
- Inc/control.h
+ Inc/control.h mylib/nrf24l01.h Inc/spi.h Inc/main.h
 
 Inc/main.h:
 
@@ -88,3 +88,9 @@ Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h:
 Inc/stm32f1xx_it.h:
 
 Inc/control.h:
+
+mylib/nrf24l01.h:
+
+Inc/spi.h:
+
+Inc/main.h:

@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccHXsP8R.s 			page 1
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccdJi6pl.s 			page 1
 
 
    1              		.cpu cortex-m3
@@ -54,28 +54,36 @@ ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccHXsP8R.s 			page 1
   22:Src/control.c **** 
   23:Src/control.c **** #define MIN(a,b) a<b?a:b
   24:Src/control.c **** 
-  25:Src/control.c **** // pitch 往前低头为正 
-  26:Src/control.c **** // Roll 右倾为正
-  27:Src/control.c **** float Pitch,Roll;   
-  28:Src/control.c **** 
-ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccHXsP8R.s 			page 2
+  25:Src/control.c **** int16_t Thrust_Value;
+  26:Src/control.c **** 
+  27:Src/control.c **** // pitch 往前低头为正 
+  28:Src/control.c **** // Roll 右倾为正
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccdJi6pl.s 			page 2
 
 
-  29:Src/control.c **** PID_S Roll_PID={0,0,0};
-  30:Src/control.c **** PID_S Pitch_PID={0,0,0};
-  31:Src/control.c **** 
-  32:Src/control.c **** enum Modes Aircraft_Mode=Mode_Wait;
-  33:Src/control.c **** 
-  34:Src/control.c **** uint8_t MS_5_Flag=0; // 5ms flag
-  35:Src/control.c **** 
-  36:Src/control.c **** float BAT_Voltage=0;
+  29:Src/control.c **** float Pitch,Roll;   
+  30:Src/control.c **** 
+  31:Src/control.c **** PID_S Roll_PID={1.5,0,0,0,0,0,0,0.005f};
+  32:Src/control.c **** PID_S Pitch_PID={-2,0,-0.0005f,0,0,0,0,0.005f};
+  33:Src/control.c **** PID_S Theta_PID={0,0,0};
+  34:Src/control.c **** 
+  35:Src/control.c **** PID_S Pitch_Angle_Speed_PID={0.5,0,0,0,0,0,0,0.005f};
+  36:Src/control.c **** PID_S Roll_Angle_Speed_PID={0.75f,0,0.001f,0,0,0,0,0.005f};
   37:Src/control.c **** 
-  38:Src/control.c **** float Get_Voltage(uint16_t R1,uint16_t R2){
-  31              		.loc 1 38 43 view -0
+  38:Src/control.c **** PID_S Theta_Angle_Speed_PID={-1,0,-0.005f,0,0,0,0,0.005f};
+  39:Src/control.c **** 
+  40:Src/control.c **** enum Modes Aircraft_Mode=Mode_Wait;
+  41:Src/control.c **** 
+  42:Src/control.c **** uint8_t MS_5_Flag=0; // 5ms flag
+  43:Src/control.c **** 
+  44:Src/control.c **** float BAT_Voltage=0;
+  45:Src/control.c **** 
+  46:Src/control.c **** float Get_Voltage(uint16_t R1,uint16_t R2){
+  31              		.loc 1 46 43 view -0
   32              		.cfi_startproc
   33              		@ args = 0, pretend = 0, frame = 0
   34              		@ frame_needed = 0, uses_anonymous_args = 0
-  35              		.loc 1 38 43 is_stmt 0 view .LVU1
+  35              		.loc 1 46 43 is_stmt 0 view .LVU1
   36 0000 70B5     		push	{r4, r5, r6, lr}
   37              	.LCFI0:
   38              		.cfi_def_cfa_offset 16
@@ -85,45 +93,45 @@ ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccHXsP8R.s 			page 1
   42              		.cfi_offset 14, -4
   43 0002 0646     		mov	r6, r0
   44 0004 0C46     		mov	r4, r1
-  39:Src/control.c ****   uint16_t adc_value=0;
-  45              		.loc 1 39 3 is_stmt 1 view .LVU2
+  47:Src/control.c ****   uint16_t adc_value=0;
+  45              		.loc 1 47 3 is_stmt 1 view .LVU2
   46              	.LVL1:
-  40:Src/control.c ****   float voltage=0;
-  47              		.loc 1 40 3 view .LVU3
-  41:Src/control.c ****   HAL_ADC_Start(&hadc1);
-  48              		.loc 1 41 3 view .LVU4
+  48:Src/control.c ****   float voltage=0;
+  47              		.loc 1 48 3 view .LVU3
+  49:Src/control.c ****   HAL_ADC_Start(&hadc1);
+  48              		.loc 1 49 3 view .LVU4
   49 0006 134D     		ldr	r5, .L3
   50 0008 2846     		mov	r0, r5
   51              	.LVL2:
-  52              		.loc 1 41 3 is_stmt 0 view .LVU5
+  52              		.loc 1 49 3 is_stmt 0 view .LVU5
   53 000a FFF7FEFF 		bl	HAL_ADC_Start
   54              	.LVL3:
-  42:Src/control.c ****   HAL_ADC_PollForConversion(&hadc1,10);
-  55              		.loc 1 42 3 is_stmt 1 view .LVU6
+  50:Src/control.c ****   HAL_ADC_PollForConversion(&hadc1,10);
+  55              		.loc 1 50 3 is_stmt 1 view .LVU6
   56 000e 0A21     		movs	r1, #10
   57 0010 2846     		mov	r0, r5
   58 0012 FFF7FEFF 		bl	HAL_ADC_PollForConversion
   59              	.LVL4:
-  43:Src/control.c ****   adc_value=HAL_ADC_GetValue(&hadc1);
-  60              		.loc 1 43 3 view .LVU7
-  61              		.loc 1 43 13 is_stmt 0 view .LVU8
+  51:Src/control.c ****   adc_value=HAL_ADC_GetValue(&hadc1);
+  60              		.loc 1 51 3 view .LVU7
+  61              		.loc 1 51 13 is_stmt 0 view .LVU8
   62 0016 2846     		mov	r0, r5
   63 0018 FFF7FEFF 		bl	HAL_ADC_GetValue
   64              	.LVL5:
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccdJi6pl.s 			page 3
+
+
   65 001c 0546     		mov	r5, r0
   66              	.LVL6:
-  44:Src/control.c ****   
-  45:Src/control.c ****   voltage=(float)(R1+R2)/R2*adc_value/4096.0f*3300;
-  67              		.loc 1 45 3 is_stmt 1 view .LVU9
-  68              		.loc 1 45 11 is_stmt 0 view .LVU10
+  52:Src/control.c ****   
+  53:Src/control.c ****   voltage=(float)(R1+R2)/R2*adc_value/4096.0f*3300;
+  67              		.loc 1 53 3 is_stmt 1 view .LVU9
+  68              		.loc 1 53 11 is_stmt 0 view .LVU10
   69 001e 3019     		adds	r0, r6, r4
   70 0020 FFF7FEFF 		bl	__aeabi_i2f
-ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccHXsP8R.s 			page 3
-
-
   71              	.LVL7:
   72 0024 0646     		mov	r6, r0
-  73              		.loc 1 45 25 view .LVU11
+  73              		.loc 1 53 25 view .LVU11
   74 0026 2046     		mov	r0, r4
   75 0028 FFF7FEFF 		bl	__aeabi_i2f
   76              	.LVL8:
@@ -132,29 +140,29 @@ ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccHXsP8R.s 			page 1
   79 0030 FFF7FEFF 		bl	__aeabi_fdiv
   80              	.LVL9:
   81 0034 0446     		mov	r4, r0
-  82              		.loc 1 45 28 view .LVU12
+  82              		.loc 1 53 28 view .LVU12
   83 0036 A8B2     		uxth	r0, r5
   84 0038 FFF7FEFF 		bl	__aeabi_i2f
   85              	.LVL10:
   86 003c 2146     		mov	r1, r4
   87 003e FFF7FEFF 		bl	__aeabi_fmul
   88              	.LVL11:
-  89              		.loc 1 45 38 view .LVU13
+  89              		.loc 1 53 38 view .LVU13
   90 0042 4FF06651 		mov	r1, #964689920
   91 0046 FFF7FEFF 		bl	__aeabi_fmul
   92              	.LVL12:
-  93              		.loc 1 45 10 view .LVU14
+  93              		.loc 1 53 10 view .LVU14
   94 004a 0349     		ldr	r1, .L3+4
   95 004c FFF7FEFF 		bl	__aeabi_fmul
   96              	.LVL13:
-  46:Src/control.c ****   return voltage;
-  97              		.loc 1 46 3 is_stmt 1 view .LVU15
-  47:Src/control.c **** }
-  98              		.loc 1 47 1 is_stmt 0 view .LVU16
+  54:Src/control.c ****   return voltage;
+  97              		.loc 1 54 3 is_stmt 1 view .LVU15
+  55:Src/control.c **** }
+  98              		.loc 1 55 1 is_stmt 0 view .LVU16
   99 0050 70BD     		pop	{r4, r5, r6, pc}
  100              	.LVL14:
  101              	.L4:
- 102              		.loc 1 47 1 view .LVU17
+ 102              		.loc 1 55 1 view .LVU17
  103 0052 00BF     		.align	2
  104              	.L3:
  105 0054 00000000 		.word	hadc1
@@ -170,66 +178,69 @@ ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccHXsP8R.s 			page 1
  116              		.fpu softvfp
  118              	Servors_Init:
  119              	.LFB69:
-  48:Src/control.c **** 
-  49:Src/control.c **** void Servors_Init(){
- 120              		.loc 1 49 20 is_stmt 1 view -0
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccdJi6pl.s 			page 4
+
+
+  56:Src/control.c **** 
+  57:Src/control.c **** void Servors_Init(){
+ 120              		.loc 1 57 20 is_stmt 1 view -0
  121              		.cfi_startproc
  122              		@ args = 0, pretend = 0, frame = 0
  123              		@ frame_needed = 0, uses_anonymous_args = 0
  124              		@ link register save eliminated.
-  50:Src/control.c ****   // 因为两个舵机的安装位置都不是1500处位于中位，因此需要做一些限制，
-ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccHXsP8R.s 			page 4
-
-
-  51:Src/control.c ****   // 需要注意的，这里取的仅是一个相对值，如Servor_Angle_Limit为45，Servor_Widt
-  52:Src/control.c ****   // 并不是说当脉宽为中值+350时，舵机就转动45°，仅仅是一个相对的量
-  53:Src/control.c ****   int L_Min=0;
- 125              		.loc 1 53 3 view .LVU19
+  58:Src/control.c ****   // 因为两个舵机的安装位置都不是1500处位于中位，因此需要做一些限制，
+  59:Src/control.c ****   // 需要注意的，这里取的仅是一个相对值，如Servor_Angle_Limit为45，Servor_Widt
+  60:Src/control.c ****   // 并不是说当脉宽为中值+350时，舵机就转动45°，仅仅是一个相对的量
+  61:Src/control.c ****   int L_Min=0;
+ 125              		.loc 1 61 3 view .LVU19
  126              	.LVL15:
-  54:Src/control.c ****   int R_Min=0;
- 127              		.loc 1 54 3 view .LVU20
-  55:Src/control.c ****   L_Min=MIN(L_Servor_Middle-1000,2000-L_Servor_Middle);
- 128              		.loc 1 55 3 view .LVU21
- 129              		.loc 1 55 9 is_stmt 0 view .LVU22
+  62:Src/control.c ****   int R_Min=0;
+ 127              		.loc 1 62 3 view .LVU20
+  63:Src/control.c ****   L_Min=MIN(L_Servor_Middle-1000,2000-L_Servor_Middle);
+ 128              		.loc 1 63 3 view .LVU21
+ 129              		.loc 1 63 9 is_stmt 0 view .LVU22
  130 0000 0C4B     		ldr	r3, .L8
  131 0002 1A68     		ldr	r2, [r3]
  132 0004 A2F2E731 		subw	r1, r2, #999
  133 0008 C2F5FA63 		rsb	r3, r2, #2000
  134 000c 9942     		cmp	r1, r3
  135 000e 01DC     		bgt	.L6
- 136              		.loc 1 55 9 discriminator 1 view .LVU23
+ 136              		.loc 1 63 9 discriminator 1 view .LVU23
  137 0010 A2F57A73 		sub	r3, r2, #1000
  138              	.L6:
  139              	.LVL16:
-  56:Src/control.c ****   R_Min=MIN(R_Servor_Middle-1000,2000-R_Servor_Middle);
- 140              		.loc 1 56 3 is_stmt 1 discriminator 4 view .LVU24
- 141              		.loc 1 56 9 is_stmt 0 discriminator 4 view .LVU25
+  64:Src/control.c ****   R_Min=MIN(R_Servor_Middle-1000,2000-R_Servor_Middle);
+ 140              		.loc 1 64 3 is_stmt 1 discriminator 4 view .LVU24
+ 141              		.loc 1 64 9 is_stmt 0 discriminator 4 view .LVU25
  142 0014 084A     		ldr	r2, .L8+4
  143 0016 1168     		ldr	r1, [r2]
  144 0018 A1F2E730 		subw	r0, r1, #999
  145 001c C1F5FA62 		rsb	r2, r1, #2000
  146 0020 9042     		cmp	r0, r2
  147 0022 01DC     		bgt	.L7
- 148              		.loc 1 56 9 discriminator 1 view .LVU26
+ 148              		.loc 1 64 9 discriminator 1 view .LVU26
  149 0024 A1F57A72 		sub	r2, r1, #1000
  150              	.L7:
  151              	.LVL17:
-  57:Src/control.c ****   
-  58:Src/control.c ****   Servor_Width_Limit=MIN(L_Min,R_Min);
- 152              		.loc 1 58 3 is_stmt 1 discriminator 4 view .LVU27
- 153              		.loc 1 58 22 is_stmt 0 discriminator 4 view .LVU28
+  65:Src/control.c ****   
+  66:Src/control.c ****   Servor_Width_Limit=MIN(L_Min,R_Min);
+ 152              		.loc 1 66 3 is_stmt 1 discriminator 4 view .LVU27
+ 153              		.loc 1 66 22 is_stmt 0 discriminator 4 view .LVU28
  154 0028 9342     		cmp	r3, r2
  155 002a A8BF     		it	ge
  156 002c 1346     		movge	r3, r2
  157              	.LVL18:
- 158              		.loc 1 58 21 discriminator 4 view .LVU29
+ 158              		.loc 1 66 21 discriminator 4 view .LVU29
  159 002e 034A     		ldr	r2, .L8+8
  160              	.LVL19:
- 161              		.loc 1 58 21 discriminator 4 view .LVU30
+ 161              		.loc 1 66 21 discriminator 4 view .LVU30
  162 0030 1360     		str	r3, [r2]
-  59:Src/control.c **** }
- 163              		.loc 1 59 1 discriminator 4 view .LVU31
+  67:Src/control.c **** }
+ 163              		.loc 1 67 1 discriminator 4 view .LVU31
  164 0032 7047     		bx	lr
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccdJi6pl.s 			page 5
+
+
  165              	.L9:
  166              		.align	2
  167              	.L8:
@@ -238,9 +249,6 @@ ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccHXsP8R.s 			page 1
  170 003c 00000000 		.word	.LANCHOR2
  171              		.cfi_endproc
  172              	.LFE69:
-ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccHXsP8R.s 			page 5
-
-
  174              		.section	.text.ESC_Init,"ax",%progbits
  175              		.align	1
  176              		.global	ESC_Init
@@ -250,9 +258,9 @@ ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccHXsP8R.s 			page 1
  180              		.fpu softvfp
  182              	ESC_Init:
  183              	.LFB70:
-  60:Src/control.c **** 
-  61:Src/control.c **** void ESC_Init(){
- 184              		.loc 1 61 16 is_stmt 1 view -0
+  68:Src/control.c **** 
+  69:Src/control.c **** void ESC_Init(){
+ 184              		.loc 1 69 16 is_stmt 1 view -0
  185              		.cfi_startproc
  186              		@ args = 0, pretend = 0, frame = 0
  187              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -263,33 +271,36 @@ ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccHXsP8R.s 			page 1
  192              		.cfi_offset 4, -12
  193              		.cfi_offset 5, -8
  194              		.cfi_offset 14, -4
-  62:Src/control.c ****   TIM3->CCR4=Caculate_Cnt(&htim3,64,1000);
- 195              		.loc 1 62 3 view .LVU33
- 196              		.loc 1 62 14 is_stmt 0 view .LVU34
+  70:Src/control.c ****   TIM3->CCR4=Caculate_Cnt(&htim3,64,1000);
+ 195              		.loc 1 70 3 view .LVU33
+ 196              		.loc 1 70 14 is_stmt 0 view .LVU34
  197 0002 084D     		ldr	r5, .L12
  198 0004 4FF47A72 		mov	r2, #1000
  199 0008 4021     		movs	r1, #64
  200 000a 2846     		mov	r0, r5
  201 000c FFF7FEFF 		bl	Caculate_Cnt
  202              	.LVL20:
- 203              		.loc 1 62 13 view .LVU35
+ 203              		.loc 1 70 13 view .LVU35
  204 0010 054C     		ldr	r4, .L12+4
  205 0012 2064     		str	r0, [r4, #64]
-  63:Src/control.c ****   TIM3->CCR3=Caculate_Cnt(&htim3,64,1000);
- 206              		.loc 1 63 3 is_stmt 1 view .LVU36
- 207              		.loc 1 63 14 is_stmt 0 view .LVU37
+  71:Src/control.c ****   TIM3->CCR3=Caculate_Cnt(&htim3,64,1000);
+ 206              		.loc 1 71 3 is_stmt 1 view .LVU36
+ 207              		.loc 1 71 14 is_stmt 0 view .LVU37
  208 0014 4FF47A72 		mov	r2, #1000
  209 0018 4021     		movs	r1, #64
  210 001a 2846     		mov	r0, r5
  211 001c FFF7FEFF 		bl	Caculate_Cnt
  212              	.LVL21:
- 213              		.loc 1 63 13 view .LVU38
+ 213              		.loc 1 71 13 view .LVU38
  214 0020 E063     		str	r0, [r4, #60]
-  64:Src/control.c **** }
- 215              		.loc 1 64 1 view .LVU39
+  72:Src/control.c **** }
+ 215              		.loc 1 72 1 view .LVU39
  216 0022 38BD     		pop	{r3, r4, r5, pc}
  217              	.L13:
  218              		.align	2
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccdJi6pl.s 			page 6
+
+
  219              	.L12:
  220 0024 00000000 		.word	htim3
  221 0028 00040040 		.word	1073742848
@@ -298,9 +309,6 @@ ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccHXsP8R.s 			page 1
  225              		.global	__aeabi_fcmpgt
  226              		.global	__aeabi_fcmplt
  227              		.global	__aeabi_f2iz
-ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccHXsP8R.s 			page 6
-
-
  228              		.section	.text.Set_Servor,"ax",%progbits
  229              		.align	1
  230              		.global	Set_Servor
@@ -311,13 +319,13 @@ ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccHXsP8R.s 			page 1
  236              	Set_Servor:
  237              	.LVL22:
  238              	.LFB71:
-  65:Src/control.c **** 
-  66:Src/control.c **** void Set_Servor(enum Servors Servor,float theta){
- 239              		.loc 1 66 49 is_stmt 1 view -0
+  73:Src/control.c **** 
+  74:Src/control.c **** void Set_Servor(enum Servors Servor,float theta){
+ 239              		.loc 1 74 49 is_stmt 1 view -0
  240              		.cfi_startproc
  241              		@ args = 0, pretend = 0, frame = 0
  242              		@ frame_needed = 0, uses_anonymous_args = 0
- 243              		.loc 1 66 49 is_stmt 0 view .LVU41
+ 243              		.loc 1 74 49 is_stmt 0 view .LVU41
  244 0000 38B5     		push	{r3, r4, r5, lr}
  245              	.LCFI2:
  246              		.cfi_def_cfa_offset 16
@@ -327,55 +335,56 @@ ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccHXsP8R.s 			page 1
  250              		.cfi_offset 14, -4
  251 0002 0546     		mov	r5, r0
  252 0004 0C46     		mov	r4, r1
-  67:Src/control.c ****   // theta 取值 -45 到 45 因为舵机的运动范围并没有到180°
-  68:Src/control.c ****   if(theta>Servor_Angle_Limit){
- 253              		.loc 1 68 3 is_stmt 1 view .LVU42
- 254              		.loc 1 68 5 is_stmt 0 view .LVU43
+  75:Src/control.c ****   // theta 取值 -45 到 45 因为舵机的运动范围并没有到180°
+  76:Src/control.c ****   // theat 为正值，舵机向前
+  77:Src/control.c ****   if(theta>Servor_Angle_Limit){
+ 253              		.loc 1 77 3 is_stmt 1 view .LVU42
+ 254              		.loc 1 77 5 is_stmt 0 view .LVU43
  255 0006 1A49     		ldr	r1, .L22
  256              	.LVL23:
- 257              		.loc 1 68 5 view .LVU44
+ 257              		.loc 1 77 5 view .LVU44
  258 0008 2046     		mov	r0, r4
  259              	.LVL24:
- 260              		.loc 1 68 5 view .LVU45
+ 260              		.loc 1 77 5 view .LVU45
  261 000a FFF7FEFF 		bl	__aeabi_fcmpgt
  262              	.LVL25:
  263 000e 30B9     		cbnz	r0, .L19
-  69:Src/control.c ****     theta=Servor_Angle_Limit;
-  70:Src/control.c ****   }else if(theta<-Servor_Angle_Limit){
- 264              		.loc 1 70 9 is_stmt 1 view .LVU46
- 265              		.loc 1 70 11 is_stmt 0 view .LVU47
+  78:Src/control.c ****     theta=Servor_Angle_Limit;
+  79:Src/control.c ****   }else if(theta<-Servor_Angle_Limit){
+ 264              		.loc 1 79 9 is_stmt 1 view .LVU46
+ 265              		.loc 1 79 11 is_stmt 0 view .LVU47
  266 0010 1849     		ldr	r1, .L22+4
  267 0012 2046     		mov	r0, r4
  268 0014 FFF7FEFF 		bl	__aeabi_fcmplt
  269              	.LVL26:
  270 0018 10B1     		cbz	r0, .L15
-  71:Src/control.c ****     theta=-Servor_Angle_Limit;
- 271              		.loc 1 71 10 view .LVU48
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccdJi6pl.s 			page 7
+
+
+  80:Src/control.c ****     theta=-Servor_Angle_Limit;
+ 271              		.loc 1 80 10 view .LVU48
  272 001a 164C     		ldr	r4, .L22+4
  273              	.LVL27:
- 274              		.loc 1 71 10 view .LVU49
+ 274              		.loc 1 80 10 view .LVU49
  275 001c 00E0     		b	.L15
  276              	.LVL28:
  277              	.L19:
-  69:Src/control.c ****     theta=Servor_Angle_Limit;
-ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccHXsP8R.s 			page 7
-
-
- 278              		.loc 1 69 10 view .LVU50
+  78:Src/control.c ****     theta=Servor_Angle_Limit;
+ 278              		.loc 1 78 10 view .LVU50
  279 001e 144C     		ldr	r4, .L22
  280              	.LVL29:
  281              	.L15:
-  72:Src/control.c ****   }
-  73:Src/control.c ****   int sub=(int)(theta/Servor_Angle_Limit*Servor_Width_Limit);
- 282              		.loc 1 73 3 is_stmt 1 view .LVU51
- 283              		.loc 1 73 22 is_stmt 0 view .LVU52
+  81:Src/control.c ****   }
+  82:Src/control.c ****   int sub=(int)(theta/Servor_Angle_Limit*Servor_Width_Limit);
+ 282              		.loc 1 82 3 is_stmt 1 view .LVU51
+ 283              		.loc 1 82 22 is_stmt 0 view .LVU52
  284 0020 1349     		ldr	r1, .L22
  285 0022 2046     		mov	r0, r4
  286 0024 FFF7FEFF 		bl	__aeabi_fdiv
  287              	.LVL30:
  288 0028 0446     		mov	r4, r0
  289              	.LVL31:
- 290              		.loc 1 73 41 view .LVU53
+ 290              		.loc 1 82 41 view .LVU53
  291 002a 134B     		ldr	r3, .L22+8
  292 002c 1868     		ldr	r0, [r3]
  293 002e FFF7FEFF 		bl	__aeabi_i2f
@@ -383,75 +392,75 @@ ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccHXsP8R.s 			page 1
  295 0032 2146     		mov	r1, r4
  296 0034 FFF7FEFF 		bl	__aeabi_fmul
  297              	.LVL33:
- 298              		.loc 1 73 7 view .LVU54
+ 298              		.loc 1 82 7 view .LVU54
  299 0038 FFF7FEFF 		bl	__aeabi_f2iz
  300              	.LVL34:
-  74:Src/control.c ****   switch(Servor){
- 301              		.loc 1 74 3 is_stmt 1 view .LVU55
+  83:Src/control.c ****   switch(Servor){
+ 301              		.loc 1 83 3 is_stmt 1 view .LVU55
  302 003c 15B1     		cbz	r5, .L16
  303 003e 012D     		cmp	r5, #1
  304 0040 0BD0     		beq	.L17
  305              	.LVL35:
  306              	.L14:
-  75:Src/control.c ****   case L_Servor:
-  76:Src/control.c ****     TIM2->CCR2=Caculate_Cnt(&htim2,64,L_Servor_Middle+sub*L_Servor_Polarity);
-  77:Src/control.c ****     break;
-  78:Src/control.c ****   case R_Servor:
-  79:Src/control.c ****     TIM2->CCR1=Caculate_Cnt(&htim2,64,R_Servor_Middle+sub*R_Servor_Poloarity);
-  80:Src/control.c ****     break;
-  81:Src/control.c ****   }
-  82:Src/control.c **** }
- 307              		.loc 1 82 1 is_stmt 0 view .LVU56
+  84:Src/control.c ****   case L_Servor:
+  85:Src/control.c ****     TIM2->CCR2=Caculate_Cnt(&htim2,64,L_Servor_Middle+sub*L_Servor_Polarity);
+  86:Src/control.c ****     break;
+  87:Src/control.c ****   case R_Servor:
+  88:Src/control.c ****     TIM2->CCR1=Caculate_Cnt(&htim2,64,R_Servor_Middle+sub*R_Servor_Poloarity);
+  89:Src/control.c ****     break;
+  90:Src/control.c ****   }
+  91:Src/control.c **** }
+ 307              		.loc 1 91 1 is_stmt 0 view .LVU56
  308 0042 38BD     		pop	{r3, r4, r5, pc}
  309              	.LVL36:
  310              	.L16:
-  76:Src/control.c ****     break;
- 311              		.loc 1 76 5 is_stmt 1 view .LVU57
-  76:Src/control.c ****     break;
- 312              		.loc 1 76 16 is_stmt 0 view .LVU58
+  85:Src/control.c ****     break;
+ 311              		.loc 1 85 5 is_stmt 1 view .LVU57
+  85:Src/control.c ****     break;
+ 312              		.loc 1 85 16 is_stmt 0 view .LVU58
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccdJi6pl.s 			page 8
+
+
  313 0044 0D4B     		ldr	r3, .L22+12
  314 0046 1A68     		ldr	r2, [r3]
  315 0048 0244     		add	r2, r2, r0
  316 004a 4021     		movs	r1, #64
  317 004c 0C48     		ldr	r0, .L22+16
  318              	.LVL37:
-  76:Src/control.c ****     break;
- 319              		.loc 1 76 16 view .LVU59
+  85:Src/control.c ****     break;
+ 319              		.loc 1 85 16 view .LVU59
  320 004e FFF7FEFF 		bl	Caculate_Cnt
-ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccHXsP8R.s 			page 8
-
-
  321              	.LVL38:
-  76:Src/control.c ****     break;
- 322              		.loc 1 76 15 view .LVU60
+  85:Src/control.c ****     break;
+ 322              		.loc 1 85 15 view .LVU60
  323 0052 4FF08043 		mov	r3, #1073741824
  324 0056 9863     		str	r0, [r3, #56]
-  77:Src/control.c ****   case R_Servor:
- 325              		.loc 1 77 5 is_stmt 1 view .LVU61
+  86:Src/control.c ****   case R_Servor:
+ 325              		.loc 1 86 5 is_stmt 1 view .LVU61
  326 0058 F3E7     		b	.L14
  327              	.LVL39:
  328              	.L17:
-  79:Src/control.c ****     break;
- 329              		.loc 1 79 5 view .LVU62
-  79:Src/control.c ****     break;
- 330              		.loc 1 79 16 is_stmt 0 view .LVU63
+  88:Src/control.c ****     break;
+ 329              		.loc 1 88 5 view .LVU62
+  88:Src/control.c ****     break;
+ 330              		.loc 1 88 16 is_stmt 0 view .LVU63
  331 005a 0A4B     		ldr	r3, .L22+20
  332 005c 1A68     		ldr	r2, [r3]
  333 005e 121A     		subs	r2, r2, r0
  334 0060 4021     		movs	r1, #64
  335 0062 0748     		ldr	r0, .L22+16
  336              	.LVL40:
-  79:Src/control.c ****     break;
- 337              		.loc 1 79 16 view .LVU64
+  88:Src/control.c ****     break;
+ 337              		.loc 1 88 16 view .LVU64
  338 0064 FFF7FEFF 		bl	Caculate_Cnt
  339              	.LVL41:
-  79:Src/control.c ****     break;
- 340              		.loc 1 79 15 view .LVU65
+  88:Src/control.c ****     break;
+ 340              		.loc 1 88 15 view .LVU65
  341 0068 4FF08043 		mov	r3, #1073741824
  342 006c 5863     		str	r0, [r3, #52]
-  80:Src/control.c ****   }
- 343              		.loc 1 80 5 is_stmt 1 view .LVU66
- 344              		.loc 1 82 1 is_stmt 0 view .LVU67
+  89:Src/control.c ****   }
+ 343              		.loc 1 89 5 is_stmt 1 view .LVU66
+ 344              		.loc 1 91 1 is_stmt 0 view .LVU67
  345 006e E8E7     		b	.L14
  346              	.L23:
  347              		.align	2
@@ -469,22 +478,22 @@ ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccHXsP8R.s 			page 1
  360              		.align	1
  361              		.global	Set_ESC
  362              		.syntax unified
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccdJi6pl.s 			page 9
+
+
  363              		.thumb
  364              		.thumb_func
  365              		.fpu softvfp
  367              	Set_ESC:
  368              	.LVL42:
  369              	.LFB72:
-  83:Src/control.c **** 
-  84:Src/control.c **** void Set_ESC(enum ESCs ESC,float duty){
- 370              		.loc 1 84 39 is_stmt 1 view -0
-ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccHXsP8R.s 			page 9
-
-
+  92:Src/control.c **** 
+  93:Src/control.c **** void Set_ESC(enum ESCs ESC,float duty){
+ 370              		.loc 1 93 39 is_stmt 1 view -0
  371              		.cfi_startproc
  372              		@ args = 0, pretend = 0, frame = 0
  373              		@ frame_needed = 0, uses_anonymous_args = 0
- 374              		.loc 1 84 39 is_stmt 0 view .LVU69
+ 374              		.loc 1 93 39 is_stmt 0 view .LVU69
  375 0000 38B5     		push	{r3, r4, r5, lr}
  376              	.LCFI3:
  377              		.cfi_def_cfa_offset 16
@@ -494,1427 +503,1280 @@ ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccHXsP8R.s 			page 1
  381              		.cfi_offset 14, -4
  382 0002 0546     		mov	r5, r0
  383 0004 0C46     		mov	r4, r1
-  85:Src/control.c ****   if(duty>100){
- 384              		.loc 1 85 3 is_stmt 1 view .LVU70
- 385              		.loc 1 85 5 is_stmt 0 view .LVU71
- 386 0006 1649     		ldr	r1, .L31
+  94:Src/control.c ****   if(duty>95){
+ 384              		.loc 1 94 3 is_stmt 1 view .LVU70
+ 385              		.loc 1 94 5 is_stmt 0 view .LVU71
+ 386 0006 1949     		ldr	r1, .L32
  387              	.LVL43:
- 388              		.loc 1 85 5 view .LVU72
+ 388              		.loc 1 94 5 view .LVU72
  389 0008 2046     		mov	r0, r4
  390              	.LVL44:
- 391              		.loc 1 85 5 view .LVU73
+ 391              		.loc 1 94 5 view .LVU73
  392 000a FFF7FEFF 		bl	__aeabi_fcmpgt
  393              	.LVL45:
- 394 000e 00B1     		cbz	r0, .L25
-  86:Src/control.c ****     duty=100;
- 395              		.loc 1 86 9 view .LVU74
- 396 0010 134C     		ldr	r4, .L31
- 397              	.LVL46:
- 398              	.L25:
-  87:Src/control.c ****   }
-  88:Src/control.c ****   switch(ESC){
- 399              		.loc 1 88 3 is_stmt 1 view .LVU75
- 400 0012 15B1     		cbz	r5, .L26
- 401 0014 012D     		cmp	r5, #1
- 402 0016 11D0     		beq	.L27
- 403              	.L24:
-  89:Src/control.c ****   case L_ESC:
-  90:Src/control.c ****     TIM3->CCR4=Caculate_Cnt(&htim3,64,(int)(1000+duty*10));
-  91:Src/control.c ****     break;
-  92:Src/control.c ****   case R_ESC:
-  93:Src/control.c ****     TIM3->CCR3=Caculate_Cnt(&htim3,64,(int)(1000+duty*10));
-  94:Src/control.c ****     break;
-  95:Src/control.c ****   }
-  96:Src/control.c **** }
- 404              		.loc 1 96 1 is_stmt 0 view .LVU76
- 405 0018 38BD     		pop	{r3, r4, r5, pc}
- 406              	.LVL47:
- 407              	.L26:
-  90:Src/control.c ****     break;
- 408              		.loc 1 90 5 is_stmt 1 view .LVU77
-  90:Src/control.c ****     break;
- 409              		.loc 1 90 54 is_stmt 0 view .LVU78
- 410 001a 1249     		ldr	r1, .L31+4
- 411 001c 2046     		mov	r0, r4
- 412 001e FFF7FEFF 		bl	__aeabi_fmul
- 413              	.LVL48:
-ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccHXsP8R.s 			page 10
+ 394 000e 30B9     		cbnz	r0, .L29
+  95:Src/control.c ****     duty=95;
+  96:Src/control.c ****   }else if(duty<0){
+ 395              		.loc 1 96 9 is_stmt 1 view .LVU74
+ 396              		.loc 1 96 11 is_stmt 0 view .LVU75
+ 397 0010 0021     		movs	r1, #0
+ 398 0012 2046     		mov	r0, r4
+ 399 0014 FFF7FEFF 		bl	__aeabi_fcmplt
+ 400              	.LVL46:
+ 401 0018 10B1     		cbz	r0, .L25
+  97:Src/control.c ****     duty=0;
+ 402              		.loc 1 97 9 view .LVU76
+ 403 001a 0024     		movs	r4, #0
+ 404              	.LVL47:
+ 405              		.loc 1 97 9 view .LVU77
+ 406 001c 00E0     		b	.L25
+ 407              	.LVL48:
+ 408              	.L29:
+  95:Src/control.c ****     duty=95;
+ 409              		.loc 1 95 9 view .LVU78
+ 410 001e 134C     		ldr	r4, .L32
+ 411              	.LVL49:
+ 412              	.L25:
+  98:Src/control.c ****   }
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccdJi6pl.s 			page 10
 
 
-  90:Src/control.c ****     break;
- 414              		.loc 1 90 49 view .LVU79
- 415 0022 1149     		ldr	r1, .L31+8
- 416 0024 FFF7FEFF 		bl	__aeabi_fadd
- 417              	.LVL49:
-  90:Src/control.c ****     break;
- 418              		.loc 1 90 16 view .LVU80
- 419 0028 FFF7FEFF 		bl	__aeabi_f2iz
+  99:Src/control.c ****   switch(ESC){
+ 413              		.loc 1 99 3 is_stmt 1 view .LVU79
+ 414 0020 15B1     		cbz	r5, .L26
+ 415 0022 012D     		cmp	r5, #1
+ 416 0024 11D0     		beq	.L27
+ 417              	.L24:
+ 100:Src/control.c ****   case L_ESC:
+ 101:Src/control.c ****     TIM3->CCR4=Caculate_Cnt(&htim3,64,(int)(1000+duty*10));
+ 102:Src/control.c ****     break;
+ 103:Src/control.c ****   case R_ESC:
+ 104:Src/control.c ****     TIM3->CCR3=Caculate_Cnt(&htim3,64,(int)(1000+duty*10));
+ 105:Src/control.c ****     break;
+ 106:Src/control.c ****   }
+ 107:Src/control.c **** }
+ 418              		.loc 1 107 1 is_stmt 0 view .LVU80
+ 419 0026 38BD     		pop	{r3, r4, r5, pc}
  420              	.LVL50:
- 421 002c 0246     		mov	r2, r0
- 422 002e 4021     		movs	r1, #64
- 423 0030 0E48     		ldr	r0, .L31+12
- 424 0032 FFF7FEFF 		bl	Caculate_Cnt
- 425              	.LVL51:
-  90:Src/control.c ****     break;
- 426              		.loc 1 90 15 view .LVU81
- 427 0036 0E4B     		ldr	r3, .L31+16
- 428 0038 1864     		str	r0, [r3, #64]
-  91:Src/control.c ****   case R_ESC:
- 429              		.loc 1 91 5 is_stmt 1 view .LVU82
- 430 003a EDE7     		b	.L24
- 431              	.L27:
-  93:Src/control.c ****     break;
- 432              		.loc 1 93 5 view .LVU83
-  93:Src/control.c ****     break;
- 433              		.loc 1 93 54 is_stmt 0 view .LVU84
- 434 003c 0949     		ldr	r1, .L31+4
- 435 003e 2046     		mov	r0, r4
- 436 0040 FFF7FEFF 		bl	__aeabi_fmul
- 437              	.LVL52:
-  93:Src/control.c ****     break;
- 438              		.loc 1 93 49 view .LVU85
- 439 0044 0849     		ldr	r1, .L31+8
- 440 0046 FFF7FEFF 		bl	__aeabi_fadd
- 441              	.LVL53:
-  93:Src/control.c ****     break;
- 442              		.loc 1 93 16 view .LVU86
- 443 004a FFF7FEFF 		bl	__aeabi_f2iz
- 444              	.LVL54:
- 445 004e 0246     		mov	r2, r0
- 446 0050 4021     		movs	r1, #64
- 447 0052 0648     		ldr	r0, .L31+12
- 448 0054 FFF7FEFF 		bl	Caculate_Cnt
- 449              	.LVL55:
-  93:Src/control.c ****     break;
- 450              		.loc 1 93 15 view .LVU87
- 451 0058 054B     		ldr	r3, .L31+16
- 452 005a D863     		str	r0, [r3, #60]
-  94:Src/control.c ****   }
- 453              		.loc 1 94 5 is_stmt 1 view .LVU88
- 454              		.loc 1 96 1 is_stmt 0 view .LVU89
- 455 005c DCE7     		b	.L24
- 456              	.L32:
- 457 005e 00BF     		.align	2
- 458              	.L31:
- 459 0060 0000C842 		.word	1120403456
- 460 0064 00002041 		.word	1092616192
-ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccHXsP8R.s 			page 11
+ 421              	.L26:
+ 101:Src/control.c ****     break;
+ 422              		.loc 1 101 5 is_stmt 1 view .LVU81
+ 101:Src/control.c ****     break;
+ 423              		.loc 1 101 54 is_stmt 0 view .LVU82
+ 424 0028 1149     		ldr	r1, .L32+4
+ 425 002a 2046     		mov	r0, r4
+ 426 002c FFF7FEFF 		bl	__aeabi_fmul
+ 427              	.LVL51:
+ 101:Src/control.c ****     break;
+ 428              		.loc 1 101 49 view .LVU83
+ 429 0030 1049     		ldr	r1, .L32+8
+ 430 0032 FFF7FEFF 		bl	__aeabi_fadd
+ 431              	.LVL52:
+ 101:Src/control.c ****     break;
+ 432              		.loc 1 101 16 view .LVU84
+ 433 0036 FFF7FEFF 		bl	__aeabi_f2iz
+ 434              	.LVL53:
+ 435 003a 0246     		mov	r2, r0
+ 436 003c 4021     		movs	r1, #64
+ 437 003e 0E48     		ldr	r0, .L32+12
+ 438 0040 FFF7FEFF 		bl	Caculate_Cnt
+ 439              	.LVL54:
+ 101:Src/control.c ****     break;
+ 440              		.loc 1 101 15 view .LVU85
+ 441 0044 0D4B     		ldr	r3, .L32+16
+ 442 0046 1864     		str	r0, [r3, #64]
+ 102:Src/control.c ****   case R_ESC:
+ 443              		.loc 1 102 5 is_stmt 1 view .LVU86
+ 444 0048 EDE7     		b	.L24
+ 445              	.L27:
+ 104:Src/control.c ****     break;
+ 446              		.loc 1 104 5 view .LVU87
+ 104:Src/control.c ****     break;
+ 447              		.loc 1 104 54 is_stmt 0 view .LVU88
+ 448 004a 0949     		ldr	r1, .L32+4
+ 449 004c 2046     		mov	r0, r4
+ 450 004e FFF7FEFF 		bl	__aeabi_fmul
+ 451              	.LVL55:
+ 104:Src/control.c ****     break;
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccdJi6pl.s 			page 11
 
 
- 461 0068 00007A44 		.word	1148846080
- 462 006c 00000000 		.word	htim3
- 463 0070 00040040 		.word	1073742848
- 464              		.cfi_endproc
- 465              	.LFE72:
- 467              		.section	.text.Transform_N_to_Duty,"ax",%progbits
- 468              		.align	1
- 469              		.global	Transform_N_to_Duty
- 470              		.syntax unified
- 471              		.thumb
- 472              		.thumb_func
- 473              		.fpu softvfp
- 475              	Transform_N_to_Duty:
- 476              	.LVL56:
- 477              	.LFB73:
-  97:Src/control.c **** 
-  98:Src/control.c **** float Transform_N_to_Duty(float F){
- 478              		.loc 1 98 35 is_stmt 1 view -0
- 479              		.cfi_startproc
- 480              		@ args = 0, pretend = 0, frame = 0
- 481              		@ frame_needed = 0, uses_anonymous_args = 0
- 482              		.loc 1 98 35 is_stmt 0 view .LVU91
- 483 0000 08B5     		push	{r3, lr}
- 484              	.LCFI4:
- 485              		.cfi_def_cfa_offset 8
- 486              		.cfi_offset 3, -8
- 487              		.cfi_offset 14, -4
-  99:Src/control.c ****   // 1N->40%
- 100:Src/control.c ****   return F/1*40;
- 488              		.loc 1 100 3 is_stmt 1 view .LVU92
- 489              		.loc 1 100 13 is_stmt 0 view .LVU93
- 490 0002 0249     		ldr	r1, .L35
- 491 0004 FFF7FEFF 		bl	__aeabi_fmul
- 492              	.LVL57:
- 101:Src/control.c **** }
- 493              		.loc 1 101 1 view .LVU94
- 494 0008 08BD     		pop	{r3, pc}
- 495              	.L36:
- 496 000a 00BF     		.align	2
- 497              	.L35:
- 498 000c 00002042 		.word	1109393408
- 499              		.cfi_endproc
- 500              	.LFE73:
- 502              		.section	.text.Transform_Rad_to_Dgree,"ax",%progbits
- 503              		.align	1
- 504              		.global	Transform_Rad_to_Dgree
- 505              		.syntax unified
- 506              		.thumb
- 507              		.thumb_func
- 508              		.fpu softvfp
- 510              	Transform_Rad_to_Dgree:
- 511              	.LVL58:
- 512              	.LFB74:
- 102:Src/control.c **** float Transform_Rad_to_Dgree(float rad){
- 513              		.loc 1 102 40 is_stmt 1 view -0
- 514              		.cfi_startproc
- 515              		@ args = 0, pretend = 0, frame = 0
-ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccHXsP8R.s 			page 12
+ 452              		.loc 1 104 49 view .LVU89
+ 453 0052 0849     		ldr	r1, .L32+8
+ 454 0054 FFF7FEFF 		bl	__aeabi_fadd
+ 455              	.LVL56:
+ 104:Src/control.c ****     break;
+ 456              		.loc 1 104 16 view .LVU90
+ 457 0058 FFF7FEFF 		bl	__aeabi_f2iz
+ 458              	.LVL57:
+ 459 005c 0246     		mov	r2, r0
+ 460 005e 4021     		movs	r1, #64
+ 461 0060 0548     		ldr	r0, .L32+12
+ 462 0062 FFF7FEFF 		bl	Caculate_Cnt
+ 463              	.LVL58:
+ 104:Src/control.c ****     break;
+ 464              		.loc 1 104 15 view .LVU91
+ 465 0066 054B     		ldr	r3, .L32+16
+ 466 0068 D863     		str	r0, [r3, #60]
+ 105:Src/control.c ****   }
+ 467              		.loc 1 105 5 is_stmt 1 view .LVU92
+ 468              		.loc 1 107 1 is_stmt 0 view .LVU93
+ 469 006a DCE7     		b	.L24
+ 470              	.L33:
+ 471              		.align	2
+ 472              	.L32:
+ 473 006c 0000BE42 		.word	1119748096
+ 474 0070 00002041 		.word	1092616192
+ 475 0074 00007A44 		.word	1148846080
+ 476 0078 00000000 		.word	htim3
+ 477 007c 00040040 		.word	1073742848
+ 478              		.cfi_endproc
+ 479              	.LFE72:
+ 481              		.section	.text.Transform_N_to_Duty,"ax",%progbits
+ 482              		.align	1
+ 483              		.global	Transform_N_to_Duty
+ 484              		.syntax unified
+ 485              		.thumb
+ 486              		.thumb_func
+ 487              		.fpu softvfp
+ 489              	Transform_N_to_Duty:
+ 490              	.LVL59:
+ 491              	.LFB73:
+ 108:Src/control.c **** 
+ 109:Src/control.c **** float Transform_N_to_Duty(float F){
+ 492              		.loc 1 109 35 is_stmt 1 view -0
+ 493              		.cfi_startproc
+ 494              		@ args = 0, pretend = 0, frame = 0
+ 495              		@ frame_needed = 0, uses_anonymous_args = 0
+ 496              		.loc 1 109 35 is_stmt 0 view .LVU95
+ 497 0000 08B5     		push	{r3, lr}
+ 498              	.LCFI4:
+ 499              		.cfi_def_cfa_offset 8
+ 500              		.cfi_offset 3, -8
+ 501              		.cfi_offset 14, -4
+ 110:Src/control.c ****   // 1N->40%
+ 111:Src/control.c ****   return F/1*40;
+ 502              		.loc 1 111 3 is_stmt 1 view .LVU96
+ 503              		.loc 1 111 13 is_stmt 0 view .LVU97
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccdJi6pl.s 			page 12
 
 
- 516              		@ frame_needed = 0, uses_anonymous_args = 0
- 517              		.loc 1 102 40 is_stmt 0 view .LVU96
- 518 0000 08B5     		push	{r3, lr}
- 519              	.LCFI5:
- 520              		.cfi_def_cfa_offset 8
- 521              		.cfi_offset 3, -8
- 522              		.cfi_offset 14, -4
- 103:Src/control.c ****   return rad/3.14f*360.0f;
- 523              		.loc 1 103 3 is_stmt 1 view .LVU97
- 524              		.loc 1 103 13 is_stmt 0 view .LVU98
- 525 0002 0349     		ldr	r1, .L39
- 526 0004 FFF7FEFF 		bl	__aeabi_fdiv
- 527              	.LVL59:
- 528              		.loc 1 103 19 view .LVU99
- 529 0008 0249     		ldr	r1, .L39+4
- 530 000a FFF7FEFF 		bl	__aeabi_fmul
- 531              	.LVL60:
- 104:Src/control.c **** }
- 532              		.loc 1 104 1 view .LVU100
- 533 000e 08BD     		pop	{r3, pc}
- 534              	.L40:
- 535              		.align	2
- 536              	.L39:
- 537 0010 C3F54840 		.word	1078523331
- 538 0014 0000B443 		.word	1135869952
- 539              		.cfi_endproc
- 540              	.LFE74:
- 542              		.global	__aeabi_fsub
- 543              		.section	.text.Control_Caculate,"ax",%progbits
- 544              		.align	1
- 545              		.global	Control_Caculate
- 546              		.syntax unified
- 547              		.thumb
- 548              		.thumb_func
- 549              		.fpu softvfp
- 551              	Control_Caculate:
- 552              	.LVL61:
- 553              	.LFB76:
- 105:Src/control.c **** 
- 106:Src/control.c **** void Control_Loop(){
- 107:Src/control.c ****   static int16_t ac[3],gy[3];
- 108:Src/control.c ****   static float angle_speed[3],ac_angle[3],angle[3];
- 109:Src/control.c ****   float Roll_Out=0;
- 110:Src/control.c ****   float result[4]={0};
- 111:Src/control.c ****   static int loop_cnt=0;
- 112:Src/control.c **** 
- 113:Src/control.c ****   if(!MS_5_Flag){
- 114:Src/control.c ****     return ;
- 115:Src/control.c ****   }
- 116:Src/control.c ****   MPU_Read6500(&MPU9250,ac,gy);
- 117:Src/control.c ****   Gyroraw_to_Angle_Speed(&MPU9250,gy,angle_speed);
- 118:Src/control.c ****   get_angle(ac,angle_speed,angle,ac_angle);
- 119:Src/control.c ****   
- 120:Src/control.c ****   Pitch=angle[1];
- 121:Src/control.c ****   Roll=angle[0];
- 122:Src/control.c ****   
- 123:Src/control.c ****   Roll_Out=PID_Control(&Roll_PID,Roll_Stable,Roll);
-ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccHXsP8R.s 			page 13
+ 504 0002 0249     		ldr	r1, .L36
+ 505 0004 FFF7FEFF 		bl	__aeabi_fmul
+ 506              	.LVL60:
+ 112:Src/control.c **** }
+ 507              		.loc 1 112 1 view .LVU98
+ 508 0008 08BD     		pop	{r3, pc}
+ 509              	.L37:
+ 510 000a 00BF     		.align	2
+ 511              	.L36:
+ 512 000c 00002042 		.word	1109393408
+ 513              		.cfi_endproc
+ 514              	.LFE73:
+ 516              		.section	.text.Transform_Rad_to_Dgree,"ax",%progbits
+ 517              		.align	1
+ 518              		.global	Transform_Rad_to_Dgree
+ 519              		.syntax unified
+ 520              		.thumb
+ 521              		.thumb_func
+ 522              		.fpu softvfp
+ 524              	Transform_Rad_to_Dgree:
+ 525              	.LVL61:
+ 526              	.LFB74:
+ 113:Src/control.c **** float Transform_Rad_to_Dgree(float rad){
+ 527              		.loc 1 113 40 is_stmt 1 view -0
+ 528              		.cfi_startproc
+ 529              		@ args = 0, pretend = 0, frame = 0
+ 530              		@ frame_needed = 0, uses_anonymous_args = 0
+ 531              		.loc 1 113 40 is_stmt 0 view .LVU100
+ 532 0000 08B5     		push	{r3, lr}
+ 533              	.LCFI5:
+ 534              		.cfi_def_cfa_offset 8
+ 535              		.cfi_offset 3, -8
+ 536              		.cfi_offset 14, -4
+ 114:Src/control.c ****   return rad/3.14f*360.0f;
+ 537              		.loc 1 114 3 is_stmt 1 view .LVU101
+ 538              		.loc 1 114 13 is_stmt 0 view .LVU102
+ 539 0002 0349     		ldr	r1, .L40
+ 540 0004 FFF7FEFF 		bl	__aeabi_fdiv
+ 541              	.LVL62:
+ 542              		.loc 1 114 19 view .LVU103
+ 543 0008 0249     		ldr	r1, .L40+4
+ 544 000a FFF7FEFF 		bl	__aeabi_fmul
+ 545              	.LVL63:
+ 115:Src/control.c **** }
+ 546              		.loc 1 115 1 view .LVU104
+ 547 000e 08BD     		pop	{r3, pc}
+ 548              	.L41:
+ 549              		.align	2
+ 550              	.L40:
+ 551 0010 C3F54840 		.word	1078523331
+ 552 0014 0000B443 		.word	1135869952
+ 553              		.cfi_endproc
+ 554              	.LFE74:
+ 556              		.global	__aeabi_fsub
+ 557              		.section	.text.Control_Loop,"ax",%progbits
+ 558              		.align	1
+ 559              		.global	Control_Loop
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccdJi6pl.s 			page 13
 
 
- 124:Src/control.c ****   
- 125:Src/control.c ****   Control_Caculate(1,Roll_Out,0,0,result);
- 126:Src/control.c ****   if (Aircraft_Mode==Mode_Arm){
- 127:Src/control.c ****     Set_Servor(L_Servor,0);
- 128:Src/control.c ****     Set_Servor(R_Servor,0);
- 129:Src/control.c ****     Set_ESC(L_ESC,50);
- 130:Src/control.c ****     Set_ESC(R_ESC,50);
- 131:Src/control.c ****   }else if (Aircraft_Mode==Mode_Takeoff){
- 132:Src/control.c ****     Set_ESC(L_ESC, Transform_N_to_Duty(result[0]));
- 133:Src/control.c ****     Set_ESC(R_ESC,Transform_N_to_Duty(result[1]));
- 134:Src/control.c ****     Set_Servor(L_Servor,Transform_Rad_to_Dgree(result[2]));
- 135:Src/control.c ****     Set_Servor(R_Servor,Transform_Rad_to_Dgree(result[3]));
- 136:Src/control.c ****   }else if(Aircraft_Mode==Mode_Stop){
- 137:Src/control.c ****     Set_Servor(L_Servor,0);
- 138:Src/control.c ****     Set_Servor(R_Servor,0);
- 139:Src/control.c ****     Set_ESC(L_ESC,0);
- 140:Src/control.c ****     Set_ESC(R_ESC,0); 
- 141:Src/control.c ****   }
- 142:Src/control.c ****   
- 143:Src/control.c ****   loop_cnt++;
- 144:Src/control.c ****   if(loop_cnt>10){
- 145:Src/control.c ****     BAT_Voltage=Get_Voltage(5100,2200);
- 146:Src/control.c ****     if(BAT_Voltage<7400){
- 147:Src/control.c ****        HAL_GPIO_WritePin(LED_GPIO_Port, LED_Pin, GPIO_PIN_SET);
- 148:Src/control.c ****     }
- 149:Src/control.c ****     loop_cnt=0;
- 150:Src/control.c ****   }
- 151:Src/control.c ****   send_wave(angle[0],angle[1],BAT_Voltage/100,0);
- 152:Src/control.c **** 
- 153:Src/control.c ****   MS_5_Flag=0;
- 154:Src/control.c **** }
- 155:Src/control.c **** 
- 156:Src/control.c **** 
- 157:Src/control.c **** void Control_Caculate(float Fz,float Mx,float My,float Mz,float *result){
- 554              		.loc 1 157 73 is_stmt 1 view -0
- 555              		.cfi_startproc
- 556              		@ args = 4, pretend = 0, frame = 8
- 557              		@ frame_needed = 0, uses_anonymous_args = 0
- 558              		.loc 1 157 73 is_stmt 0 view .LVU102
- 559 0000 2DE9F04F 		push	{r4, r5, r6, r7, r8, r9, r10, fp, lr}
- 560              	.LCFI6:
- 561              		.cfi_def_cfa_offset 36
- 562              		.cfi_offset 4, -36
- 563              		.cfi_offset 5, -32
- 564              		.cfi_offset 6, -28
- 565              		.cfi_offset 7, -24
- 566              		.cfi_offset 8, -20
- 567              		.cfi_offset 9, -16
- 568              		.cfi_offset 10, -12
- 569              		.cfi_offset 11, -8
- 570              		.cfi_offset 14, -4
- 571 0004 83B0     		sub	sp, sp, #12
- 572              	.LCFI7:
- 573              		.cfi_def_cfa_offset 48
- 574 0006 0546     		mov	r5, r0
- 575 0008 8946     		mov	r9, r1
- 576 000a 1646     		mov	r6, r2
-ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccHXsP8R.s 			page 14
+ 560              		.syntax unified
+ 561              		.thumb
+ 562              		.thumb_func
+ 563              		.fpu softvfp
+ 565              	Control_Loop:
+ 566              	.LFB75:
+ 116:Src/control.c **** 
+ 117:Src/control.c **** float Caculate_theta(float pitch,float roll);
+ 118:Src/control.c **** 
+ 119:Src/control.c **** #define PI 3.1415926f
+ 120:Src/control.c **** void Control_Loop(){
+ 567              		.loc 1 120 20 is_stmt 1 view -0
+ 568              		.cfi_startproc
+ 569              		@ args = 0, pretend = 0, frame = 0
+ 570              		@ frame_needed = 0, uses_anonymous_args = 0
+ 571 0000 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+ 572              	.LCFI6:
+ 573              		.cfi_def_cfa_offset 24
+ 574              		.cfi_offset 3, -24
+ 575              		.cfi_offset 4, -20
+ 576              		.cfi_offset 5, -16
+ 577              		.cfi_offset 6, -12
+ 578              		.cfi_offset 7, -8
+ 579              		.cfi_offset 14, -4
+ 121:Src/control.c ****   static int16_t ac[3],gy[3];
+ 580              		.loc 1 121 3 view .LVU106
+ 122:Src/control.c ****   static float angle_speed[3],ac_angle[3],angle[3];
+ 581              		.loc 1 122 3 view .LVU107
+ 123:Src/control.c ****   float Roll_Out=0;
+ 582              		.loc 1 123 3 view .LVU108
+ 583              	.LVL64:
+ 124:Src/control.c ****   float Pitch_Out=0;
+ 584              		.loc 1 124 3 view .LVU109
+ 125:Src/control.c ****   float Pitch_Angle_Speed_Out,Roll_Angle_Speed_Out;
+ 585              		.loc 1 125 3 view .LVU110
+ 126:Src/control.c ****   float Theta_Angle_Speed_Out;
+ 586              		.loc 1 126 3 view .LVU111
+ 127:Src/control.c ****   float result[4]={0};
+ 587              		.loc 1 127 3 view .LVU112
+ 128:Src/control.c ****   static int loop_cnt=0;
+ 588              		.loc 1 128 3 view .LVU113
+ 129:Src/control.c **** 
+ 130:Src/control.c ****   float base_duty=0;
+ 589              		.loc 1 130 3 view .LVU114
+ 131:Src/control.c **** 
+ 132:Src/control.c ****   if(!MS_5_Flag){
+ 590              		.loc 1 132 3 view .LVU115
+ 591              		.loc 1 132 6 is_stmt 0 view .LVU116
+ 592 0002 674B     		ldr	r3, .L61
+ 593 0004 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 594              		.loc 1 132 5 view .LVU117
+ 595 0006 03B9     		cbnz	r3, .L54
+ 596              	.LVL65:
+ 597              	.L42:
+ 133:Src/control.c ****     return ;
+ 134:Src/control.c ****   }
+ 135:Src/control.c ****   MPU_Read6500(&MPU9250,ac,gy);
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccdJi6pl.s 			page 14
 
 
- 577 000c 1F46     		mov	r7, r3
- 578 000e 0C9C     		ldr	r4, [sp, #48]
- 158:Src/control.c ****   /*顺序为 F1 F2 theta1 theta2
- 159:Src/control.c **** 
- 160:Src/control.c **** /               #2              \
- 161:Src/control.c **** |             -----             |
- 162:Src/control.c **** |             2 d r             |
- 163:Src/control.c **** |                               |
- 164:Src/control.c **** |               #1              |
- 165:Src/control.c **** |             -----             |
- 166:Src/control.c **** |             2 d r             |
- 167:Src/control.c **** |                               |
- 168:Src/control.c **** |      / Mx r - #2 + Fz d r \   |
- 169:Src/control.c **** | -atan| ------------------ | 2 |
- 170:Src/control.c **** |      \     My d + Mz r    /   |
- 171:Src/control.c **** |                               |
- 172:Src/control.c **** |      / Mx r + #1 - Fz d r \   |
- 173:Src/control.c **** |  atan| ------------------ | 2 |
- 174:Src/control.c **** \      \     My d - Mz r    /   /
- 175:Src/control.c **** 
- 176:Src/control.c **** where
- 177:Src/control.c **** 
- 178:Src/control.c ****                 2  2  2              2     2  2     2  2                   2  2
- 179:Src/control.c ****    #1 == sqrt(Fz  d  r  - 2 Fz Mx d r  + Mx  r  + My  d  - 2 My Mz d r + Mz  r )
- 180:Src/control.c **** 
- 181:Src/control.c ****                 2  2  2              2     2  2     2  2                   2  2
- 182:Src/control.c ****    #2 == sqrt(Fz  d  r  + 2 Fz Mx d r  + Mx  r  + My  d  + 2 My Mz d r + Mz  r )
- 183:Src/control.c **** */
- 184:Src/control.c ****   
- 185:Src/control.c ****   float M1, M2;
- 579              		.loc 1 185 3 is_stmt 1 view .LVU103
- 186:Src/control.c ****   
- 187:Src/control.c ****   float F1,F2,theta1,theta2;
- 580              		.loc 1 187 3 view .LVU104
- 188:Src/control.c ****   float d,r;
- 581              		.loc 1 188 3 view .LVU105
- 189:Src/control.c ****   
- 190:Src/control.c ****   r=0.04f; // 单位 m
- 582              		.loc 1 190 3 view .LVU106
- 583              	.LVL62:
- 191:Src/control.c ****   d=0.1f;
- 584              		.loc 1 191 3 view .LVU107
- 192:Src/control.c ****   
- 193:Src/control.c ****   float temp1=Fz*Fz*d*d*r*r+Mx*Mx*r*r+My*My*d*d+Mz*Mz*r*r;
- 585              		.loc 1 193 3 view .LVU108
- 586              		.loc 1 193 17 is_stmt 0 view .LVU109
- 587 0010 0146     		mov	r1, r0
- 588              	.LVL63:
- 589              		.loc 1 193 17 view .LVU110
- 590 0012 FFF7FEFF 		bl	__aeabi_fmul
- 591              	.LVL64:
- 592              		.loc 1 193 20 view .LVU111
- 593 0016 6249     		ldr	r1, .L43
- 594 0018 FFF7FEFF 		bl	__aeabi_fmul
- 595              	.LVL65:
- 596              		.loc 1 193 22 view .LVU112
- 597 001c 6049     		ldr	r1, .L43
-ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccHXsP8R.s 			page 15
-
-
- 598 001e FFF7FEFF 		bl	__aeabi_fmul
- 599              	.LVL66:
- 600              		.loc 1 193 24 view .LVU113
- 601 0022 6049     		ldr	r1, .L43+4
- 602 0024 FFF7FEFF 		bl	__aeabi_fmul
- 603              	.LVL67:
- 604              		.loc 1 193 26 view .LVU114
- 605 0028 5E49     		ldr	r1, .L43+4
- 606 002a FFF7FEFF 		bl	__aeabi_fmul
- 607              	.LVL68:
- 608 002e 8046     		mov	r8, r0
- 609              		.loc 1 193 31 view .LVU115
- 610 0030 4946     		mov	r1, r9
- 611 0032 4846     		mov	r0, r9
- 612 0034 FFF7FEFF 		bl	__aeabi_fmul
- 613              	.LVL69:
- 614              		.loc 1 193 34 view .LVU116
- 615 0038 5A49     		ldr	r1, .L43+4
- 616 003a FFF7FEFF 		bl	__aeabi_fmul
- 617              	.LVL70:
- 618              		.loc 1 193 36 view .LVU117
- 619 003e 5949     		ldr	r1, .L43+4
- 620 0040 FFF7FEFF 		bl	__aeabi_fmul
- 621              	.LVL71:
- 622 0044 0146     		mov	r1, r0
- 623              		.loc 1 193 28 view .LVU118
- 624 0046 4046     		mov	r0, r8
- 625 0048 FFF7FEFF 		bl	__aeabi_fadd
- 626              	.LVL72:
- 627 004c 8046     		mov	r8, r0
- 628              		.loc 1 193 41 view .LVU119
- 629 004e 3146     		mov	r1, r6
- 630 0050 3046     		mov	r0, r6
- 631 0052 FFF7FEFF 		bl	__aeabi_fmul
- 632              	.LVL73:
- 633              		.loc 1 193 44 view .LVU120
- 634 0056 5249     		ldr	r1, .L43
- 635 0058 FFF7FEFF 		bl	__aeabi_fmul
- 636              	.LVL74:
- 637              		.loc 1 193 46 view .LVU121
- 638 005c 5049     		ldr	r1, .L43
- 639 005e FFF7FEFF 		bl	__aeabi_fmul
- 640              	.LVL75:
- 641 0062 0146     		mov	r1, r0
- 642              		.loc 1 193 38 view .LVU122
- 643 0064 4046     		mov	r0, r8
- 644 0066 FFF7FEFF 		bl	__aeabi_fadd
- 645              	.LVL76:
- 646 006a 8046     		mov	r8, r0
- 647              		.loc 1 193 51 view .LVU123
- 648 006c 3946     		mov	r1, r7
- 649 006e 3846     		mov	r0, r7
- 650 0070 FFF7FEFF 		bl	__aeabi_fmul
- 651              	.LVL77:
- 652              		.loc 1 193 54 view .LVU124
- 653 0074 4B49     		ldr	r1, .L43+4
- 654 0076 FFF7FEFF 		bl	__aeabi_fmul
-ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccHXsP8R.s 			page 16
-
-
- 655              	.LVL78:
- 656              		.loc 1 193 56 view .LVU125
- 657 007a 4A49     		ldr	r1, .L43+4
- 658 007c FFF7FEFF 		bl	__aeabi_fmul
- 659              	.LVL79:
- 660 0080 0146     		mov	r1, r0
- 661              		.loc 1 193 9 view .LVU126
- 662 0082 4046     		mov	r0, r8
- 663 0084 FFF7FEFF 		bl	__aeabi_fadd
- 664              	.LVL80:
- 665 0088 8246     		mov	r10, r0
- 666              	.LVL81:
- 194:Src/control.c ****   float temp2=2*Fz*Mx*d*r*r+2*My*Mz*d*r;
- 667              		.loc 1 194 3 is_stmt 1 view .LVU127
- 668              		.loc 1 194 16 is_stmt 0 view .LVU128
- 669 008a 2946     		mov	r1, r5
- 670 008c 2846     		mov	r0, r5
- 671              	.LVL82:
- 672              		.loc 1 194 16 view .LVU129
- 673 008e FFF7FEFF 		bl	__aeabi_fadd
- 674              	.LVL83:
- 675              		.loc 1 194 19 view .LVU130
- 676 0092 4946     		mov	r1, r9
- 677 0094 FFF7FEFF 		bl	__aeabi_fmul
- 678              	.LVL84:
- 679              		.loc 1 194 22 view .LVU131
- 680 0098 4149     		ldr	r1, .L43
- 681 009a FFF7FEFF 		bl	__aeabi_fmul
- 682              	.LVL85:
- 683              		.loc 1 194 24 view .LVU132
- 684 009e 4149     		ldr	r1, .L43+4
- 685 00a0 FFF7FEFF 		bl	__aeabi_fmul
- 686              	.LVL86:
- 687              		.loc 1 194 26 view .LVU133
- 688 00a4 3F49     		ldr	r1, .L43+4
- 689 00a6 FFF7FEFF 		bl	__aeabi_fmul
- 690              	.LVL87:
- 691 00aa 8046     		mov	r8, r0
- 692              		.loc 1 194 30 view .LVU134
- 693 00ac 3146     		mov	r1, r6
- 694 00ae 3046     		mov	r0, r6
- 695 00b0 FFF7FEFF 		bl	__aeabi_fadd
- 696              	.LVL88:
- 697              		.loc 1 194 33 view .LVU135
- 698 00b4 3946     		mov	r1, r7
- 699 00b6 FFF7FEFF 		bl	__aeabi_fmul
- 700              	.LVL89:
- 701              		.loc 1 194 36 view .LVU136
- 702 00ba 3949     		ldr	r1, .L43
- 703 00bc FFF7FEFF 		bl	__aeabi_fmul
- 704              	.LVL90:
- 705              		.loc 1 194 38 view .LVU137
- 706 00c0 3849     		ldr	r1, .L43+4
- 707 00c2 FFF7FEFF 		bl	__aeabi_fmul
- 708              	.LVL91:
- 709 00c6 0146     		mov	r1, r0
- 710              		.loc 1 194 9 view .LVU138
-ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccHXsP8R.s 			page 17
-
-
- 711 00c8 4046     		mov	r0, r8
- 712 00ca FFF7FEFF 		bl	__aeabi_fadd
- 713              	.LVL92:
- 714 00ce 8346     		mov	fp, r0
- 715              	.LVL93:
- 195:Src/control.c ****   
- 196:Src/control.c ****   M1=sqrtf(temp1-temp2);
- 716              		.loc 1 196 3 is_stmt 1 view .LVU139
- 717              		.loc 1 196 6 is_stmt 0 view .LVU140
- 718 00d0 0146     		mov	r1, r0
- 719 00d2 5046     		mov	r0, r10
- 720              	.LVL94:
- 721              		.loc 1 196 6 view .LVU141
- 722 00d4 FFF7FEFF 		bl	__aeabi_fsub
- 723              	.LVL95:
- 724              		.loc 1 196 6 view .LVU142
- 725 00d8 FFF7FEFF 		bl	sqrtf
- 726              	.LVL96:
- 727 00dc 8046     		mov	r8, r0
- 728              	.LVL97:
- 197:Src/control.c ****   M2=sqrtf(temp1+temp2);
- 729              		.loc 1 197 3 is_stmt 1 view .LVU143
- 730              		.loc 1 197 6 is_stmt 0 view .LVU144
- 731 00de 5946     		mov	r1, fp
- 732 00e0 5046     		mov	r0, r10
- 733              	.LVL98:
- 734              		.loc 1 197 6 view .LVU145
- 735 00e2 FFF7FEFF 		bl	__aeabi_fadd
- 736              	.LVL99:
- 737 00e6 FFF7FEFF 		bl	sqrtf
- 738              	.LVL100:
- 739 00ea 8246     		mov	r10, r0
- 740              	.LVL101:
- 198:Src/control.c ****   
- 199:Src/control.c ****   F1=M2/(2*d*r);
- 741              		.loc 1 199 3 is_stmt 1 view .LVU146
- 742              		.loc 1 199 5 is_stmt 0 view .LVU147
- 743 00ec 2E49     		ldr	r1, .L43+8
- 744 00ee FFF7FEFF 		bl	__aeabi_fdiv
- 745              	.LVL102:
- 746              		.loc 1 199 5 view .LVU148
- 747 00f2 0090     		str	r0, [sp]	@ float
- 748              	.LVL103:
- 200:Src/control.c ****   F2=M1/(2*d*r);
- 749              		.loc 1 200 3 is_stmt 1 view .LVU149
- 750              		.loc 1 200 5 is_stmt 0 view .LVU150
- 751 00f4 2C49     		ldr	r1, .L43+8
- 752 00f6 4046     		mov	r0, r8
- 753              	.LVL104:
- 754              		.loc 1 200 5 view .LVU151
- 755 00f8 FFF7FEFF 		bl	__aeabi_fdiv
- 756              	.LVL105:
- 757 00fc 8346     		mov	fp, r0
- 758              	.LVL106:
- 201:Src/control.c ****   
- 202:Src/control.c ****   theta1=-2*atan2f(Mx*r-M2+Fz*d*r,(My*d+Mz*r+0.000000001f));
- 759              		.loc 1 202 3 is_stmt 1 view .LVU152
-ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccHXsP8R.s 			page 18
-
-
- 760              		.loc 1 202 22 is_stmt 0 view .LVU153
- 761 00fe 2949     		ldr	r1, .L43+4
- 762 0100 4846     		mov	r0, r9
- 763              	.LVL107:
- 764              		.loc 1 202 22 view .LVU154
- 765 0102 FFF7FEFF 		bl	__aeabi_fmul
- 766              	.LVL108:
- 767 0106 8146     		mov	r9, r0
- 768              	.LVL109:
- 769              		.loc 1 202 24 view .LVU155
- 770 0108 5146     		mov	r1, r10
- 771 010a FFF7FEFF 		bl	__aeabi_fsub
- 772              	.LVL110:
- 773 010e 0190     		str	r0, [sp, #4]	@ float
- 774              		.loc 1 202 30 view .LVU156
- 775 0110 2349     		ldr	r1, .L43
- 776 0112 2846     		mov	r0, r5
- 777 0114 FFF7FEFF 		bl	__aeabi_fmul
- 778              	.LVL111:
- 779              		.loc 1 202 32 view .LVU157
- 780 0118 2249     		ldr	r1, .L43+4
- 781 011a FFF7FEFF 		bl	__aeabi_fmul
- 782              	.LVL112:
- 783 011e 0546     		mov	r5, r0
- 784              	.LVL113:
- 785              		.loc 1 202 38 view .LVU158
- 786 0120 1F49     		ldr	r1, .L43
- 787 0122 3046     		mov	r0, r6
- 788 0124 FFF7FEFF 		bl	__aeabi_fmul
- 789              	.LVL114:
- 790 0128 0646     		mov	r6, r0
- 791              	.LVL115:
- 792              		.loc 1 202 43 view .LVU159
- 793 012a 1E49     		ldr	r1, .L43+4
- 794 012c 3846     		mov	r0, r7
- 795 012e FFF7FEFF 		bl	__aeabi_fmul
- 796              	.LVL116:
- 797 0132 0746     		mov	r7, r0
- 798              	.LVL117:
- 799              		.loc 1 202 40 view .LVU160
- 800 0134 0146     		mov	r1, r0
- 801 0136 3046     		mov	r0, r6
- 802 0138 FFF7FEFF 		bl	__aeabi_fadd
- 803              	.LVL118:
- 804              		.loc 1 202 13 view .LVU161
- 805 013c 1B49     		ldr	r1, .L43+12
- 806 013e FFF7FEFF 		bl	__aeabi_fadd
- 807              	.LVL119:
- 808 0142 8246     		mov	r10, r0
- 809              	.LVL120:
- 810              		.loc 1 202 13 view .LVU162
- 811 0144 2946     		mov	r1, r5
- 812 0146 0198     		ldr	r0, [sp, #4]	@ float
- 813 0148 FFF7FEFF 		bl	__aeabi_fadd
- 814              	.LVL121:
- 815 014c 5146     		mov	r1, r10
- 816 014e FFF7FEFF 		bl	atan2f
-ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccHXsP8R.s 			page 19
-
-
- 817              	.LVL122:
- 818              		.loc 1 202 9 view .LVU163
- 819 0152 4FF04041 		mov	r1, #-1073741824
- 820 0156 FFF7FEFF 		bl	__aeabi_fmul
- 821              	.LVL123:
- 822 015a 8246     		mov	r10, r0
- 823              	.LVL124:
- 203:Src/control.c ****   theta2=2*atan2f(Mx*r+M1-Fz*d*r,(My*d-Mz*r+0.000000001f));
- 824              		.loc 1 203 3 is_stmt 1 view .LVU164
- 825              		.loc 1 203 23 is_stmt 0 view .LVU165
- 826 015c 4146     		mov	r1, r8
- 827 015e 4846     		mov	r0, r9
- 828              	.LVL125:
- 829              		.loc 1 203 23 view .LVU166
- 830 0160 FFF7FEFF 		bl	__aeabi_fadd
- 831              	.LVL126:
- 832 0164 8046     		mov	r8, r0
- 833              	.LVL127:
- 834              		.loc 1 203 39 view .LVU167
- 835 0166 3946     		mov	r1, r7
- 836 0168 3046     		mov	r0, r6
- 837 016a FFF7FEFF 		bl	__aeabi_fsub
- 838              	.LVL128:
- 839              		.loc 1 203 12 view .LVU168
- 840 016e 0F49     		ldr	r1, .L43+12
- 841 0170 FFF7FEFF 		bl	__aeabi_fadd
- 842              	.LVL129:
- 843 0174 0646     		mov	r6, r0
- 844 0176 2946     		mov	r1, r5
- 845 0178 4046     		mov	r0, r8
- 846 017a FFF7FEFF 		bl	__aeabi_fsub
- 847              	.LVL130:
- 848 017e 3146     		mov	r1, r6
- 849 0180 FFF7FEFF 		bl	atan2f
- 850              	.LVL131:
- 851 0184 0146     		mov	r1, r0
- 852              		.loc 1 203 9 view .LVU169
- 853 0186 FFF7FEFF 		bl	__aeabi_fadd
- 854              	.LVL132:
- 204:Src/control.c ****   
- 205:Src/control.c ****   result[0]=F1;
- 855              		.loc 1 205 3 is_stmt 1 view .LVU170
- 856              		.loc 1 205 12 is_stmt 0 view .LVU171
- 857 018a 009B     		ldr	r3, [sp]	@ float
- 858 018c 2360     		str	r3, [r4]	@ float
- 206:Src/control.c ****   result[1]=F2;
- 859              		.loc 1 206 3 is_stmt 1 view .LVU172
- 860              		.loc 1 206 12 is_stmt 0 view .LVU173
- 861 018e C4F804B0 		str	fp, [r4, #4]	@ float
- 207:Src/control.c ****   result[2]=theta1;
- 862              		.loc 1 207 3 is_stmt 1 view .LVU174
- 863              		.loc 1 207 12 is_stmt 0 view .LVU175
- 864 0192 C4F808A0 		str	r10, [r4, #8]	@ float
- 208:Src/control.c ****   result[3]=theta2;
- 865              		.loc 1 208 3 is_stmt 1 view .LVU176
- 866              		.loc 1 208 12 is_stmt 0 view .LVU177
- 867 0196 E060     		str	r0, [r4, #12]	@ float
-ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccHXsP8R.s 			page 20
-
-
- 209:Src/control.c **** }
- 868              		.loc 1 209 1 view .LVU178
- 869 0198 03B0     		add	sp, sp, #12
- 870              	.LCFI8:
- 871              		.cfi_def_cfa_offset 36
- 872              	.LVL133:
- 873              		.loc 1 209 1 view .LVU179
- 874              		@ sp needed
- 875 019a BDE8F08F 		pop	{r4, r5, r6, r7, r8, r9, r10, fp, pc}
- 876              	.LVL134:
- 877              	.L44:
- 878              		.loc 1 209 1 view .LVU180
- 879 019e 00BF     		.align	2
- 880              	.L43:
- 881 01a0 CDCCCC3D 		.word	1036831949
- 882 01a4 0AD7233D 		.word	1025758986
- 883 01a8 6F12033C 		.word	1006834287
- 884 01ac 5F708930 		.word	814313567
- 885              		.cfi_endproc
- 886              	.LFE76:
- 888              		.section	.text.Control_Loop,"ax",%progbits
- 889              		.align	1
- 890              		.global	Control_Loop
- 891              		.syntax unified
- 892              		.thumb
- 893              		.thumb_func
- 894              		.fpu softvfp
- 896              	Control_Loop:
- 897              	.LFB75:
- 106:Src/control.c ****   static int16_t ac[3],gy[3];
- 898              		.loc 1 106 20 is_stmt 1 view -0
- 899              		.cfi_startproc
- 900              		@ args = 0, pretend = 0, frame = 16
- 901              		@ frame_needed = 0, uses_anonymous_args = 0
- 902 0000 F0B5     		push	{r4, r5, r6, r7, lr}
- 903              	.LCFI9:
- 904              		.cfi_def_cfa_offset 20
- 905              		.cfi_offset 4, -20
- 906              		.cfi_offset 5, -16
- 907              		.cfi_offset 6, -12
- 908              		.cfi_offset 7, -8
- 909              		.cfi_offset 14, -4
- 910 0002 87B0     		sub	sp, sp, #28
- 911              	.LCFI10:
- 912              		.cfi_def_cfa_offset 48
- 107:Src/control.c ****   static float angle_speed[3],ac_angle[3],angle[3];
- 913              		.loc 1 107 3 view .LVU182
- 108:Src/control.c ****   float Roll_Out=0;
- 914              		.loc 1 108 3 view .LVU183
- 109:Src/control.c ****   float result[4]={0};
- 915              		.loc 1 109 3 view .LVU184
- 916              	.LVL135:
- 110:Src/control.c ****   static int loop_cnt=0;
- 917              		.loc 1 110 3 view .LVU185
- 110:Src/control.c ****   static int loop_cnt=0;
- 918              		.loc 1 110 9 is_stmt 0 view .LVU186
- 919 0004 0023     		movs	r3, #0
-ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccHXsP8R.s 			page 21
-
-
- 920 0006 0293     		str	r3, [sp, #8]
- 921 0008 0393     		str	r3, [sp, #12]
- 922 000a 0493     		str	r3, [sp, #16]
- 923 000c 0593     		str	r3, [sp, #20]
- 111:Src/control.c **** 
- 924              		.loc 1 111 3 is_stmt 1 view .LVU187
- 113:Src/control.c ****     return ;
- 925              		.loc 1 113 3 view .LVU188
- 113:Src/control.c ****     return ;
- 926              		.loc 1 113 6 is_stmt 0 view .LVU189
- 927 000e 524B     		ldr	r3, .L62
- 928 0010 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
- 113:Src/control.c ****     return ;
- 929              		.loc 1 113 5 view .LVU190
- 930 0012 0BB9     		cbnz	r3, .L56
- 931              	.LVL136:
- 932              	.L45:
- 154:Src/control.c **** 
- 933              		.loc 1 154 1 view .LVU191
- 934 0014 07B0     		add	sp, sp, #28
- 935              	.LCFI11:
- 936              		.cfi_remember_state
- 937              		.cfi_def_cfa_offset 20
- 938              		@ sp needed
- 939 0016 F0BD     		pop	{r4, r5, r6, r7, pc}
- 940              	.LVL137:
- 941              	.L56:
- 942              	.LCFI12:
- 943              		.cfi_restore_state
- 116:Src/control.c ****   Gyroraw_to_Angle_Speed(&MPU9250,gy,angle_speed);
- 944              		.loc 1 116 3 is_stmt 1 view .LVU192
- 945 0018 504F     		ldr	r7, .L62+4
- 946 001a 514D     		ldr	r5, .L62+8
- 947 001c 514C     		ldr	r4, .L62+12
- 948 001e 3A46     		mov	r2, r7
- 949 0020 2946     		mov	r1, r5
- 950 0022 2046     		mov	r0, r4
- 951 0024 FFF7FEFF 		bl	MPU_Read6500
- 952              	.LVL138:
- 117:Src/control.c ****   get_angle(ac,angle_speed,angle,ac_angle);
- 953              		.loc 1 117 3 view .LVU193
- 954 0028 4F4E     		ldr	r6, .L62+16
- 955 002a 3246     		mov	r2, r6
- 956 002c 3946     		mov	r1, r7
- 957 002e 2046     		mov	r0, r4
- 958 0030 FFF7FEFF 		bl	Gyroraw_to_Angle_Speed
- 959              	.LVL139:
- 118:Src/control.c ****   
- 960              		.loc 1 118 3 view .LVU194
- 961 0034 4D4C     		ldr	r4, .L62+20
- 962 0036 4E4B     		ldr	r3, .L62+24
- 963 0038 2246     		mov	r2, r4
- 964 003a 3146     		mov	r1, r6
- 965 003c 2846     		mov	r0, r5
- 966 003e FFF7FEFF 		bl	get_angle
- 967              	.LVL140:
- 120:Src/control.c ****   Roll=angle[0];
-ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccHXsP8R.s 			page 22
-
-
- 968              		.loc 1 120 3 view .LVU195
- 120:Src/control.c ****   Roll=angle[0];
- 969              		.loc 1 120 14 is_stmt 0 view .LVU196
- 970 0042 6268     		ldr	r2, [r4, #4]	@ float
- 120:Src/control.c ****   Roll=angle[0];
- 971              		.loc 1 120 8 view .LVU197
- 972 0044 4B4B     		ldr	r3, .L62+28
- 973 0046 1A60     		str	r2, [r3]	@ float
- 121:Src/control.c ****   
- 974              		.loc 1 121 3 is_stmt 1 view .LVU198
- 121:Src/control.c ****   
- 975              		.loc 1 121 13 is_stmt 0 view .LVU199
- 976 0048 2268     		ldr	r2, [r4]	@ float
- 121:Src/control.c ****   
- 977              		.loc 1 121 7 view .LVU200
- 978 004a 4B4B     		ldr	r3, .L62+32
- 979 004c 1A60     		str	r2, [r3]	@ float
- 123:Src/control.c ****   
- 980              		.loc 1 123 3 is_stmt 1 view .LVU201
- 123:Src/control.c ****   
- 981              		.loc 1 123 12 is_stmt 0 view .LVU202
- 982 004e 4B4B     		ldr	r3, .L62+36
- 983 0050 1968     		ldr	r1, [r3]	@ float
- 984 0052 4B48     		ldr	r0, .L62+40
- 985 0054 FFF7FEFF 		bl	PID_Control
- 986              	.LVL141:
- 987 0058 0146     		mov	r1, r0
- 988              	.LVL142:
- 125:Src/control.c ****   if (Aircraft_Mode==Mode_Arm){
- 989              		.loc 1 125 3 is_stmt 1 view .LVU203
- 990 005a 0022     		movs	r2, #0
- 991 005c 02AB     		add	r3, sp, #8
- 992 005e 0093     		str	r3, [sp]
- 993 0060 1346     		mov	r3, r2
- 994 0062 4FF07E50 		mov	r0, #1065353216
- 995              	.LVL143:
- 125:Src/control.c ****   if (Aircraft_Mode==Mode_Arm){
- 996              		.loc 1 125 3 is_stmt 0 view .LVU204
- 997 0066 FFF7FEFF 		bl	Control_Caculate
- 998              	.LVL144:
- 126:Src/control.c ****     Set_Servor(L_Servor,0);
- 999              		.loc 1 126 3 is_stmt 1 view .LVU205
- 126:Src/control.c ****     Set_Servor(L_Servor,0);
- 1000              		.loc 1 126 20 is_stmt 0 view .LVU206
- 1001 006a 464B     		ldr	r3, .L62+44
- 1002 006c 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
- 126:Src/control.c ****     Set_Servor(L_Servor,0);
- 1003              		.loc 1 126 6 view .LVU207
- 1004 006e 012B     		cmp	r3, #1
- 1005 0070 19D0     		beq	.L57
- 131:Src/control.c ****     Set_ESC(L_ESC, Transform_N_to_Duty(result[0]));
- 1006              		.loc 1 131 9 is_stmt 1 view .LVU208
- 131:Src/control.c ****     Set_ESC(L_ESC, Transform_N_to_Duty(result[0]));
- 1007              		.loc 1 131 12 is_stmt 0 view .LVU209
- 1008 0072 022B     		cmp	r3, #2
- 1009 0074 2AD0     		beq	.L58
- 136:Src/control.c ****     Set_Servor(L_Servor,0);
-ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccHXsP8R.s 			page 23
-
-
- 1010              		.loc 1 136 9 is_stmt 1 view .LVU210
- 136:Src/control.c ****     Set_Servor(L_Servor,0);
- 1011              		.loc 1 136 11 is_stmt 0 view .LVU211
- 1012 0076 032B     		cmp	r3, #3
- 1013 0078 45D0     		beq	.L59
- 1014              	.L49:
- 143:Src/control.c ****   if(loop_cnt>10){
- 1015              		.loc 1 143 3 is_stmt 1 view .LVU212
- 143:Src/control.c ****   if(loop_cnt>10){
- 1016              		.loc 1 143 11 is_stmt 0 view .LVU213
- 1017 007a 434A     		ldr	r2, .L62+48
- 1018 007c 1368     		ldr	r3, [r2]
- 1019 007e 0133     		adds	r3, r3, #1
- 1020 0080 1360     		str	r3, [r2]
- 144:Src/control.c ****     BAT_Voltage=Get_Voltage(5100,2200);
- 1021              		.loc 1 144 3 is_stmt 1 view .LVU214
- 144:Src/control.c ****     BAT_Voltage=Get_Voltage(5100,2200);
- 1022              		.loc 1 144 5 is_stmt 0 view .LVU215
- 1023 0082 0A2B     		cmp	r3, #10
- 1024 0084 51DC     		bgt	.L60
- 1025              	.L51:
+ 136:Src/control.c ****   Gyroraw_to_Angle_Speed(&MPU9250,gy,angle_speed);
+ 137:Src/control.c ****   get_angle(ac,angle_speed,angle,ac_angle);
+ 138:Src/control.c ****   
+ 139:Src/control.c ****   Pitch=angle[1];
+ 140:Src/control.c ****   Roll=angle[0];
+ 141:Src/control.c ****   
+ 142:Src/control.c ****   //  Roll_Out=PID_Control(&Roll_PID,Roll_Stable,Roll);
+ 143:Src/control.c **** 
+ 144:Src/control.c ****   // 前倾 角度为正  角速度为负
+ 145:Src/control.c ****   // 左倾 角度为负 角速度为负    最终输出 左+右-，所以ROLL_Angle_PID 为正
+ 146:Src/control.c ****   Pitch_Out=PID_Control(&Pitch_PID,Pitch_Stable,Pitch);
+ 147:Src/control.c ****   Roll_Out=PID_Control(&Roll_PID,Roll_Stable,Roll);
+ 148:Src/control.c **** 
+ 149:Src/control.c ****   Pitch_Angle_Speed_Out=PID_Control(&Pitch_Angle_Speed_PID,Pitch_Out,angle_speed[0]);
+ 150:Src/control.c ****   Roll_Angle_Speed_Out=PID_Control(&Roll_Angle_Speed_PID,Roll_Out,angle_speed[1]);
  151:Src/control.c **** 
- 1026              		.loc 1 151 3 is_stmt 1 view .LVU216
- 1027 0086 4149     		ldr	r1, .L62+52
- 1028 0088 414B     		ldr	r3, .L62+56
- 1029 008a 1868     		ldr	r0, [r3]	@ float
- 1030 008c FFF7FEFF 		bl	__aeabi_fdiv
- 1031              	.LVL145:
- 1032 0090 0246     		mov	r2, r0
- 1033 0092 364C     		ldr	r4, .L62+20
- 1034 0094 0023     		movs	r3, #0
- 1035 0096 6168     		ldr	r1, [r4, #4]	@ float
- 1036 0098 2068     		ldr	r0, [r4]	@ float
- 1037 009a FFF7FEFF 		bl	send_wave
- 1038              	.LVL146:
- 153:Src/control.c **** }
- 1039              		.loc 1 153 3 view .LVU217
- 153:Src/control.c **** }
- 1040              		.loc 1 153 12 is_stmt 0 view .LVU218
- 1041 009e 2E4B     		ldr	r3, .L62
- 1042 00a0 0022     		movs	r2, #0
- 1043 00a2 1A70     		strb	r2, [r3]
- 1044 00a4 B6E7     		b	.L45
- 1045              	.L57:
- 127:Src/control.c ****     Set_Servor(R_Servor,0);
- 1046              		.loc 1 127 5 is_stmt 1 view .LVU219
- 1047 00a6 0024     		movs	r4, #0
- 1048 00a8 2146     		mov	r1, r4
- 1049 00aa 0020     		movs	r0, #0
- 1050 00ac FFF7FEFF 		bl	Set_Servor
- 1051              	.LVL147:
- 128:Src/control.c ****     Set_ESC(L_ESC,50);
- 1052              		.loc 1 128 5 view .LVU220
- 1053 00b0 2146     		mov	r1, r4
- 1054 00b2 0120     		movs	r0, #1
- 1055 00b4 FFF7FEFF 		bl	Set_Servor
- 1056              	.LVL148:
-ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccHXsP8R.s 			page 24
+ 152:Src/control.c ****   Theta_Angle_Speed_Out=PID_Control(&Theta_Angle_Speed_PID,Pitch_Out,angle_speed[0]);
+ 153:Src/control.c **** 
+ 154:Src/control.c ****   Pitch_Angle_Speed_Out=fabs(Pitch_Angle_Speed_Out);
+ 155:Src/control.c **** 
+ 156:Src/control.c ****   base_duty=Thrust_Value/128.0f*50.0f;
+ 157:Src/control.c ****   if(base_duty<0){
+ 158:Src/control.c ****     base_duty=0;
+ 159:Src/control.c ****   }
+ 160:Src/control.c ****   
+ 161:Src/control.c ****   if (Aircraft_Mode==Mode_Arm){
+ 162:Src/control.c ****     Set_Servor(L_Servor,Theta_Angle_Speed_Out);
+ 163:Src/control.c ****     Set_Servor(R_Servor,Theta_Angle_Speed_Out);
+ 164:Src/control.c ****     Set_ESC(L_ESC,Pitch_Angle_Speed_Out+Roll_Angle_Speed_Out+base_duty);
+ 165:Src/control.c ****     Set_ESC(R_ESC,Pitch_Angle_Speed_Out-Roll_Angle_Speed_Out+base_duty);
+ 166:Src/control.c ****   }else if (Aircraft_Mode==Mode_Takeoff){
+ 167:Src/control.c ****     Set_ESC(L_ESC, Transform_N_to_Duty(result[0]));
+ 168:Src/control.c ****     Set_ESC(R_ESC,Transform_N_to_Duty(result[1]));
+ 169:Src/control.c ****     Set_Servor(L_Servor,Transform_Rad_to_Dgree(result[2]));
+ 170:Src/control.c ****     Set_Servor(R_Servor,Transform_Rad_to_Dgree(result[3]));
+ 171:Src/control.c ****   }else if(Aircraft_Mode==Mode_Stop){
+ 172:Src/control.c ****     Set_Servor(L_Servor,0);
+ 173:Src/control.c ****     Set_Servor(R_Servor,0);
+ 174:Src/control.c ****     Set_ESC(L_ESC,0);
+ 175:Src/control.c ****     Set_ESC(R_ESC,0); 
+ 176:Src/control.c ****   }
+ 177:Src/control.c ****   
+ 178:Src/control.c ****   loop_cnt++;
+ 179:Src/control.c ****   if(loop_cnt>10){
+ 180:Src/control.c ****     BAT_Voltage=Get_Voltage(5100,2200);
+ 181:Src/control.c ****     if(BAT_Voltage<7400){
+ 182:Src/control.c ****        HAL_GPIO_WritePin(LED_GPIO_Port, LED_Pin, GPIO_PIN_SET);
+ 183:Src/control.c ****     }
+ 184:Src/control.c ****     loop_cnt=0;
+ 185:Src/control.c ****   }
+ 186:Src/control.c ****   send_wave(angle[0],angle[1],angle_speed[0],angle_speed[1]);
+ 187:Src/control.c **** 
+ 188:Src/control.c ****   MS_5_Flag=0;
+ 189:Src/control.c **** }
+ 598              		.loc 1 189 1 view .LVU118
+ 599 0008 F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 600              	.LVL66:
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccdJi6pl.s 			page 15
 
 
- 129:Src/control.c ****     Set_ESC(R_ESC,50);
- 1057              		.loc 1 129 5 view .LVU221
- 1058 00b8 364C     		ldr	r4, .L62+60
- 1059 00ba 2146     		mov	r1, r4
- 1060 00bc 0020     		movs	r0, #0
- 1061 00be FFF7FEFF 		bl	Set_ESC
- 1062              	.LVL149:
- 130:Src/control.c ****   }else if (Aircraft_Mode==Mode_Takeoff){
- 1063              		.loc 1 130 5 view .LVU222
- 1064 00c2 2146     		mov	r1, r4
- 1065 00c4 0120     		movs	r0, #1
- 1066 00c6 FFF7FEFF 		bl	Set_ESC
- 1067              	.LVL150:
- 1068 00ca D6E7     		b	.L49
- 1069              	.L58:
- 132:Src/control.c ****     Set_ESC(R_ESC,Transform_N_to_Duty(result[1]));
- 1070              		.loc 1 132 5 view .LVU223
- 1071 00cc 0298     		ldr	r0, [sp, #8]	@ float
- 1072 00ce FFF7FEFF 		bl	Transform_N_to_Duty
- 1073              	.LVL151:
- 1074 00d2 0146     		mov	r1, r0
- 1075 00d4 0020     		movs	r0, #0
- 1076 00d6 FFF7FEFF 		bl	Set_ESC
- 1077              	.LVL152:
- 133:Src/control.c ****     Set_Servor(L_Servor,Transform_Rad_to_Dgree(result[2]));
- 1078              		.loc 1 133 5 view .LVU224
- 1079 00da 0398     		ldr	r0, [sp, #12]	@ float
- 1080 00dc FFF7FEFF 		bl	Transform_N_to_Duty
- 1081              	.LVL153:
- 1082 00e0 0146     		mov	r1, r0
- 1083 00e2 0120     		movs	r0, #1
- 1084 00e4 FFF7FEFF 		bl	Set_ESC
- 1085              	.LVL154:
- 134:Src/control.c ****     Set_Servor(R_Servor,Transform_Rad_to_Dgree(result[3]));
- 1086              		.loc 1 134 5 view .LVU225
- 1087 00e8 0498     		ldr	r0, [sp, #16]	@ float
- 1088 00ea FFF7FEFF 		bl	Transform_Rad_to_Dgree
- 1089              	.LVL155:
- 1090 00ee 0146     		mov	r1, r0
- 1091 00f0 0020     		movs	r0, #0
- 1092 00f2 FFF7FEFF 		bl	Set_Servor
- 1093              	.LVL156:
- 135:Src/control.c ****   }else if(Aircraft_Mode==Mode_Stop){
- 1094              		.loc 1 135 5 view .LVU226
- 1095 00f6 0598     		ldr	r0, [sp, #20]	@ float
- 1096 00f8 FFF7FEFF 		bl	Transform_Rad_to_Dgree
- 1097              	.LVL157:
- 1098 00fc 0146     		mov	r1, r0
- 1099 00fe 0120     		movs	r0, #1
- 1100 0100 FFF7FEFF 		bl	Set_Servor
- 1101              	.LVL158:
- 1102 0104 B9E7     		b	.L49
- 1103              	.L59:
- 137:Src/control.c ****     Set_Servor(R_Servor,0);
- 1104              		.loc 1 137 5 view .LVU227
- 1105 0106 0024     		movs	r4, #0
- 1106 0108 2146     		mov	r1, r4
-ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccHXsP8R.s 			page 25
+ 601              	.L54:
+ 135:Src/control.c ****   Gyroraw_to_Angle_Speed(&MPU9250,gy,angle_speed);
+ 602              		.loc 1 135 3 is_stmt 1 view .LVU119
+ 603 000a 664F     		ldr	r7, .L61+4
+ 604 000c 664E     		ldr	r6, .L61+8
+ 605 000e 674D     		ldr	r5, .L61+12
+ 606 0010 3A46     		mov	r2, r7
+ 607 0012 3146     		mov	r1, r6
+ 608 0014 2846     		mov	r0, r5
+ 609 0016 FFF7FEFF 		bl	MPU_Read6500
+ 610              	.LVL67:
+ 136:Src/control.c ****   get_angle(ac,angle_speed,angle,ac_angle);
+ 611              		.loc 1 136 3 view .LVU120
+ 612 001a 654C     		ldr	r4, .L61+16
+ 613 001c 2246     		mov	r2, r4
+ 614 001e 3946     		mov	r1, r7
+ 615 0020 2846     		mov	r0, r5
+ 616 0022 FFF7FEFF 		bl	Gyroraw_to_Angle_Speed
+ 617              	.LVL68:
+ 137:Src/control.c ****   
+ 618              		.loc 1 137 3 view .LVU121
+ 619 0026 634D     		ldr	r5, .L61+20
+ 620 0028 634B     		ldr	r3, .L61+24
+ 621 002a 2A46     		mov	r2, r5
+ 622 002c 2146     		mov	r1, r4
+ 623 002e 3046     		mov	r0, r6
+ 624 0030 FFF7FEFF 		bl	get_angle
+ 625              	.LVL69:
+ 139:Src/control.c ****   Roll=angle[0];
+ 626              		.loc 1 139 3 view .LVU122
+ 139:Src/control.c ****   Roll=angle[0];
+ 627              		.loc 1 139 14 is_stmt 0 view .LVU123
+ 628 0034 6A68     		ldr	r2, [r5, #4]	@ float
+ 139:Src/control.c ****   Roll=angle[0];
+ 629              		.loc 1 139 8 view .LVU124
+ 630 0036 614B     		ldr	r3, .L61+28
+ 631 0038 1A60     		str	r2, [r3]	@ float
+ 140:Src/control.c ****   
+ 632              		.loc 1 140 3 is_stmt 1 view .LVU125
+ 140:Src/control.c ****   
+ 633              		.loc 1 140 13 is_stmt 0 view .LVU126
+ 634 003a 2B68     		ldr	r3, [r5]	@ float
+ 140:Src/control.c ****   
+ 635              		.loc 1 140 7 view .LVU127
+ 636 003c 604E     		ldr	r6, .L61+32
+ 637 003e 3360     		str	r3, [r6]	@ float
+ 146:Src/control.c ****   Roll_Out=PID_Control(&Roll_PID,Roll_Stable,Roll);
+ 638              		.loc 1 146 3 is_stmt 1 view .LVU128
+ 146:Src/control.c ****   Roll_Out=PID_Control(&Roll_PID,Roll_Stable,Roll);
+ 639              		.loc 1 146 13 is_stmt 0 view .LVU129
+ 640 0040 604B     		ldr	r3, .L61+36
+ 641 0042 1968     		ldr	r1, [r3]	@ float
+ 642 0044 6048     		ldr	r0, .L61+40
+ 643 0046 FFF7FEFF 		bl	PID_Control
+ 644              	.LVL70:
+ 645 004a 0546     		mov	r5, r0
+ 646              	.LVL71:
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccdJi6pl.s 			page 16
 
 
- 1107 010a 0020     		movs	r0, #0
- 1108 010c FFF7FEFF 		bl	Set_Servor
- 1109              	.LVL159:
- 138:Src/control.c ****     Set_ESC(L_ESC,0);
- 1110              		.loc 1 138 5 view .LVU228
- 1111 0110 2146     		mov	r1, r4
- 1112 0112 0120     		movs	r0, #1
- 1113 0114 FFF7FEFF 		bl	Set_Servor
- 1114              	.LVL160:
- 139:Src/control.c ****     Set_ESC(R_ESC,0); 
- 1115              		.loc 1 139 5 view .LVU229
- 1116 0118 2146     		mov	r1, r4
- 1117 011a 0020     		movs	r0, #0
- 1118 011c FFF7FEFF 		bl	Set_ESC
- 1119              	.LVL161:
- 140:Src/control.c ****   }
- 1120              		.loc 1 140 5 view .LVU230
- 1121 0120 2146     		mov	r1, r4
- 1122 0122 0120     		movs	r0, #1
- 1123 0124 FFF7FEFF 		bl	Set_ESC
- 1124              	.LVL162:
- 1125 0128 A7E7     		b	.L49
- 1126              	.L60:
- 145:Src/control.c ****     if(BAT_Voltage<7400){
- 1127              		.loc 1 145 5 view .LVU231
- 145:Src/control.c ****     if(BAT_Voltage<7400){
- 1128              		.loc 1 145 17 is_stmt 0 view .LVU232
- 1129 012a 40F69801 		movw	r1, #2200
- 1130 012e 41F2EC30 		movw	r0, #5100
- 1131 0132 FFF7FEFF 		bl	Get_Voltage
- 1132              	.LVL163:
- 145:Src/control.c ****     if(BAT_Voltage<7400){
- 1133              		.loc 1 145 16 view .LVU233
- 1134 0136 164B     		ldr	r3, .L62+56
- 1135 0138 1860     		str	r0, [r3]	@ float
- 146:Src/control.c ****        HAL_GPIO_WritePin(LED_GPIO_Port, LED_Pin, GPIO_PIN_SET);
- 1136              		.loc 1 146 5 is_stmt 1 view .LVU234
- 146:Src/control.c ****        HAL_GPIO_WritePin(LED_GPIO_Port, LED_Pin, GPIO_PIN_SET);
- 1137              		.loc 1 146 7 is_stmt 0 view .LVU235
- 1138 013a 1749     		ldr	r1, .L62+64
- 1139 013c FFF7FEFF 		bl	__aeabi_fcmplt
- 1140              	.LVL164:
- 1141 0140 18B9     		cbnz	r0, .L61
- 1142              	.L52:
- 149:Src/control.c ****   }
- 1143              		.loc 1 149 5 is_stmt 1 view .LVU236
- 149:Src/control.c ****   }
- 1144              		.loc 1 149 13 is_stmt 0 view .LVU237
- 1145 0142 114B     		ldr	r3, .L62+48
- 1146 0144 0022     		movs	r2, #0
- 1147 0146 1A60     		str	r2, [r3]
- 1148 0148 9DE7     		b	.L51
- 1149              	.L61:
- 147:Src/control.c ****     }
- 1150              		.loc 1 147 8 is_stmt 1 view .LVU238
- 1151 014a 0122     		movs	r2, #1
- 1152 014c 0821     		movs	r1, #8
-ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccHXsP8R.s 			page 26
+ 147:Src/control.c **** 
+ 647              		.loc 1 147 3 is_stmt 1 view .LVU130
+ 147:Src/control.c **** 
+ 648              		.loc 1 147 12 is_stmt 0 view .LVU131
+ 649 004c 3268     		ldr	r2, [r6]	@ float
+ 650 004e 5F4B     		ldr	r3, .L61+44
+ 651 0050 1968     		ldr	r1, [r3]	@ float
+ 652 0052 5F48     		ldr	r0, .L61+48
+ 653              	.LVL72:
+ 147:Src/control.c **** 
+ 654              		.loc 1 147 12 view .LVU132
+ 655 0054 FFF7FEFF 		bl	PID_Control
+ 656              	.LVL73:
+ 657 0058 0746     		mov	r7, r0
+ 658              	.LVL74:
+ 149:Src/control.c ****   Roll_Angle_Speed_Out=PID_Control(&Roll_Angle_Speed_PID,Roll_Out,angle_speed[1]);
+ 659              		.loc 1 149 3 is_stmt 1 view .LVU133
+ 149:Src/control.c ****   Roll_Angle_Speed_Out=PID_Control(&Roll_Angle_Speed_PID,Roll_Out,angle_speed[1]);
+ 660              		.loc 1 149 25 is_stmt 0 view .LVU134
+ 661 005a 2268     		ldr	r2, [r4]	@ float
+ 662 005c 2946     		mov	r1, r5
+ 663 005e 5D48     		ldr	r0, .L61+52
+ 664              	.LVL75:
+ 149:Src/control.c ****   Roll_Angle_Speed_Out=PID_Control(&Roll_Angle_Speed_PID,Roll_Out,angle_speed[1]);
+ 665              		.loc 1 149 25 view .LVU135
+ 666 0060 FFF7FEFF 		bl	PID_Control
+ 667              	.LVL76:
+ 668 0064 0646     		mov	r6, r0
+ 669              	.LVL77:
+ 150:Src/control.c **** 
+ 670              		.loc 1 150 3 is_stmt 1 view .LVU136
+ 150:Src/control.c **** 
+ 671              		.loc 1 150 24 is_stmt 0 view .LVU137
+ 672 0066 6268     		ldr	r2, [r4, #4]	@ float
+ 673 0068 3946     		mov	r1, r7
+ 674 006a 5B48     		ldr	r0, .L61+56
+ 675              	.LVL78:
+ 150:Src/control.c **** 
+ 676              		.loc 1 150 24 view .LVU138
+ 677 006c FFF7FEFF 		bl	PID_Control
+ 678              	.LVL79:
+ 679 0070 0746     		mov	r7, r0
+ 680              	.LVL80:
+ 152:Src/control.c **** 
+ 681              		.loc 1 152 3 is_stmt 1 view .LVU139
+ 152:Src/control.c **** 
+ 682              		.loc 1 152 25 is_stmt 0 view .LVU140
+ 683 0072 2268     		ldr	r2, [r4]	@ float
+ 684 0074 2946     		mov	r1, r5
+ 685 0076 5948     		ldr	r0, .L61+60
+ 686              	.LVL81:
+ 152:Src/control.c **** 
+ 687              		.loc 1 152 25 view .LVU141
+ 688 0078 FFF7FEFF 		bl	PID_Control
+ 689              	.LVL82:
+ 690 007c 0546     		mov	r5, r0
+ 691              	.LVL83:
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccdJi6pl.s 			page 17
 
 
- 1153 014e 1348     		ldr	r0, .L62+68
- 1154 0150 FFF7FEFF 		bl	HAL_GPIO_WritePin
- 1155              	.LVL165:
- 1156 0154 F5E7     		b	.L52
- 1157              	.L63:
- 1158 0156 00BF     		.align	2
- 1159              	.L62:
- 1160 0158 00000000 		.word	.LANCHOR3
- 1161 015c 00000000 		.word	.LANCHOR4
- 1162 0160 00000000 		.word	.LANCHOR5
- 1163 0164 00000000 		.word	MPU9250
- 1164 0168 00000000 		.word	.LANCHOR6
- 1165 016c 00000000 		.word	.LANCHOR8
- 1166 0170 00000000 		.word	.LANCHOR7
- 1167 0174 00000000 		.word	Pitch
- 1168 0178 00000000 		.word	Roll
- 1169 017c 00000000 		.word	.LANCHOR9
- 1170 0180 00000000 		.word	.LANCHOR10
- 1171 0184 00000000 		.word	.LANCHOR11
- 1172 0188 00000000 		.word	.LANCHOR12
- 1173 018c 0000C842 		.word	1120403456
- 1174 0190 00000000 		.word	.LANCHOR13
- 1175 0194 00004842 		.word	1112014848
- 1176 0198 0040E745 		.word	1172783104
- 1177 019c 000C0140 		.word	1073810432
- 1178              		.cfi_endproc
- 1179              	.LFE75:
- 1181              		.section	.text.NRF_Receive_Callback,"ax",%progbits
- 1182              		.align	1
- 1183              		.global	NRF_Receive_Callback
- 1184              		.syntax unified
- 1185              		.thumb
- 1186              		.thumb_func
- 1187              		.fpu softvfp
- 1189              	NRF_Receive_Callback:
- 1190              	.LVL166:
- 1191              	.LFB77:
- 210:Src/control.c **** 
- 211:Src/control.c **** void NRF_Receive_Callback(uint8_t * data,int len){
- 1192              		.loc 1 211 50 view -0
- 1193              		.cfi_startproc
- 1194              		@ args = 0, pretend = 0, frame = 0
- 1195              		@ frame_needed = 0, uses_anonymous_args = 0
- 1196              		@ link register save eliminated.
- 212:Src/control.c ****   
- 213:Src/control.c ****   uint16_t state=0;
- 1197              		.loc 1 213 3 view .LVU240
- 214:Src/control.c ****   if(len==10){
- 1198              		.loc 1 214 3 view .LVU241
- 1199              		.loc 1 214 5 is_stmt 0 view .LVU242
- 1200 0000 0A29     		cmp	r1, #10
- 1201 0002 00D0     		beq	.L67
- 1202              	.LVL167:
- 1203              	.L64:
- 215:Src/control.c ****    memcpy(&state,data+8,2);
- 216:Src/control.c ****    state&=0x3FFF;
- 217:Src/control.c ****    if(state==1){
-ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccHXsP8R.s 			page 27
+ 154:Src/control.c **** 
+ 692              		.loc 1 154 3 is_stmt 1 view .LVU142
+ 154:Src/control.c **** 
+ 693              		.loc 1 154 24 is_stmt 0 view .LVU143
+ 694 007e 26F00046 		bic	r6, r6, #-2147483648
+ 695              	.LVL84:
+ 156:Src/control.c ****   if(base_duty<0){
+ 696              		.loc 1 156 3 is_stmt 1 view .LVU144
+ 156:Src/control.c ****   if(base_duty<0){
+ 697              		.loc 1 156 25 is_stmt 0 view .LVU145
+ 698 0082 574B     		ldr	r3, .L61+64
+ 699 0084 B3F90000 		ldrsh	r0, [r3]
+ 700              	.LVL85:
+ 156:Src/control.c ****   if(base_duty<0){
+ 701              		.loc 1 156 25 view .LVU146
+ 702 0088 FFF7FEFF 		bl	__aeabi_i2f
+ 703              	.LVL86:
+ 704 008c 4FF07051 		mov	r1, #1006632960
+ 705 0090 FFF7FEFF 		bl	__aeabi_fmul
+ 706              	.LVL87:
+ 156:Src/control.c ****   if(base_duty<0){
+ 707              		.loc 1 156 12 view .LVU147
+ 708 0094 5349     		ldr	r1, .L61+68
+ 709 0096 FFF7FEFF 		bl	__aeabi_fmul
+ 710              	.LVL88:
+ 711 009a 0446     		mov	r4, r0
+ 712              	.LVL89:
+ 157:Src/control.c ****     base_duty=0;
+ 713              		.loc 1 157 3 is_stmt 1 view .LVU148
+ 157:Src/control.c ****     base_duty=0;
+ 714              		.loc 1 157 5 is_stmt 0 view .LVU149
+ 715 009c 0021     		movs	r1, #0
+ 716 009e FFF7FEFF 		bl	__aeabi_fcmplt
+ 717              	.LVL90:
+ 157:Src/control.c ****     base_duty=0;
+ 718              		.loc 1 157 5 view .LVU150
+ 719 00a2 C8B9     		cbnz	r0, .L55
+ 720              	.LVL91:
+ 721              	.L44:
+ 161:Src/control.c ****     Set_Servor(L_Servor,Theta_Angle_Speed_Out);
+ 722              		.loc 1 161 3 is_stmt 1 view .LVU151
+ 161:Src/control.c ****     Set_Servor(L_Servor,Theta_Angle_Speed_Out);
+ 723              		.loc 1 161 20 is_stmt 0 view .LVU152
+ 724 00a4 504B     		ldr	r3, .L61+72
+ 725 00a6 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 161:Src/control.c ****     Set_Servor(L_Servor,Theta_Angle_Speed_Out);
+ 726              		.loc 1 161 6 view .LVU153
+ 727 00a8 012B     		cmp	r3, #1
+ 728 00aa 17D0     		beq	.L56
+ 166:Src/control.c ****     Set_ESC(L_ESC, Transform_N_to_Duty(result[0]));
+ 729              		.loc 1 166 9 is_stmt 1 view .LVU154
+ 166:Src/control.c ****     Set_ESC(L_ESC, Transform_N_to_Duty(result[0]));
+ 730              		.loc 1 166 12 is_stmt 0 view .LVU155
+ 731 00ac 022B     		cmp	r3, #2
+ 732 00ae 34D0     		beq	.L57
+ 171:Src/control.c ****     Set_Servor(L_Servor,0);
+ 733              		.loc 1 171 9 is_stmt 1 view .LVU156
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccdJi6pl.s 			page 18
 
 
- 218:Src/control.c ****      Aircraft_Mode=Mode_Arm;
- 219:Src/control.c ****    }else if(state==8){
- 220:Src/control.c ****      Aircraft_Mode=Mode_Stop;
- 221:Src/control.c ****    }
- 222:Src/control.c ****   }
- 223:Src/control.c **** }
- 1204              		.loc 1 223 1 view .LVU243
- 1205 0004 7047     		bx	lr
- 1206              	.LVL168:
- 1207              	.L67:
- 215:Src/control.c ****    memcpy(&state,data+8,2);
- 1208              		.loc 1 215 4 is_stmt 1 view .LVU244
- 216:Src/control.c ****    if(state==1){
- 1209              		.loc 1 216 4 view .LVU245
- 216:Src/control.c ****    if(state==1){
- 1210              		.loc 1 216 9 is_stmt 0 view .LVU246
- 1211 0006 0389     		ldrh	r3, [r0, #8]	@ unaligned
- 1212 0008 C3F30D03 		ubfx	r3, r3, #0, #14
- 1213              	.LVL169:
- 217:Src/control.c ****      Aircraft_Mode=Mode_Arm;
- 1214              		.loc 1 217 4 is_stmt 1 view .LVU247
- 217:Src/control.c ****      Aircraft_Mode=Mode_Arm;
- 1215              		.loc 1 217 6 is_stmt 0 view .LVU248
- 1216 000c 012B     		cmp	r3, #1
- 1217 000e 05D0     		beq	.L68
- 219:Src/control.c ****      Aircraft_Mode=Mode_Stop;
- 1218              		.loc 1 219 10 is_stmt 1 view .LVU249
- 219:Src/control.c ****      Aircraft_Mode=Mode_Stop;
- 1219              		.loc 1 219 12 is_stmt 0 view .LVU250
- 1220 0010 082B     		cmp	r3, #8
- 1221 0012 F7D1     		bne	.L64
- 220:Src/control.c ****    }
- 1222              		.loc 1 220 6 is_stmt 1 view .LVU251
- 220:Src/control.c ****    }
- 1223              		.loc 1 220 19 is_stmt 0 view .LVU252
- 1224 0014 034B     		ldr	r3, .L69
- 1225              	.LVL170:
- 220:Src/control.c ****    }
- 1226              		.loc 1 220 19 view .LVU253
- 1227 0016 0322     		movs	r2, #3
- 1228 0018 1A70     		strb	r2, [r3]
- 1229              	.LVL171:
- 1230              		.loc 1 223 1 view .LVU254
- 1231 001a F3E7     		b	.L64
- 1232              	.LVL172:
- 1233              	.L68:
- 218:Src/control.c ****    }else if(state==8){
- 1234              		.loc 1 218 6 is_stmt 1 view .LVU255
- 218:Src/control.c ****    }else if(state==8){
- 1235              		.loc 1 218 19 is_stmt 0 view .LVU256
- 1236 001c 014B     		ldr	r3, .L69
- 1237              	.LVL173:
- 218:Src/control.c ****    }else if(state==8){
- 1238              		.loc 1 218 19 view .LVU257
- 1239 001e 0122     		movs	r2, #1
- 1240 0020 1A70     		strb	r2, [r3]
- 1241 0022 7047     		bx	lr
-ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccHXsP8R.s 			page 28
+ 171:Src/control.c ****     Set_Servor(L_Servor,0);
+ 734              		.loc 1 171 11 is_stmt 0 view .LVU157
+ 735 00b0 032B     		cmp	r3, #3
+ 736 00b2 4CD0     		beq	.L58
+ 737              	.LVL92:
+ 738              	.L46:
+ 178:Src/control.c ****   if(loop_cnt>10){
+ 739              		.loc 1 178 3 is_stmt 1 view .LVU158
+ 178:Src/control.c ****   if(loop_cnt>10){
+ 740              		.loc 1 178 11 is_stmt 0 view .LVU159
+ 741 00b4 4D4A     		ldr	r2, .L61+76
+ 742 00b6 1368     		ldr	r3, [r2]
+ 743 00b8 0133     		adds	r3, r3, #1
+ 744 00ba 1360     		str	r3, [r2]
+ 179:Src/control.c ****     BAT_Voltage=Get_Voltage(5100,2200);
+ 745              		.loc 1 179 3 is_stmt 1 view .LVU160
+ 179:Src/control.c ****     BAT_Voltage=Get_Voltage(5100,2200);
+ 746              		.loc 1 179 5 is_stmt 0 view .LVU161
+ 747 00bc 0A2B     		cmp	r3, #10
+ 748 00be 58DC     		bgt	.L59
+ 749              	.L48:
+ 186:Src/control.c **** 
+ 750              		.loc 1 186 3 is_stmt 1 view .LVU162
+ 751 00c0 3B4A     		ldr	r2, .L61+16
+ 752 00c2 3C48     		ldr	r0, .L61+20
+ 753 00c4 5368     		ldr	r3, [r2, #4]	@ float
+ 754 00c6 1268     		ldr	r2, [r2]	@ float
+ 755 00c8 4168     		ldr	r1, [r0, #4]	@ float
+ 756 00ca 0068     		ldr	r0, [r0]	@ float
+ 757 00cc FFF7FEFF 		bl	send_wave
+ 758              	.LVL93:
+ 188:Src/control.c **** }
+ 759              		.loc 1 188 3 view .LVU163
+ 188:Src/control.c **** }
+ 760              		.loc 1 188 12 is_stmt 0 view .LVU164
+ 761 00d0 334B     		ldr	r3, .L61
+ 762 00d2 0022     		movs	r2, #0
+ 763 00d4 1A70     		strb	r2, [r3]
+ 764 00d6 97E7     		b	.L42
+ 765              	.LVL94:
+ 766              	.L55:
+ 158:Src/control.c ****   }
+ 767              		.loc 1 158 14 view .LVU165
+ 768 00d8 0024     		movs	r4, #0
+ 769              	.LVL95:
+ 158:Src/control.c ****   }
+ 770              		.loc 1 158 14 view .LVU166
+ 771 00da E3E7     		b	.L44
+ 772              	.LVL96:
+ 773              	.L56:
+ 162:Src/control.c ****     Set_Servor(R_Servor,Theta_Angle_Speed_Out);
+ 774              		.loc 1 162 5 is_stmt 1 view .LVU167
+ 775 00dc 2946     		mov	r1, r5
+ 776 00de 0020     		movs	r0, #0
+ 777 00e0 FFF7FEFF 		bl	Set_Servor
+ 778              	.LVL97:
+ 163:Src/control.c ****     Set_ESC(L_ESC,Pitch_Angle_Speed_Out+Roll_Angle_Speed_Out+base_duty);
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccdJi6pl.s 			page 19
 
 
- 1242              	.L70:
- 1243              		.align	2
- 1244              	.L69:
- 1245 0024 00000000 		.word	.LANCHOR11
- 1246              		.cfi_endproc
- 1247              	.LFE77:
- 1249              		.section	.text.Ms_IRQ_Handler,"ax",%progbits
- 1250              		.align	1
- 1251              		.global	Ms_IRQ_Handler
- 1252              		.syntax unified
- 1253              		.thumb
- 1254              		.thumb_func
- 1255              		.fpu softvfp
- 1257              	Ms_IRQ_Handler:
- 1258              	.LFB78:
- 224:Src/control.c **** 
- 225:Src/control.c **** void Ms_IRQ_Handler(){
- 1259              		.loc 1 225 22 is_stmt 1 view -0
- 1260              		.cfi_startproc
- 1261              		@ args = 0, pretend = 0, frame = 0
- 1262              		@ frame_needed = 0, uses_anonymous_args = 0
- 1263              		@ link register save eliminated.
- 226:Src/control.c ****   static int Ms_Cnt=0;
- 1264              		.loc 1 226 3 view .LVU259
- 227:Src/control.c ****   if(Ms_Cnt==5){
- 1265              		.loc 1 227 3 view .LVU260
- 1266              		.loc 1 227 12 is_stmt 0 view .LVU261
- 1267 0000 074B     		ldr	r3, .L74
- 1268 0002 1B68     		ldr	r3, [r3]
- 1269              		.loc 1 227 5 view .LVU262
- 1270 0004 052B     		cmp	r3, #5
- 1271 0006 04D0     		beq	.L73
- 1272              	.L72:
- 228:Src/control.c ****     MS_5_Flag=1;
- 229:Src/control.c ****     Ms_Cnt=0;
- 230:Src/control.c ****   }
- 231:Src/control.c **** 
- 232:Src/control.c ****   Ms_Cnt++;
- 1273              		.loc 1 232 3 is_stmt 1 view .LVU263
- 1274              		.loc 1 232 9 is_stmt 0 view .LVU264
- 1275 0008 054A     		ldr	r2, .L74
- 1276 000a 1368     		ldr	r3, [r2]
- 1277 000c 0133     		adds	r3, r3, #1
- 1278 000e 1360     		str	r3, [r2]
- 233:Src/control.c **** }...
- 1279              		.loc 1 233 1 view .LVU265
- 1280 0010 7047     		bx	lr
- 1281              	.L73:
- 228:Src/control.c ****     MS_5_Flag=1;
- 1282              		.loc 1 228 5 is_stmt 1 view .LVU266
- 228:Src/control.c ****     MS_5_Flag=1;
- 1283              		.loc 1 228 14 is_stmt 0 view .LVU267
- 1284 0012 044B     		ldr	r3, .L74+4
- 1285 0014 0122     		movs	r2, #1
- 1286 0016 1A70     		strb	r2, [r3]
- 229:Src/control.c ****     Ms_Cnt=0;
- 1287              		.loc 1 229 5 is_stmt 1 view .LVU268
-ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccHXsP8R.s 			page 29
+ 779              		.loc 1 163 5 view .LVU168
+ 780 00e4 2946     		mov	r1, r5
+ 781 00e6 0120     		movs	r0, #1
+ 782 00e8 FFF7FEFF 		bl	Set_Servor
+ 783              	.LVL98:
+ 164:Src/control.c ****     Set_ESC(R_ESC,Pitch_Angle_Speed_Out-Roll_Angle_Speed_Out+base_duty);
+ 784              		.loc 1 164 5 view .LVU169
+ 164:Src/control.c ****     Set_ESC(R_ESC,Pitch_Angle_Speed_Out-Roll_Angle_Speed_Out+base_duty);
+ 785              		.loc 1 164 40 is_stmt 0 view .LVU170
+ 786 00ec 3146     		mov	r1, r6
+ 787 00ee 3846     		mov	r0, r7
+ 788 00f0 FFF7FEFF 		bl	__aeabi_fadd
+ 789              	.LVL99:
+ 164:Src/control.c ****     Set_ESC(R_ESC,Pitch_Angle_Speed_Out-Roll_Angle_Speed_Out+base_duty);
+ 790              		.loc 1 164 5 view .LVU171
+ 791 00f4 2146     		mov	r1, r4
+ 792 00f6 FFF7FEFF 		bl	__aeabi_fadd
+ 793              	.LVL100:
+ 794 00fa 0146     		mov	r1, r0
+ 795 00fc 0020     		movs	r0, #0
+ 796 00fe FFF7FEFF 		bl	Set_ESC
+ 797              	.LVL101:
+ 165:Src/control.c ****   }else if (Aircraft_Mode==Mode_Takeoff){
+ 798              		.loc 1 165 5 is_stmt 1 view .LVU172
+ 165:Src/control.c ****   }else if (Aircraft_Mode==Mode_Takeoff){
+ 799              		.loc 1 165 40 is_stmt 0 view .LVU173
+ 800 0102 3946     		mov	r1, r7
+ 801 0104 3046     		mov	r0, r6
+ 802 0106 FFF7FEFF 		bl	__aeabi_fsub
+ 803              	.LVL102:
+ 165:Src/control.c ****   }else if (Aircraft_Mode==Mode_Takeoff){
+ 804              		.loc 1 165 5 view .LVU174
+ 805 010a 2146     		mov	r1, r4
+ 806 010c FFF7FEFF 		bl	__aeabi_fadd
+ 807              	.LVL103:
+ 808 0110 0146     		mov	r1, r0
+ 809 0112 0120     		movs	r0, #1
+ 810 0114 FFF7FEFF 		bl	Set_ESC
+ 811              	.LVL104:
+ 812 0118 CCE7     		b	.L46
+ 813              	.L57:
+ 167:Src/control.c ****     Set_ESC(R_ESC,Transform_N_to_Duty(result[1]));
+ 814              		.loc 1 167 5 is_stmt 1 view .LVU175
+ 815 011a 0025     		movs	r5, #0
+ 816              	.LVL105:
+ 167:Src/control.c ****     Set_ESC(R_ESC,Transform_N_to_Duty(result[1]));
+ 817              		.loc 1 167 5 is_stmt 0 view .LVU176
+ 818 011c 2846     		mov	r0, r5
+ 819 011e FFF7FEFF 		bl	Transform_N_to_Duty
+ 820              	.LVL106:
+ 821 0122 0446     		mov	r4, r0
+ 822              	.LVL107:
+ 167:Src/control.c ****     Set_ESC(R_ESC,Transform_N_to_Duty(result[1]));
+ 823              		.loc 1 167 5 view .LVU177
+ 824 0124 0146     		mov	r1, r0
+ 825 0126 0020     		movs	r0, #0
+ 826 0128 FFF7FEFF 		bl	Set_ESC
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccdJi6pl.s 			page 20
 
 
- 229:Src/control.c ****     Ms_Cnt=0;
- 1288              		.loc 1 229 11 is_stmt 0 view .LVU269
- 1289 0018 014B     		ldr	r3, .L74
- 1290 001a 0022     		movs	r2, #0
- 1291 001c 1A60     		str	r2, [r3]
- 1292 001e F3E7     		b	.L72
- 1293              	.L75:
- 1294              		.align	2
- 1295              	.L74:
- 1296 0020 00000000 		.word	.LANCHOR14
- 1297 0024 00000000 		.word	.LANCHOR3
- 1298              		.cfi_endproc
- 1299              	.LFE78:
- 1301              		.global	BAT_Voltage
- 1302              		.global	MS_5_Flag
- 1303              		.global	Aircraft_Mode
- 1304              		.global	Pitch_PID
- 1305              		.global	Roll_PID
- 1306              		.comm	Roll,4,4
- 1307              		.comm	Pitch,4,4
- 1308              		.global	Servor_Width_Limit
- 1309              		.global	R_Servor_Middle
- 1310              		.global	L_Servor_Middle
- 1311              		.global	Roll_Stable
- 1312              		.global	Pitch_Stable
- 1313              		.section	.bss.Aircraft_Mode,"aw",%nobits
- 1314              		.set	.LANCHOR11,. + 0
- 1317              	Aircraft_Mode:
- 1318 0000 00       		.space	1
- 1319              		.section	.bss.BAT_Voltage,"aw",%nobits
- 1320              		.align	2
- 1321              		.set	.LANCHOR13,. + 0
- 1324              	BAT_Voltage:
- 1325 0000 00000000 		.space	4
- 1326              		.section	.bss.MS_5_Flag,"aw",%nobits
- 1327              		.set	.LANCHOR3,. + 0
- 1330              	MS_5_Flag:
- 1331 0000 00       		.space	1
- 1332              		.section	.bss.Ms_Cnt.8922,"aw",%nobits
- 1333              		.align	2
- 1334              		.set	.LANCHOR14,. + 0
- 1337              	Ms_Cnt.8922:
- 1338 0000 00000000 		.space	4
- 1339              		.section	.bss.Pitch_PID,"aw",%nobits
- 1340              		.align	2
- 1343              	Pitch_PID:
- 1344 0000 00000000 		.space	32
- 1344      00000000 
- 1344      00000000 
- 1344      00000000 
- 1344      00000000 
- 1345              		.section	.bss.Roll_PID,"aw",%nobits
- 1346              		.align	2
- 1347              		.set	.LANCHOR10,. + 0
- 1350              	Roll_PID:
- 1351 0000 00000000 		.space	32
- 1351      00000000 
-ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccHXsP8R.s 			page 30
+ 827              	.LVL108:
+ 168:Src/control.c ****     Set_Servor(L_Servor,Transform_Rad_to_Dgree(result[2]));
+ 828              		.loc 1 168 5 is_stmt 1 view .LVU178
+ 829 012c 2146     		mov	r1, r4
+ 830 012e 0120     		movs	r0, #1
+ 831 0130 FFF7FEFF 		bl	Set_ESC
+ 832              	.LVL109:
+ 169:Src/control.c ****     Set_Servor(R_Servor,Transform_Rad_to_Dgree(result[3]));
+ 833              		.loc 1 169 5 view .LVU179
+ 834 0134 2846     		mov	r0, r5
+ 835 0136 FFF7FEFF 		bl	Transform_Rad_to_Dgree
+ 836              	.LVL110:
+ 837 013a 0446     		mov	r4, r0
+ 838 013c 0146     		mov	r1, r0
+ 839 013e 0020     		movs	r0, #0
+ 840 0140 FFF7FEFF 		bl	Set_Servor
+ 841              	.LVL111:
+ 170:Src/control.c ****   }else if(Aircraft_Mode==Mode_Stop){
+ 842              		.loc 1 170 5 view .LVU180
+ 843 0144 2146     		mov	r1, r4
+ 844 0146 0120     		movs	r0, #1
+ 845 0148 FFF7FEFF 		bl	Set_Servor
+ 846              	.LVL112:
+ 847 014c B2E7     		b	.L46
+ 848              	.LVL113:
+ 849              	.L58:
+ 172:Src/control.c ****     Set_Servor(R_Servor,0);
+ 850              		.loc 1 172 5 view .LVU181
+ 851 014e 0024     		movs	r4, #0
+ 852              	.LVL114:
+ 172:Src/control.c ****     Set_Servor(R_Servor,0);
+ 853              		.loc 1 172 5 is_stmt 0 view .LVU182
+ 854 0150 2146     		mov	r1, r4
+ 855 0152 0020     		movs	r0, #0
+ 856 0154 FFF7FEFF 		bl	Set_Servor
+ 857              	.LVL115:
+ 173:Src/control.c ****     Set_ESC(L_ESC,0);
+ 858              		.loc 1 173 5 is_stmt 1 view .LVU183
+ 859 0158 2146     		mov	r1, r4
+ 860 015a 0120     		movs	r0, #1
+ 861 015c FFF7FEFF 		bl	Set_Servor
+ 862              	.LVL116:
+ 174:Src/control.c ****     Set_ESC(R_ESC,0); 
+ 863              		.loc 1 174 5 view .LVU184
+ 864 0160 2146     		mov	r1, r4
+ 865 0162 0020     		movs	r0, #0
+ 866 0164 FFF7FEFF 		bl	Set_ESC
+ 867              	.LVL117:
+ 175:Src/control.c ****   }
+ 868              		.loc 1 175 5 view .LVU185
+ 869 0168 2146     		mov	r1, r4
+ 870 016a 0120     		movs	r0, #1
+ 871 016c FFF7FEFF 		bl	Set_ESC
+ 872              	.LVL118:
+ 873 0170 A0E7     		b	.L46
+ 874              	.LVL119:
+ 875              	.L59:
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccdJi6pl.s 			page 21
 
 
- 1351      00000000 
- 1351      00000000 
- 1351      00000000 
- 1352              		.section	.bss.Servor_Width_Limit,"aw",%nobits
- 1353              		.align	2
- 1354              		.set	.LANCHOR2,. + 0
- 1357              	Servor_Width_Limit:
- 1358 0000 00000000 		.space	4
- 1359              		.section	.bss.ac.8890,"aw",%nobits
- 1360              		.align	2
- 1361              		.set	.LANCHOR5,. + 0
- 1364              	ac.8890:
- 1365 0000 00000000 		.space	6
- 1365      0000
- 1366              		.section	.bss.ac_angle.8893,"aw",%nobits
- 1367              		.align	2
- 1368              		.set	.LANCHOR7,. + 0
- 1371              	ac_angle.8893:
- 1372 0000 00000000 		.space	12
- 1372      00000000 
- 1372      00000000 
- 1373              		.section	.bss.angle.8894,"aw",%nobits
- 1374              		.align	2
- 1375              		.set	.LANCHOR8,. + 0
- 1378              	angle.8894:
- 1379 0000 00000000 		.space	12
- 1379      00000000 
- 1379      00000000 
- 1380              		.section	.bss.angle_speed.8892,"aw",%nobits
- 1381              		.align	2
- 1382              		.set	.LANCHOR6,. + 0
- 1385              	angle_speed.8892:
- 1386 0000 00000000 		.space	12
- 1386      00000000 
- 1386      00000000 
- 1387              		.section	.bss.gy.8891,"aw",%nobits
- 1388              		.align	2
- 1389              		.set	.LANCHOR4,. + 0
- 1392              	gy.8891:
- 1393 0000 00000000 		.space	6
- 1393      0000
- 1394              		.section	.bss.loop_cnt.8897,"aw",%nobits
- 1395              		.align	2
- 1396              		.set	.LANCHOR12,. + 0
- 1399              	loop_cnt.8897:
- 1400 0000 00000000 		.space	4
- 1401              		.section	.data.L_Servor_Middle,"aw"
- 1402              		.align	2
- 1403              		.set	.LANCHOR0,. + 0
- 1406              	L_Servor_Middle:
- 1407 0000 78050000 		.word	1400
- 1408              		.section	.data.Pitch_Stable,"aw"
- 1409              		.align	2
- 1412              	Pitch_Stable:
- 1413 0000 0000B442 		.word	1119092736
- 1414              		.section	.data.R_Servor_Middle,"aw"
- 1415              		.align	2
-ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccHXsP8R.s 			page 31
+ 180:Src/control.c ****     if(BAT_Voltage<7400){
+ 876              		.loc 1 180 5 view .LVU186
+ 180:Src/control.c ****     if(BAT_Voltage<7400){
+ 877              		.loc 1 180 17 is_stmt 0 view .LVU187
+ 878 0172 40F69801 		movw	r1, #2200
+ 879 0176 41F2EC30 		movw	r0, #5100
+ 880 017a FFF7FEFF 		bl	Get_Voltage
+ 881              	.LVL120:
+ 180:Src/control.c ****     if(BAT_Voltage<7400){
+ 882              		.loc 1 180 16 view .LVU188
+ 883 017e 1C4B     		ldr	r3, .L61+80
+ 884 0180 1860     		str	r0, [r3]	@ float
+ 181:Src/control.c ****        HAL_GPIO_WritePin(LED_GPIO_Port, LED_Pin, GPIO_PIN_SET);
+ 885              		.loc 1 181 5 is_stmt 1 view .LVU189
+ 181:Src/control.c ****        HAL_GPIO_WritePin(LED_GPIO_Port, LED_Pin, GPIO_PIN_SET);
+ 886              		.loc 1 181 7 is_stmt 0 view .LVU190
+ 887 0182 1C49     		ldr	r1, .L61+84
+ 888 0184 FFF7FEFF 		bl	__aeabi_fcmplt
+ 889              	.LVL121:
+ 890 0188 18B9     		cbnz	r0, .L60
+ 891              	.L49:
+ 184:Src/control.c ****   }
+ 892              		.loc 1 184 5 is_stmt 1 view .LVU191
+ 184:Src/control.c ****   }
+ 893              		.loc 1 184 13 is_stmt 0 view .LVU192
+ 894 018a 184B     		ldr	r3, .L61+76
+ 895 018c 0022     		movs	r2, #0
+ 896 018e 1A60     		str	r2, [r3]
+ 897 0190 96E7     		b	.L48
+ 898              	.L60:
+ 182:Src/control.c ****     }
+ 899              		.loc 1 182 8 is_stmt 1 view .LVU193
+ 900 0192 0122     		movs	r2, #1
+ 901 0194 0821     		movs	r1, #8
+ 902 0196 1848     		ldr	r0, .L61+88
+ 903 0198 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 904              	.LVL122:
+ 905 019c F5E7     		b	.L49
+ 906              	.L62:
+ 907 019e 00BF     		.align	2
+ 908              	.L61:
+ 909 01a0 00000000 		.word	.LANCHOR3
+ 910 01a4 00000000 		.word	.LANCHOR4
+ 911 01a8 00000000 		.word	.LANCHOR5
+ 912 01ac 00000000 		.word	MPU9250
+ 913 01b0 00000000 		.word	.LANCHOR6
+ 914 01b4 00000000 		.word	.LANCHOR8
+ 915 01b8 00000000 		.word	.LANCHOR7
+ 916 01bc 00000000 		.word	Pitch
+ 917 01c0 00000000 		.word	Roll
+ 918 01c4 00000000 		.word	.LANCHOR9
+ 919 01c8 00000000 		.word	.LANCHOR10
+ 920 01cc 00000000 		.word	.LANCHOR11
+ 921 01d0 00000000 		.word	.LANCHOR12
+ 922 01d4 00000000 		.word	.LANCHOR13
+ 923 01d8 00000000 		.word	.LANCHOR14
+ 924 01dc 00000000 		.word	.LANCHOR15
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccdJi6pl.s 			page 22
 
 
- 1416              		.set	.LANCHOR1,. + 0
- 1419              	R_Servor_Middle:
- 1420 0000 72060000 		.word	1650
- 1421              		.section	.data.Roll_Stable,"aw"
- 1422              		.align	2
- 1423              		.set	.LANCHOR9,. + 0
- 1426              	Roll_Stable:
- 1427 0000 0000B442 		.word	1119092736
- 1428              		.text
- 1429              	.Letext0:
- 1430              		.file 2 "Inc/control.h"
- 1431              		.file 3 "c:\\arm_gcc\\arm-none-eabi\\include\\machine\\_default_types.h"
- 1432              		.file 4 "c:\\arm_gcc\\arm-none-eabi\\include\\sys\\_stdint.h"
- 1433              		.file 5 "Drivers/CMSIS/Include/core_cm3.h"
- 1434              		.file 6 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h"
- 1435              		.file 7 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xb.h"
- 1436              		.file 8 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h"
- 1437              		.file 9 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h"
- 1438              		.file 10 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h"
- 1439              		.file 11 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h"
- 1440              		.file 12 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_adc.h"
- 1441              		.file 13 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_i2c.h"
- 1442              		.file 14 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h"
- 1443              		.file 15 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h"
- 1444              		.file 16 "Inc/tim.h"
- 1445              		.file 17 "Inc/i2c.h"
- 1446              		.file 18 "mylib/icm20600.h"
- 1447              		.file 19 "c:\\arm_gcc\\arm-none-eabi\\include\\sys\\lock.h"
- 1448              		.file 20 "c:\\arm_gcc\\arm-none-eabi\\include\\sys\\_types.h"
- 1449              		.file 21 "c:\\arm_gcc\\lib\\gcc\\arm-none-eabi\\9.2.1\\include\\stddef.h"
- 1450              		.file 22 "c:\\arm_gcc\\arm-none-eabi\\include\\sys\\reent.h"
- 1451              		.file 23 "c:\\arm_gcc\\arm-none-eabi\\include\\stdlib.h"
- 1452              		.file 24 "mylib/uart_ext.h"
- 1453              		.file 25 "c:\\arm_gcc\\arm-none-eabi\\include\\math.h"
- 1454              		.file 26 "mylib/pid.h"
- 1455              		.file 27 "Inc/adc.h"
- 1456              		.file 28 "mylib/easy_angle.h"
-ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccHXsP8R.s 			page 32
+ 925 01e0 00000000 		.word	Thrust_Value
+ 926 01e4 00004842 		.word	1112014848
+ 927 01e8 00000000 		.word	.LANCHOR16
+ 928 01ec 00000000 		.word	.LANCHOR17
+ 929 01f0 00000000 		.word	.LANCHOR18
+ 930 01f4 0040E745 		.word	1172783104
+ 931 01f8 000C0140 		.word	1073810432
+ 932              		.cfi_endproc
+ 933              	.LFE75:
+ 935              		.section	.text.Control_Caculate,"ax",%progbits
+ 936              		.align	1
+ 937              		.global	Control_Caculate
+ 938              		.syntax unified
+ 939              		.thumb
+ 940              		.thumb_func
+ 941              		.fpu softvfp
+ 943              	Control_Caculate:
+ 944              	.LVL123:
+ 945              	.LFB76:
+ 190:Src/control.c **** 
+ 191:Src/control.c **** void Control_Caculate(float Fz,float Mx,float My,float Mz,float *result){
+ 946              		.loc 1 191 73 view -0
+ 947              		.cfi_startproc
+ 948              		@ args = 4, pretend = 0, frame = 0
+ 949              		@ frame_needed = 0, uses_anonymous_args = 0
+ 950              		@ link register save eliminated.
+ 192:Src/control.c ****   ;
+ 951              		.loc 1 192 3 view .LVU195
+ 193:Src/control.c **** }
+ 952              		.loc 1 193 1 is_stmt 0 view .LVU196
+ 953 0000 7047     		bx	lr
+ 954              		.cfi_endproc
+ 955              	.LFE76:
+ 957              		.section	.text.NRF_Receive_Callback,"ax",%progbits
+ 958              		.align	1
+ 959              		.global	NRF_Receive_Callback
+ 960              		.syntax unified
+ 961              		.thumb
+ 962              		.thumb_func
+ 963              		.fpu softvfp
+ 965              	NRF_Receive_Callback:
+ 966              	.LVL124:
+ 967              	.LFB77:
+ 194:Src/control.c **** 
+ 195:Src/control.c **** 
+ 196:Src/control.c **** 
+ 197:Src/control.c **** void NRF_Receive_Callback(uint8_t * data,int len){
+ 968              		.loc 1 197 50 is_stmt 1 view -0
+ 969              		.cfi_startproc
+ 970              		@ args = 0, pretend = 0, frame = 0
+ 971              		@ frame_needed = 0, uses_anonymous_args = 0
+ 972              		@ link register save eliminated.
+ 198:Src/control.c ****   
+ 199:Src/control.c ****   uint16_t state=0;
+ 973              		.loc 1 199 3 view .LVU198
+ 200:Src/control.c ****   if(len==10){
+ 974              		.loc 1 200 3 view .LVU199
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccdJi6pl.s 			page 23
+
+
+ 975              		.loc 1 200 5 is_stmt 0 view .LVU200
+ 976 0000 0A29     		cmp	r1, #10
+ 977 0002 00D0     		beq	.L67
+ 978              	.LVL125:
+ 979              	.L64:
+ 201:Src/control.c ****    memcpy(&state,data+8,2);
+ 202:Src/control.c ****    memcpy(&Thrust_Value,data+4,2);
+ 203:Src/control.c ****    state&=0x3FFF;
+ 204:Src/control.c ****    if(state==1){
+ 205:Src/control.c ****      Aircraft_Mode=Mode_Arm;
+ 206:Src/control.c ****    }else if(state==8){
+ 207:Src/control.c ****      Aircraft_Mode=Mode_Stop;
+ 208:Src/control.c ****    }
+ 209:Src/control.c ****   }
+ 210:Src/control.c **** }
+ 980              		.loc 1 210 1 view .LVU201
+ 981 0004 7047     		bx	lr
+ 982              	.LVL126:
+ 983              	.L67:
+ 201:Src/control.c ****    memcpy(&state,data+8,2);
+ 984              		.loc 1 201 4 is_stmt 1 view .LVU202
+ 985 0006 0389     		ldrh	r3, [r0, #8]	@ unaligned
+ 986              	.LVL127:
+ 202:Src/control.c ****    state&=0x3FFF;
+ 987              		.loc 1 202 4 view .LVU203
+ 988 0008 8188     		ldrh	r1, [r0, #4]	@ unaligned
+ 989              	.LVL128:
+ 202:Src/control.c ****    state&=0x3FFF;
+ 990              		.loc 1 202 4 is_stmt 0 view .LVU204
+ 991 000a 084A     		ldr	r2, .L69
+ 992 000c 1180     		strh	r1, [r2]	@ movhi
+ 203:Src/control.c ****    if(state==1){
+ 993              		.loc 1 203 4 is_stmt 1 view .LVU205
+ 203:Src/control.c ****    if(state==1){
+ 994              		.loc 1 203 9 is_stmt 0 view .LVU206
+ 995 000e C3F30D03 		ubfx	r3, r3, #0, #14
+ 996              	.LVL129:
+ 204:Src/control.c ****      Aircraft_Mode=Mode_Arm;
+ 997              		.loc 1 204 4 is_stmt 1 view .LVU207
+ 204:Src/control.c ****      Aircraft_Mode=Mode_Arm;
+ 998              		.loc 1 204 6 is_stmt 0 view .LVU208
+ 999 0012 012B     		cmp	r3, #1
+ 1000 0014 05D0     		beq	.L68
+ 206:Src/control.c ****      Aircraft_Mode=Mode_Stop;
+ 1001              		.loc 1 206 10 is_stmt 1 view .LVU209
+ 206:Src/control.c ****      Aircraft_Mode=Mode_Stop;
+ 1002              		.loc 1 206 12 is_stmt 0 view .LVU210
+ 1003 0016 082B     		cmp	r3, #8
+ 1004 0018 F4D1     		bne	.L64
+ 207:Src/control.c ****    }
+ 1005              		.loc 1 207 6 is_stmt 1 view .LVU211
+ 207:Src/control.c ****    }
+ 1006              		.loc 1 207 19 is_stmt 0 view .LVU212
+ 1007 001a 054B     		ldr	r3, .L69+4
+ 1008              	.LVL130:
+ 207:Src/control.c ****    }
+ 1009              		.loc 1 207 19 view .LVU213
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccdJi6pl.s 			page 24
+
+
+ 1010 001c 0322     		movs	r2, #3
+ 1011 001e 1A70     		strb	r2, [r3]
+ 1012              	.LVL131:
+ 1013              		.loc 1 210 1 view .LVU214
+ 1014 0020 F0E7     		b	.L64
+ 1015              	.LVL132:
+ 1016              	.L68:
+ 205:Src/control.c ****    }else if(state==8){
+ 1017              		.loc 1 205 6 is_stmt 1 view .LVU215
+ 205:Src/control.c ****    }else if(state==8){
+ 1018              		.loc 1 205 19 is_stmt 0 view .LVU216
+ 1019 0022 034B     		ldr	r3, .L69+4
+ 1020              	.LVL133:
+ 205:Src/control.c ****    }else if(state==8){
+ 1021              		.loc 1 205 19 view .LVU217
+ 1022 0024 0122     		movs	r2, #1
+ 1023 0026 1A70     		strb	r2, [r3]
+ 1024 0028 7047     		bx	lr
+ 1025              	.L70:
+ 1026 002a 00BF     		.align	2
+ 1027              	.L69:
+ 1028 002c 00000000 		.word	Thrust_Value
+ 1029 0030 00000000 		.word	.LANCHOR16
+ 1030              		.cfi_endproc
+ 1031              	.LFE77:
+ 1033              		.section	.text.Ms_IRQ_Handler,"ax",%progbits
+ 1034              		.align	1
+ 1035              		.global	Ms_IRQ_Handler
+ 1036              		.syntax unified
+ 1037              		.thumb
+ 1038              		.thumb_func
+ 1039              		.fpu softvfp
+ 1041              	Ms_IRQ_Handler:
+ 1042              	.LFB78:
+ 211:Src/control.c **** 
+ 212:Src/control.c **** extern uint8_t Init_OK;
+ 213:Src/control.c **** void Ms_IRQ_Handler(){
+ 1043              		.loc 1 213 22 is_stmt 1 view -0
+ 1044              		.cfi_startproc
+ 1045              		@ args = 0, pretend = 0, frame = 0
+ 1046              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1047              		@ link register save eliminated.
+ 214:Src/control.c ****   static int Ms_Cnt=0;
+ 1048              		.loc 1 214 3 view .LVU219
+ 215:Src/control.c ****   if(!Init_OK){
+ 1049              		.loc 1 215 3 view .LVU220
+ 1050              		.loc 1 215 6 is_stmt 0 view .LVU221
+ 1051 0000 094B     		ldr	r3, .L75
+ 1052 0002 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 1053              		.loc 1 215 5 view .LVU222
+ 1054 0004 3BB1     		cbz	r3, .L71
+ 216:Src/control.c ****     return ;
+ 217:Src/control.c ****   }
+ 218:Src/control.c ****   if(Ms_Cnt==5){
+ 1055              		.loc 1 218 3 is_stmt 1 view .LVU223
+ 1056              		.loc 1 218 12 is_stmt 0 view .LVU224
+ 1057 0006 094B     		ldr	r3, .L75+4
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccdJi6pl.s 			page 25
+
+
+ 1058 0008 1B68     		ldr	r3, [r3]
+ 1059              		.loc 1 218 5 view .LVU225
+ 1060 000a 052B     		cmp	r3, #5
+ 1061 000c 04D0     		beq	.L74
+ 1062              	.L73:
+ 219:Src/control.c ****     MS_5_Flag=1;
+ 220:Src/control.c ****     Ms_Cnt=0;
+ 221:Src/control.c ****   }
+ 222:Src/control.c **** 
+ 223:Src/control.c ****   Ms_Cnt++;
+ 1063              		.loc 1 223 3 is_stmt 1 view .LVU226
+ 1064              		.loc 1 223 9 is_stmt 0 view .LVU227
+ 1065 000e 074A     		ldr	r2, .L75+4
+ 1066 0010 1368     		ldr	r3, [r2]
+ 1067 0012 0133     		adds	r3, r3, #1
+ 1068 0014 1360     		str	r3, [r2]
+ 1069              	.L71:
+ 224:Src/control.c **** }...
+ 1070              		.loc 1 224 1 view .LVU228
+ 1071 0016 7047     		bx	lr
+ 1072              	.L74:
+ 219:Src/control.c ****     MS_5_Flag=1;
+ 1073              		.loc 1 219 5 is_stmt 1 view .LVU229
+ 219:Src/control.c ****     MS_5_Flag=1;
+ 1074              		.loc 1 219 14 is_stmt 0 view .LVU230
+ 1075 0018 054B     		ldr	r3, .L75+8
+ 1076 001a 0122     		movs	r2, #1
+ 1077 001c 1A70     		strb	r2, [r3]
+ 220:Src/control.c ****     Ms_Cnt=0;
+ 1078              		.loc 1 220 5 is_stmt 1 view .LVU231
+ 220:Src/control.c ****     Ms_Cnt=0;
+ 1079              		.loc 1 220 11 is_stmt 0 view .LVU232
+ 1080 001e 034B     		ldr	r3, .L75+4
+ 1081 0020 0022     		movs	r2, #0
+ 1082 0022 1A60     		str	r2, [r3]
+ 1083 0024 F3E7     		b	.L73
+ 1084              	.L76:
+ 1085 0026 00BF     		.align	2
+ 1086              	.L75:
+ 1087 0028 00000000 		.word	Init_OK
+ 1088 002c 00000000 		.word	.LANCHOR19
+ 1089 0030 00000000 		.word	.LANCHOR3
+ 1090              		.cfi_endproc
+ 1091              	.LFE78:
+ 1093              		.global	BAT_Voltage
+ 1094              		.global	MS_5_Flag
+ 1095              		.global	Aircraft_Mode
+ 1096              		.global	Theta_Angle_Speed_PID
+ 1097              		.global	Roll_Angle_Speed_PID
+ 1098              		.global	Pitch_Angle_Speed_PID
+ 1099              		.global	Theta_PID
+ 1100              		.global	Pitch_PID
+ 1101              		.global	Roll_PID
+ 1102              		.comm	Roll,4,4
+ 1103              		.comm	Pitch,4,4
+ 1104              		.comm	Thrust_Value,2,2
+ 1105              		.global	Servor_Width_Limit
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccdJi6pl.s 			page 26
+
+
+ 1106              		.global	R_Servor_Middle
+ 1107              		.global	L_Servor_Middle
+ 1108              		.global	Roll_Stable
+ 1109              		.global	Pitch_Stable
+ 1110              		.section	.bss.Aircraft_Mode,"aw",%nobits
+ 1111              		.set	.LANCHOR16,. + 0
+ 1114              	Aircraft_Mode:
+ 1115 0000 00       		.space	1
+ 1116              		.section	.bss.BAT_Voltage,"aw",%nobits
+ 1117              		.align	2
+ 1118              		.set	.LANCHOR18,. + 0
+ 1121              	BAT_Voltage:
+ 1122 0000 00000000 		.space	4
+ 1123              		.section	.bss.MS_5_Flag,"aw",%nobits
+ 1124              		.set	.LANCHOR3,. + 0
+ 1127              	MS_5_Flag:
+ 1128 0000 00       		.space	1
+ 1129              		.section	.bss.Ms_Cnt.8928,"aw",%nobits
+ 1130              		.align	2
+ 1131              		.set	.LANCHOR19,. + 0
+ 1134              	Ms_Cnt.8928:
+ 1135 0000 00000000 		.space	4
+ 1136              		.section	.bss.Servor_Width_Limit,"aw",%nobits
+ 1137              		.align	2
+ 1138              		.set	.LANCHOR2,. + 0
+ 1141              	Servor_Width_Limit:
+ 1142 0000 00000000 		.space	4
+ 1143              		.section	.bss.Theta_PID,"aw",%nobits
+ 1144              		.align	2
+ 1147              	Theta_PID:
+ 1148 0000 00000000 		.space	32
+ 1148      00000000 
+ 1148      00000000 
+ 1148      00000000 
+ 1148      00000000 
+ 1149              		.section	.bss.ac.8900,"aw",%nobits
+ 1150              		.align	2
+ 1151              		.set	.LANCHOR5,. + 0
+ 1154              	ac.8900:
+ 1155 0000 00000000 		.space	6
+ 1155      0000
+ 1156              		.section	.bss.ac_angle.8903,"aw",%nobits
+ 1157              		.align	2
+ 1158              		.set	.LANCHOR7,. + 0
+ 1161              	ac_angle.8903:
+ 1162 0000 00000000 		.space	12
+ 1162      00000000 
+ 1162      00000000 
+ 1163              		.section	.bss.angle.8904,"aw",%nobits
+ 1164              		.align	2
+ 1165              		.set	.LANCHOR8,. + 0
+ 1168              	angle.8904:
+ 1169 0000 00000000 		.space	12
+ 1169      00000000 
+ 1169      00000000 
+ 1170              		.section	.bss.angle_speed.8902,"aw",%nobits
+ 1171              		.align	2
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccdJi6pl.s 			page 27
+
+
+ 1172              		.set	.LANCHOR6,. + 0
+ 1175              	angle_speed.8902:
+ 1176 0000 00000000 		.space	12
+ 1176      00000000 
+ 1176      00000000 
+ 1177              		.section	.bss.gy.8901,"aw",%nobits
+ 1178              		.align	2
+ 1179              		.set	.LANCHOR4,. + 0
+ 1182              	gy.8901:
+ 1183 0000 00000000 		.space	6
+ 1183      0000
+ 1184              		.section	.bss.loop_cnt.8911,"aw",%nobits
+ 1185              		.align	2
+ 1186              		.set	.LANCHOR17,. + 0
+ 1189              	loop_cnt.8911:
+ 1190 0000 00000000 		.space	4
+ 1191              		.section	.data.L_Servor_Middle,"aw"
+ 1192              		.align	2
+ 1193              		.set	.LANCHOR0,. + 0
+ 1196              	L_Servor_Middle:
+ 1197 0000 78050000 		.word	1400
+ 1198              		.section	.data.Pitch_Angle_Speed_PID,"aw"
+ 1199              		.align	2
+ 1200              		.set	.LANCHOR13,. + 0
+ 1203              	Pitch_Angle_Speed_PID:
+ 1204 0000 0000003F 		.word	1056964608
+ 1205 0004 00000000 		.word	0
+ 1206 0008 00000000 		.word	0
+ 1207 000c 00000000 		.word	0
+ 1208 0010 00000000 		.word	0
+ 1209 0014 00000000 		.word	0
+ 1210 0018 00000000 		.word	0
+ 1211 001c 0AD7A33B 		.word	1000593162
+ 1212              		.section	.data.Pitch_PID,"aw"
+ 1213              		.align	2
+ 1214              		.set	.LANCHOR10,. + 0
+ 1217              	Pitch_PID:
+ 1218 0000 000000C0 		.word	-1073741824
+ 1219 0004 00000000 		.word	0
+ 1220 0008 6F1203BA 		.word	-1174203793
+ 1221 000c 00000000 		.word	0
+ 1222 0010 00000000 		.word	0
+ 1223 0014 00000000 		.word	0
+ 1224 0018 00000000 		.word	0
+ 1225 001c 0AD7A33B 		.word	1000593162
+ 1226              		.section	.data.Pitch_Stable,"aw"
+ 1227              		.align	2
+ 1228              		.set	.LANCHOR9,. + 0
+ 1231              	Pitch_Stable:
+ 1232 0000 0000B442 		.word	1119092736
+ 1233              		.section	.data.R_Servor_Middle,"aw"
+ 1234              		.align	2
+ 1235              		.set	.LANCHOR1,. + 0
+ 1238              	R_Servor_Middle:
+ 1239 0000 72060000 		.word	1650
+ 1240              		.section	.data.Roll_Angle_Speed_PID,"aw"
+ 1241              		.align	2
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccdJi6pl.s 			page 28
+
+
+ 1242              		.set	.LANCHOR14,. + 0
+ 1245              	Roll_Angle_Speed_PID:
+ 1246 0000 0000403F 		.word	1061158912
+ 1247 0004 00000000 		.word	0
+ 1248 0008 6F12833A 		.word	981668463
+ 1249 000c 00000000 		.word	0
+ 1250 0010 00000000 		.word	0
+ 1251 0014 00000000 		.word	0
+ 1252 0018 00000000 		.word	0
+ 1253 001c 0AD7A33B 		.word	1000593162
+ 1254              		.section	.data.Roll_PID,"aw"
+ 1255              		.align	2
+ 1256              		.set	.LANCHOR12,. + 0
+ 1259              	Roll_PID:
+ 1260 0000 0000C03F 		.word	1069547520
+ 1261 0004 00000000 		.word	0
+ 1262 0008 00000000 		.word	0
+ 1263 000c 00000000 		.word	0
+ 1264 0010 00000000 		.word	0
+ 1265 0014 00000000 		.word	0
+ 1266 0018 00000000 		.word	0
+ 1267 001c 0AD7A33B 		.word	1000593162
+ 1268              		.section	.data.Roll_Stable,"aw"
+ 1269              		.align	2
+ 1270              		.set	.LANCHOR11,. + 0
+ 1273              	Roll_Stable:
+ 1274 0000 0000B442 		.word	1119092736
+ 1275              		.section	.data.Theta_Angle_Speed_PID,"aw"
+ 1276              		.align	2
+ 1277              		.set	.LANCHOR15,. + 0
+ 1280              	Theta_Angle_Speed_PID:
+ 1281 0000 000080BF 		.word	-1082130432
+ 1282 0004 00000000 		.word	0
+ 1283 0008 0AD7A3BB 		.word	-1146890486
+ 1284 000c 00000000 		.word	0
+ 1285 0010 00000000 		.word	0
+ 1286 0014 00000000 		.word	0
+ 1287 0018 00000000 		.word	0
+ 1288 001c 0AD7A33B 		.word	1000593162
+ 1289              		.text
+ 1290              	.Letext0:
+ 1291              		.file 2 "Inc/control.h"
+ 1292              		.file 3 "c:\\arm_gcc\\arm-none-eabi\\include\\machine\\_default_types.h"
+ 1293              		.file 4 "c:\\arm_gcc\\arm-none-eabi\\include\\sys\\_stdint.h"
+ 1294              		.file 5 "Drivers/CMSIS/Include/core_cm3.h"
+ 1295              		.file 6 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h"
+ 1296              		.file 7 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xb.h"
+ 1297              		.file 8 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h"
+ 1298              		.file 9 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h"
+ 1299              		.file 10 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h"
+ 1300              		.file 11 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h"
+ 1301              		.file 12 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_adc.h"
+ 1302              		.file 13 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_i2c.h"
+ 1303              		.file 14 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h"
+ 1304              		.file 15 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h"
+ 1305              		.file 16 "Inc/tim.h"
+ 1306              		.file 17 "Inc/i2c.h"
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccdJi6pl.s 			page 29
+
+
+ 1307              		.file 18 "mylib/icm20600.h"
+ 1308              		.file 19 "c:\\arm_gcc\\arm-none-eabi\\include\\sys\\lock.h"
+ 1309              		.file 20 "c:\\arm_gcc\\arm-none-eabi\\include\\sys\\_types.h"
+ 1310              		.file 21 "c:\\arm_gcc\\lib\\gcc\\arm-none-eabi\\9.2.1\\include\\stddef.h"
+ 1311              		.file 22 "c:\\arm_gcc\\arm-none-eabi\\include\\sys\\reent.h"
+ 1312              		.file 23 "c:\\arm_gcc\\arm-none-eabi\\include\\stdlib.h"
+ 1313              		.file 24 "mylib/uart_ext.h"
+ 1314              		.file 25 "c:\\arm_gcc\\arm-none-eabi\\include\\math.h"
+ 1315              		.file 26 "mylib/pid.h"
+ 1316              		.file 27 "Inc/adc.h"
+ 1317              		.file 28 "mylib/easy_angle.h"
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccdJi6pl.s 			page 30
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 control.c
-C:\Users\ncer\AppData\Local\Temp\ccHXsP8R.s:19     .text.Get_Voltage:00000000 $t
-C:\Users\ncer\AppData\Local\Temp\ccHXsP8R.s:27     .text.Get_Voltage:00000000 Get_Voltage
-C:\Users\ncer\AppData\Local\Temp\ccHXsP8R.s:105    .text.Get_Voltage:00000054 $d
-C:\Users\ncer\AppData\Local\Temp\ccHXsP8R.s:111    .text.Servors_Init:00000000 $t
-C:\Users\ncer\AppData\Local\Temp\ccHXsP8R.s:118    .text.Servors_Init:00000000 Servors_Init
-C:\Users\ncer\AppData\Local\Temp\ccHXsP8R.s:168    .text.Servors_Init:00000034 $d
-C:\Users\ncer\AppData\Local\Temp\ccHXsP8R.s:175    .text.ESC_Init:00000000 $t
-C:\Users\ncer\AppData\Local\Temp\ccHXsP8R.s:182    .text.ESC_Init:00000000 ESC_Init
-C:\Users\ncer\AppData\Local\Temp\ccHXsP8R.s:220    .text.ESC_Init:00000024 $d
-C:\Users\ncer\AppData\Local\Temp\ccHXsP8R.s:229    .text.Set_Servor:00000000 $t
-C:\Users\ncer\AppData\Local\Temp\ccHXsP8R.s:236    .text.Set_Servor:00000000 Set_Servor
-C:\Users\ncer\AppData\Local\Temp\ccHXsP8R.s:349    .text.Set_Servor:00000070 $d
-C:\Users\ncer\AppData\Local\Temp\ccHXsP8R.s:360    .text.Set_ESC:00000000 $t
-C:\Users\ncer\AppData\Local\Temp\ccHXsP8R.s:367    .text.Set_ESC:00000000 Set_ESC
-C:\Users\ncer\AppData\Local\Temp\ccHXsP8R.s:459    .text.Set_ESC:00000060 $d
-C:\Users\ncer\AppData\Local\Temp\ccHXsP8R.s:468    .text.Transform_N_to_Duty:00000000 $t
-C:\Users\ncer\AppData\Local\Temp\ccHXsP8R.s:475    .text.Transform_N_to_Duty:00000000 Transform_N_to_Duty
-C:\Users\ncer\AppData\Local\Temp\ccHXsP8R.s:498    .text.Transform_N_to_Duty:0000000c $d
-C:\Users\ncer\AppData\Local\Temp\ccHXsP8R.s:503    .text.Transform_Rad_to_Dgree:00000000 $t
-C:\Users\ncer\AppData\Local\Temp\ccHXsP8R.s:510    .text.Transform_Rad_to_Dgree:00000000 Transform_Rad_to_Dgree
-C:\Users\ncer\AppData\Local\Temp\ccHXsP8R.s:537    .text.Transform_Rad_to_Dgree:00000010 $d
-C:\Users\ncer\AppData\Local\Temp\ccHXsP8R.s:544    .text.Control_Caculate:00000000 $t
-C:\Users\ncer\AppData\Local\Temp\ccHXsP8R.s:551    .text.Control_Caculate:00000000 Control_Caculate
-C:\Users\ncer\AppData\Local\Temp\ccHXsP8R.s:881    .text.Control_Caculate:000001a0 $d
-C:\Users\ncer\AppData\Local\Temp\ccHXsP8R.s:889    .text.Control_Loop:00000000 $t
-C:\Users\ncer\AppData\Local\Temp\ccHXsP8R.s:896    .text.Control_Loop:00000000 Control_Loop
-C:\Users\ncer\AppData\Local\Temp\ccHXsP8R.s:1160   .text.Control_Loop:00000158 $d
+C:\Users\ncer\AppData\Local\Temp\ccdJi6pl.s:19     .text.Get_Voltage:00000000 $t
+C:\Users\ncer\AppData\Local\Temp\ccdJi6pl.s:27     .text.Get_Voltage:00000000 Get_Voltage
+C:\Users\ncer\AppData\Local\Temp\ccdJi6pl.s:105    .text.Get_Voltage:00000054 $d
+C:\Users\ncer\AppData\Local\Temp\ccdJi6pl.s:111    .text.Servors_Init:00000000 $t
+C:\Users\ncer\AppData\Local\Temp\ccdJi6pl.s:118    .text.Servors_Init:00000000 Servors_Init
+C:\Users\ncer\AppData\Local\Temp\ccdJi6pl.s:168    .text.Servors_Init:00000034 $d
+C:\Users\ncer\AppData\Local\Temp\ccdJi6pl.s:175    .text.ESC_Init:00000000 $t
+C:\Users\ncer\AppData\Local\Temp\ccdJi6pl.s:182    .text.ESC_Init:00000000 ESC_Init
+C:\Users\ncer\AppData\Local\Temp\ccdJi6pl.s:220    .text.ESC_Init:00000024 $d
+C:\Users\ncer\AppData\Local\Temp\ccdJi6pl.s:229    .text.Set_Servor:00000000 $t
+C:\Users\ncer\AppData\Local\Temp\ccdJi6pl.s:236    .text.Set_Servor:00000000 Set_Servor
+C:\Users\ncer\AppData\Local\Temp\ccdJi6pl.s:349    .text.Set_Servor:00000070 $d
+C:\Users\ncer\AppData\Local\Temp\ccdJi6pl.s:360    .text.Set_ESC:00000000 $t
+C:\Users\ncer\AppData\Local\Temp\ccdJi6pl.s:367    .text.Set_ESC:00000000 Set_ESC
+C:\Users\ncer\AppData\Local\Temp\ccdJi6pl.s:473    .text.Set_ESC:0000006c $d
+C:\Users\ncer\AppData\Local\Temp\ccdJi6pl.s:482    .text.Transform_N_to_Duty:00000000 $t
+C:\Users\ncer\AppData\Local\Temp\ccdJi6pl.s:489    .text.Transform_N_to_Duty:00000000 Transform_N_to_Duty
+C:\Users\ncer\AppData\Local\Temp\ccdJi6pl.s:512    .text.Transform_N_to_Duty:0000000c $d
+C:\Users\ncer\AppData\Local\Temp\ccdJi6pl.s:517    .text.Transform_Rad_to_Dgree:00000000 $t
+C:\Users\ncer\AppData\Local\Temp\ccdJi6pl.s:524    .text.Transform_Rad_to_Dgree:00000000 Transform_Rad_to_Dgree
+C:\Users\ncer\AppData\Local\Temp\ccdJi6pl.s:551    .text.Transform_Rad_to_Dgree:00000010 $d
+C:\Users\ncer\AppData\Local\Temp\ccdJi6pl.s:558    .text.Control_Loop:00000000 $t
+C:\Users\ncer\AppData\Local\Temp\ccdJi6pl.s:565    .text.Control_Loop:00000000 Control_Loop
+C:\Users\ncer\AppData\Local\Temp\ccdJi6pl.s:909    .text.Control_Loop:000001a0 $d
                             *COM*:00000004 Pitch
                             *COM*:00000004 Roll
-C:\Users\ncer\AppData\Local\Temp\ccHXsP8R.s:1182   .text.NRF_Receive_Callback:00000000 $t
-C:\Users\ncer\AppData\Local\Temp\ccHXsP8R.s:1189   .text.NRF_Receive_Callback:00000000 NRF_Receive_Callback
-C:\Users\ncer\AppData\Local\Temp\ccHXsP8R.s:1245   .text.NRF_Receive_Callback:00000024 $d
-C:\Users\ncer\AppData\Local\Temp\ccHXsP8R.s:1250   .text.Ms_IRQ_Handler:00000000 $t
-C:\Users\ncer\AppData\Local\Temp\ccHXsP8R.s:1257   .text.Ms_IRQ_Handler:00000000 Ms_IRQ_Handler
-C:\Users\ncer\AppData\Local\Temp\ccHXsP8R.s:1296   .text.Ms_IRQ_Handler:00000020 $d
-C:\Users\ncer\AppData\Local\Temp\ccHXsP8R.s:1324   .bss.BAT_Voltage:00000000 BAT_Voltage
-C:\Users\ncer\AppData\Local\Temp\ccHXsP8R.s:1330   .bss.MS_5_Flag:00000000 MS_5_Flag
-C:\Users\ncer\AppData\Local\Temp\ccHXsP8R.s:1317   .bss.Aircraft_Mode:00000000 Aircraft_Mode
-C:\Users\ncer\AppData\Local\Temp\ccHXsP8R.s:1343   .bss.Pitch_PID:00000000 Pitch_PID
-C:\Users\ncer\AppData\Local\Temp\ccHXsP8R.s:1350   .bss.Roll_PID:00000000 Roll_PID
-C:\Users\ncer\AppData\Local\Temp\ccHXsP8R.s:1357   .bss.Servor_Width_Limit:00000000 Servor_Width_Limit
-C:\Users\ncer\AppData\Local\Temp\ccHXsP8R.s:1419   .data.R_Servor_Middle:00000000 R_Servor_Middle
-C:\Users\ncer\AppData\Local\Temp\ccHXsP8R.s:1406   .data.L_Servor_Middle:00000000 L_Servor_Middle
-C:\Users\ncer\AppData\Local\Temp\ccHXsP8R.s:1426   .data.Roll_Stable:00000000 Roll_Stable
-C:\Users\ncer\AppData\Local\Temp\ccHXsP8R.s:1412   .data.Pitch_Stable:00000000 Pitch_Stable
-C:\Users\ncer\AppData\Local\Temp\ccHXsP8R.s:1318   .bss.Aircraft_Mode:00000000 $d
-C:\Users\ncer\AppData\Local\Temp\ccHXsP8R.s:1320   .bss.BAT_Voltage:00000000 $d
-C:\Users\ncer\AppData\Local\Temp\ccHXsP8R.s:1331   .bss.MS_5_Flag:00000000 $d
-C:\Users\ncer\AppData\Local\Temp\ccHXsP8R.s:1333   .bss.Ms_Cnt.8922:00000000 $d
-C:\Users\ncer\AppData\Local\Temp\ccHXsP8R.s:1337   .bss.Ms_Cnt.8922:00000000 Ms_Cnt.8922
-C:\Users\ncer\AppData\Local\Temp\ccHXsP8R.s:1340   .bss.Pitch_PID:00000000 $d
-C:\Users\ncer\AppData\Local\Temp\ccHXsP8R.s:1346   .bss.Roll_PID:00000000 $d
-C:\Users\ncer\AppData\Local\Temp\ccHXsP8R.s:1353   .bss.Servor_Width_Limit:00000000 $d
-C:\Users\ncer\AppData\Local\Temp\ccHXsP8R.s:1360   .bss.ac.8890:00000000 $d
-C:\Users\ncer\AppData\Local\Temp\ccHXsP8R.s:1364   .bss.ac.8890:00000000 ac.8890
-ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccHXsP8R.s 			page 33
+                            *COM*:00000002 Thrust_Value
+C:\Users\ncer\AppData\Local\Temp\ccdJi6pl.s:936    .text.Control_Caculate:00000000 $t
+C:\Users\ncer\AppData\Local\Temp\ccdJi6pl.s:943    .text.Control_Caculate:00000000 Control_Caculate
+C:\Users\ncer\AppData\Local\Temp\ccdJi6pl.s:958    .text.NRF_Receive_Callback:00000000 $t
+C:\Users\ncer\AppData\Local\Temp\ccdJi6pl.s:965    .text.NRF_Receive_Callback:00000000 NRF_Receive_Callback
+C:\Users\ncer\AppData\Local\Temp\ccdJi6pl.s:1028   .text.NRF_Receive_Callback:0000002c $d
+C:\Users\ncer\AppData\Local\Temp\ccdJi6pl.s:1034   .text.Ms_IRQ_Handler:00000000 $t
+C:\Users\ncer\AppData\Local\Temp\ccdJi6pl.s:1041   .text.Ms_IRQ_Handler:00000000 Ms_IRQ_Handler
+C:\Users\ncer\AppData\Local\Temp\ccdJi6pl.s:1087   .text.Ms_IRQ_Handler:00000028 $d
+C:\Users\ncer\AppData\Local\Temp\ccdJi6pl.s:1121   .bss.BAT_Voltage:00000000 BAT_Voltage
+C:\Users\ncer\AppData\Local\Temp\ccdJi6pl.s:1127   .bss.MS_5_Flag:00000000 MS_5_Flag
+C:\Users\ncer\AppData\Local\Temp\ccdJi6pl.s:1114   .bss.Aircraft_Mode:00000000 Aircraft_Mode
+C:\Users\ncer\AppData\Local\Temp\ccdJi6pl.s:1280   .data.Theta_Angle_Speed_PID:00000000 Theta_Angle_Speed_PID
+C:\Users\ncer\AppData\Local\Temp\ccdJi6pl.s:1245   .data.Roll_Angle_Speed_PID:00000000 Roll_Angle_Speed_PID
+C:\Users\ncer\AppData\Local\Temp\ccdJi6pl.s:1203   .data.Pitch_Angle_Speed_PID:00000000 Pitch_Angle_Speed_PID
+C:\Users\ncer\AppData\Local\Temp\ccdJi6pl.s:1147   .bss.Theta_PID:00000000 Theta_PID
+C:\Users\ncer\AppData\Local\Temp\ccdJi6pl.s:1217   .data.Pitch_PID:00000000 Pitch_PID
+C:\Users\ncer\AppData\Local\Temp\ccdJi6pl.s:1259   .data.Roll_PID:00000000 Roll_PID
+C:\Users\ncer\AppData\Local\Temp\ccdJi6pl.s:1141   .bss.Servor_Width_Limit:00000000 Servor_Width_Limit
+C:\Users\ncer\AppData\Local\Temp\ccdJi6pl.s:1238   .data.R_Servor_Middle:00000000 R_Servor_Middle
+C:\Users\ncer\AppData\Local\Temp\ccdJi6pl.s:1196   .data.L_Servor_Middle:00000000 L_Servor_Middle
+C:\Users\ncer\AppData\Local\Temp\ccdJi6pl.s:1273   .data.Roll_Stable:00000000 Roll_Stable
+C:\Users\ncer\AppData\Local\Temp\ccdJi6pl.s:1231   .data.Pitch_Stable:00000000 Pitch_Stable
+C:\Users\ncer\AppData\Local\Temp\ccdJi6pl.s:1115   .bss.Aircraft_Mode:00000000 $d
+C:\Users\ncer\AppData\Local\Temp\ccdJi6pl.s:1117   .bss.BAT_Voltage:00000000 $d
+C:\Users\ncer\AppData\Local\Temp\ccdJi6pl.s:1128   .bss.MS_5_Flag:00000000 $d
+C:\Users\ncer\AppData\Local\Temp\ccdJi6pl.s:1130   .bss.Ms_Cnt.8928:00000000 $d
+C:\Users\ncer\AppData\Local\Temp\ccdJi6pl.s:1134   .bss.Ms_Cnt.8928:00000000 Ms_Cnt.8928
+C:\Users\ncer\AppData\Local\Temp\ccdJi6pl.s:1137   .bss.Servor_Width_Limit:00000000 $d
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccdJi6pl.s 			page 31
 
 
-C:\Users\ncer\AppData\Local\Temp\ccHXsP8R.s:1367   .bss.ac_angle.8893:00000000 $d
-C:\Users\ncer\AppData\Local\Temp\ccHXsP8R.s:1371   .bss.ac_angle.8893:00000000 ac_angle.8893
-C:\Users\ncer\AppData\Local\Temp\ccHXsP8R.s:1374   .bss.angle.8894:00000000 $d
-C:\Users\ncer\AppData\Local\Temp\ccHXsP8R.s:1378   .bss.angle.8894:00000000 angle.8894
-C:\Users\ncer\AppData\Local\Temp\ccHXsP8R.s:1381   .bss.angle_speed.8892:00000000 $d
-C:\Users\ncer\AppData\Local\Temp\ccHXsP8R.s:1385   .bss.angle_speed.8892:00000000 angle_speed.8892
-C:\Users\ncer\AppData\Local\Temp\ccHXsP8R.s:1388   .bss.gy.8891:00000000 $d
-C:\Users\ncer\AppData\Local\Temp\ccHXsP8R.s:1392   .bss.gy.8891:00000000 gy.8891
-C:\Users\ncer\AppData\Local\Temp\ccHXsP8R.s:1395   .bss.loop_cnt.8897:00000000 $d
-C:\Users\ncer\AppData\Local\Temp\ccHXsP8R.s:1399   .bss.loop_cnt.8897:00000000 loop_cnt.8897
-C:\Users\ncer\AppData\Local\Temp\ccHXsP8R.s:1402   .data.L_Servor_Middle:00000000 $d
-C:\Users\ncer\AppData\Local\Temp\ccHXsP8R.s:1409   .data.Pitch_Stable:00000000 $d
-C:\Users\ncer\AppData\Local\Temp\ccHXsP8R.s:1415   .data.R_Servor_Middle:00000000 $d
-C:\Users\ncer\AppData\Local\Temp\ccHXsP8R.s:1422   .data.Roll_Stable:00000000 $d
+C:\Users\ncer\AppData\Local\Temp\ccdJi6pl.s:1144   .bss.Theta_PID:00000000 $d
+C:\Users\ncer\AppData\Local\Temp\ccdJi6pl.s:1150   .bss.ac.8900:00000000 $d
+C:\Users\ncer\AppData\Local\Temp\ccdJi6pl.s:1154   .bss.ac.8900:00000000 ac.8900
+C:\Users\ncer\AppData\Local\Temp\ccdJi6pl.s:1157   .bss.ac_angle.8903:00000000 $d
+C:\Users\ncer\AppData\Local\Temp\ccdJi6pl.s:1161   .bss.ac_angle.8903:00000000 ac_angle.8903
+C:\Users\ncer\AppData\Local\Temp\ccdJi6pl.s:1164   .bss.angle.8904:00000000 $d
+C:\Users\ncer\AppData\Local\Temp\ccdJi6pl.s:1168   .bss.angle.8904:00000000 angle.8904
+C:\Users\ncer\AppData\Local\Temp\ccdJi6pl.s:1171   .bss.angle_speed.8902:00000000 $d
+C:\Users\ncer\AppData\Local\Temp\ccdJi6pl.s:1175   .bss.angle_speed.8902:00000000 angle_speed.8902
+C:\Users\ncer\AppData\Local\Temp\ccdJi6pl.s:1178   .bss.gy.8901:00000000 $d
+C:\Users\ncer\AppData\Local\Temp\ccdJi6pl.s:1182   .bss.gy.8901:00000000 gy.8901
+C:\Users\ncer\AppData\Local\Temp\ccdJi6pl.s:1185   .bss.loop_cnt.8911:00000000 $d
+C:\Users\ncer\AppData\Local\Temp\ccdJi6pl.s:1189   .bss.loop_cnt.8911:00000000 loop_cnt.8911
+C:\Users\ncer\AppData\Local\Temp\ccdJi6pl.s:1192   .data.L_Servor_Middle:00000000 $d
+C:\Users\ncer\AppData\Local\Temp\ccdJi6pl.s:1199   .data.Pitch_Angle_Speed_PID:00000000 $d
+C:\Users\ncer\AppData\Local\Temp\ccdJi6pl.s:1213   .data.Pitch_PID:00000000 $d
+C:\Users\ncer\AppData\Local\Temp\ccdJi6pl.s:1227   .data.Pitch_Stable:00000000 $d
+C:\Users\ncer\AppData\Local\Temp\ccdJi6pl.s:1234   .data.R_Servor_Middle:00000000 $d
+C:\Users\ncer\AppData\Local\Temp\ccdJi6pl.s:1241   .data.Roll_Angle_Speed_PID:00000000 $d
+C:\Users\ncer\AppData\Local\Temp\ccdJi6pl.s:1255   .data.Roll_PID:00000000 $d
+C:\Users\ncer\AppData\Local\Temp\ccdJi6pl.s:1269   .data.Roll_Stable:00000000 $d
+C:\Users\ncer\AppData\Local\Temp\ccdJi6pl.s:1276   .data.Theta_Angle_Speed_PID:00000000 $d
 
 UNDEFINED SYMBOLS
 __aeabi_i2f
@@ -1932,8 +1794,6 @@ __aeabi_f2iz
 htim2
 __aeabi_fadd
 __aeabi_fsub
-sqrtf
-atan2f
 MPU_Read6500
 Gyroraw_to_Angle_Speed
 get_angle
@@ -1941,3 +1801,4 @@ PID_Control
 send_wave
 HAL_GPIO_WritePin
 MPU9250
+Init_OK

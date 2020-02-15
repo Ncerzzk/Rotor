@@ -22,12 +22,20 @@ int Servor_Width_Limit=0; // 舵机脉宽限制
 
 #define MIN(a,b) a<b?a:b
 
+int16_t Thrust_Value;
+
 // pitch 往前低头为正 
 // Roll 右倾为正
 float Pitch,Roll;   
 
-PID_S Roll_PID={0,0,0};
-PID_S Pitch_PID={0,0,0};
+PID_S Roll_PID={1.5,0,0,0,0,0,0,0.005f};
+PID_S Pitch_PID={-2,0,-0.0005f,0,0,0,0,0.005f};
+PID_S Theta_PID={0,0,0};
+
+PID_S Pitch_Angle_Speed_PID={0.5,0,0,0,0,0,0,0.005f};
+PID_S Roll_Angle_Speed_PID={0.75f,0,0.001f,0,0,0,0,0.005f};
+
+PID_S Theta_Angle_Speed_PID={-1,0,-0.005f,0,0,0,0,0.005f};
 
 enum Modes Aircraft_Mode=Mode_Wait;
 
@@ -65,6 +73,7 @@ void ESC_Init(){
 
 void Set_Servor(enum Servors Servor,float theta){
   // theta 取值 -45 到 45 因为舵机的运动范围并没有到180°
+  // theat 为正值，舵机向前
   if(theta>Servor_Angle_Limit){
     theta=Servor_Angle_Limit;
   }else if(theta<-Servor_Angle_Limit){
@@ -82,8 +91,10 @@ void Set_Servor(enum Servors Servor,float theta){
 }
 
 void Set_ESC(enum ESCs ESC,float duty){
-  if(duty>100){
-    duty=100;
+  if(duty>95){
+    duty=95;
+  }else if(duty<0){
+    duty=0;
   }
   switch(ESC){
   case L_ESC:
@@ -103,12 +114,20 @@ float Transform_Rad_to_Dgree(float rad){
   return rad/3.14f*360.0f;
 }
 
+float Caculate_theta(float pitch,float roll);
+
+#define PI 3.1415926f
 void Control_Loop(){
   static int16_t ac[3],gy[3];
   static float angle_speed[3],ac_angle[3],angle[3];
   float Roll_Out=0;
+  float Pitch_Out=0;
+  float Pitch_Angle_Speed_Out,Roll_Angle_Speed_Out;
+  float Theta_Angle_Speed_Out;
   float result[4]={0};
   static int loop_cnt=0;
+
+  float base_duty=0;
 
   if(!MS_5_Flag){
     return ;
@@ -120,14 +139,30 @@ void Control_Loop(){
   Pitch=angle[1];
   Roll=angle[0];
   
+  //  Roll_Out=PID_Control(&Roll_PID,Roll_Stable,Roll);
+
+  // 前倾 角度为正  角速度为负
+  // 左倾 角度为负 角速度为负    最终输出 左+右-，所以ROLL_Angle_PID 为正
+  Pitch_Out=PID_Control(&Pitch_PID,Pitch_Stable,Pitch);
   Roll_Out=PID_Control(&Roll_PID,Roll_Stable,Roll);
+
+  Pitch_Angle_Speed_Out=PID_Control(&Pitch_Angle_Speed_PID,Pitch_Out,angle_speed[0]);
+  Roll_Angle_Speed_Out=PID_Control(&Roll_Angle_Speed_PID,Roll_Out,angle_speed[1]);
+
+  Theta_Angle_Speed_Out=PID_Control(&Theta_Angle_Speed_PID,Pitch_Out,angle_speed[0]);
+
+  Pitch_Angle_Speed_Out=fabs(Pitch_Angle_Speed_Out);
+
+  base_duty=Thrust_Value/128.0f*50.0f;
+  if(base_duty<0){
+    base_duty=0;
+  }
   
-  Control_Caculate(1,Roll_Out,0,0,result);
   if (Aircraft_Mode==Mode_Arm){
-    Set_Servor(L_Servor,0);
-    Set_Servor(R_Servor,0);
-    Set_ESC(L_ESC,50);
-    Set_ESC(R_ESC,50);
+    Set_Servor(L_Servor,Theta_Angle_Speed_Out);
+    Set_Servor(R_Servor,Theta_Angle_Speed_Out);
+    Set_ESC(L_ESC,Pitch_Angle_Speed_Out+Roll_Angle_Speed_Out+base_duty);
+    Set_ESC(R_ESC,Pitch_Angle_Speed_Out-Roll_Angle_Speed_Out+base_duty);
   }else if (Aircraft_Mode==Mode_Takeoff){
     Set_ESC(L_ESC, Transform_N_to_Duty(result[0]));
     Set_ESC(R_ESC,Transform_N_to_Duty(result[1]));
@@ -148,71 +183,23 @@ void Control_Loop(){
     }
     loop_cnt=0;
   }
-  send_wave(angle[0],angle[1],BAT_Voltage/100,0);
+  send_wave(angle[0],angle[1],angle_speed[0],angle_speed[1]);
 
   MS_5_Flag=0;
 }
 
-
 void Control_Caculate(float Fz,float Mx,float My,float Mz,float *result){
-  /*顺序为 F1 F2 theta1 theta2
-
-/               #2              \
-|             -----             |
-|             2 d r             |
-|                               |
-|               #1              |
-|             -----             |
-|             2 d r             |
-|                               |
-|      / Mx r - #2 + Fz d r \   |
-| -atan| ------------------ | 2 |
-|      \     My d + Mz r    /   |
-|                               |
-|      / Mx r + #1 - Fz d r \   |
-|  atan| ------------------ | 2 |
-\      \     My d - Mz r    /   /
-
-where
-
-                2  2  2              2     2  2     2  2                   2  2
-   #1 == sqrt(Fz  d  r  - 2 Fz Mx d r  + Mx  r  + My  d  - 2 My Mz d r + Mz  r )
-
-                2  2  2              2     2  2     2  2                   2  2
-   #2 == sqrt(Fz  d  r  + 2 Fz Mx d r  + Mx  r  + My  d  + 2 My Mz d r + Mz  r )
-*/
-  
-  float M1, M2;
-  
-  float F1,F2,theta1,theta2;
-  float d,r;
-  
-  r=0.04f; // 单位 m
-  d=0.1f;
-  
-  float temp1=Fz*Fz*d*d*r*r+Mx*Mx*r*r+My*My*d*d+Mz*Mz*r*r;
-  float temp2=2*Fz*Mx*d*r*r+2*My*Mz*d*r;
-  
-  M1=sqrtf(temp1-temp2);
-  M2=sqrtf(temp1+temp2);
-  
-  F1=M2/(2*d*r);
-  F2=M1/(2*d*r);
-  
-  theta1=-2*atan2f(Mx*r-M2+Fz*d*r,(My*d+Mz*r+0.000000001f));
-  theta2=2*atan2f(Mx*r+M1-Fz*d*r,(My*d-Mz*r+0.000000001f));
-  
-  result[0]=F1;
-  result[1]=F2;
-  result[2]=theta1;
-  result[3]=theta2;
+  ;
 }
+
+
 
 void NRF_Receive_Callback(uint8_t * data,int len){
   
   uint16_t state=0;
   if(len==10){
    memcpy(&state,data+8,2);
+   memcpy(&Thrust_Value,data+4,2);
    state&=0x3FFF;
    if(state==1){
      Aircraft_Mode=Mode_Arm;
@@ -222,8 +209,12 @@ void NRF_Receive_Callback(uint8_t * data,int len){
   }
 }
 
+extern uint8_t Init_OK;
 void Ms_IRQ_Handler(){
   static int Ms_Cnt=0;
+  if(!Init_OK){
+    return ;
+  }
   if(Ms_Cnt==5){
     MS_5_Flag=1;
     Ms_Cnt=0;

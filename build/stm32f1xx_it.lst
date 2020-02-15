@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\ncer\AppData\Local\Temp\cceYftsr.s 			page 1
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccr1f3Ay.s 			page 1
 
 
    1              		.cpu cortex-m3
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\ncer\AppData\Local\Temp\cceYftsr.s 			page 1
   30:Src/stm32f1xx_it.c **** /* USER CODE BEGIN TD */
   31:Src/stm32f1xx_it.c **** 
   32:Src/stm32f1xx_it.c **** /* USER CODE END TD */
-ARM GAS  C:\Users\ncer\AppData\Local\Temp\cceYftsr.s 			page 2
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccr1f3Ay.s 			page 2
 
 
   33:Src/stm32f1xx_it.c **** 
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\ncer\AppData\Local\Temp\cceYftsr.s 			page 1
   32              		.loc 1 81 1 view .LVU1
   33 0000 7047     		bx	lr
   34              		.cfi_endproc
-ARM GAS  C:\Users\ncer\AppData\Local\Temp\cceYftsr.s 			page 3
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccr1f3Ay.s 			page 3
 
 
   35              	.LFE65:
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\ncer\AppData\Local\Temp\cceYftsr.s 			page 1
   71              		.loc 1 102 1 view -0
   72              		.cfi_startproc
   73              		@ Volatile: function does not return.
-ARM GAS  C:\Users\ncer\AppData\Local\Temp\cceYftsr.s 			page 4
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccr1f3Ay.s 			page 4
 
 
   74              		@ args = 0, pretend = 0, frame = 0
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\ncer\AppData\Local\Temp\cceYftsr.s 			page 1
  105 0000 FEE7     		b	.L7
  106              		.cfi_endproc
  107              	.LFE68:
-ARM GAS  C:\Users\ncer\AppData\Local\Temp\cceYftsr.s 			page 5
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccr1f3Ay.s 			page 5
 
 
  109              		.section	.text.UsageFault_Handler,"ax",%progbits
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\ncer\AppData\Local\Temp\cceYftsr.s 			page 1
  143              		.loc 1 147 1 view -0
  144              		.cfi_startproc
  145              		@ args = 0, pretend = 0, frame = 0
-ARM GAS  C:\Users\ncer\AppData\Local\Temp\cceYftsr.s 			page 6
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccr1f3Ay.s 			page 6
 
 
  146              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\ncer\AppData\Local\Temp\cceYftsr.s 			page 1
  169:Src/stm32f1xx_it.c **** /**
  170:Src/stm32f1xx_it.c ****   * @brief This function handles Pendable request for system service.
  171:Src/stm32f1xx_it.c ****   */
-ARM GAS  C:\Users\ncer\AppData\Local\Temp\cceYftsr.s 			page 7
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccr1f3Ay.s 			page 7
 
 
  172:Src/stm32f1xx_it.c **** void PendSV_Handler(void)
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\ncer\AppData\Local\Temp\cceYftsr.s 			page 1
  193:Src/stm32f1xx_it.c ****   /* USER CODE END SysTick_IRQn 1 */
  194:Src/stm32f1xx_it.c **** }
  218              		.loc 1 194 1 is_stmt 0 view .LVU27
-ARM GAS  C:\Users\ncer\AppData\Local\Temp\cceYftsr.s 			page 8
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccr1f3Ay.s 			page 8
 
 
  219 000a 08BD     		pop	{r3, pc}
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\ncer\AppData\Local\Temp\cceYftsr.s 			page 1
  255              		.section	.text.DMA1_Channel5_IRQHandler,"ax",%progbits
  256              		.align	1
  257              		.global	DMA1_Channel5_IRQHandler
-ARM GAS  C:\Users\ncer\AppData\Local\Temp\cceYftsr.s 			page 9
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccr1f3Ay.s 			page 9
 
 
  258              		.syntax unified
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\ncer\AppData\Local\Temp\cceYftsr.s 			page 1
  234:Src/stm32f1xx_it.c **** void USART1_IRQHandler(void)
  235:Src/stm32f1xx_it.c **** {
  297              		.loc 1 235 1 is_stmt 1 view -0
-ARM GAS  C:\Users\ncer\AppData\Local\Temp\cceYftsr.s 			page 10
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccr1f3Ay.s 			page 10
 
 
  298              		.cfi_startproc
@@ -592,54 +592,99 @@ ARM GAS  C:\Users\ncer\AppData\Local\Temp\cceYftsr.s 			page 1
  332 0020 00000000 		.word	huart1
  333              		.cfi_endproc
  334              	.LFE76:
- 336              		.text
- 337              	.Letext0:
- 338              		.file 2 "c:\\arm_gcc\\arm-none-eabi\\include\\machine\\_default_types.h"
- 339              		.file 3 "c:\\arm_gcc\\arm-none-eabi\\include\\sys\\_stdint.h"
- 340              		.file 4 "Drivers/CMSIS/Include/core_cm3.h"
- 341              		.file 5 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h"
-ARM GAS  C:\Users\ncer\AppData\Local\Temp\cceYftsr.s 			page 11
+ 336              		.section	.text.EXTI15_10_IRQHandler,"ax",%progbits
+ 337              		.align	1
+ 338              		.global	EXTI15_10_IRQHandler
+ 339              		.syntax unified
+ 340              		.thumb
+ 341              		.thumb_func
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccr1f3Ay.s 			page 11
 
 
- 342              		.file 6 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xb.h"
- 343              		.file 7 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h"
- 344              		.file 8 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h"
- 345              		.file 9 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h"
- 346              		.file 10 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h"
- 347              		.file 11 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h"
- 348              		.file 12 "Inc/control.h"
-ARM GAS  C:\Users\ncer\AppData\Local\Temp\cceYftsr.s 			page 12
+ 342              		.fpu softvfp
+ 344              	EXTI15_10_IRQHandler:
+ 345              	.LFB77:
+ 248:Src/stm32f1xx_it.c **** 
+ 249:Src/stm32f1xx_it.c **** /* USER CODE BEGIN 1 */
+ 250:Src/stm32f1xx_it.c **** #include "nrf24l01.h"
+ 251:Src/stm32f1xx_it.c **** void EXTI15_10_IRQHandler(void)
+ 252:Src/stm32f1xx_it.c **** {
+ 346              		.loc 1 252 1 view -0
+ 347              		.cfi_startproc
+ 348              		@ args = 0, pretend = 0, frame = 0
+ 349              		@ frame_needed = 0, uses_anonymous_args = 0
+ 350 0000 08B5     		push	{r3, lr}
+ 351              	.LCFI4:
+ 352              		.cfi_def_cfa_offset 8
+ 353              		.cfi_offset 3, -8
+ 354              		.cfi_offset 14, -4
+ 253:Src/stm32f1xx_it.c ****   /* USER CODE BEGIN EXTI9_5_IRQn 0 */
+ 254:Src/stm32f1xx_it.c **** 
+ 255:Src/stm32f1xx_it.c ****   /* USER CODE END EXTI9_5_IRQn 0 */
+ 256:Src/stm32f1xx_it.c ****   HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_12);
+ 355              		.loc 1 256 3 view .LVU44
+ 356 0002 4FF48050 		mov	r0, #4096
+ 357 0006 FFF7FEFF 		bl	HAL_GPIO_EXTI_IRQHandler
+ 358              	.LVL6:
+ 257:Src/stm32f1xx_it.c ****   //NRF_RX_IRQ_Handler();
+ 258:Src/stm32f1xx_it.c ****   /* USER CODE BEGIN EXTI9_5_IRQn 1 */
+ 259:Src/stm32f1xx_it.c **** 
+ 260:Src/stm32f1xx_it.c ****   /* USER CODE END EXTI9_5_IRQn 1 */
+ 261:Src/stm32f1xx_it.c **** }
+ 359              		.loc 1 261 1 is_stmt 0 view .LVU45
+ 360 000a 08BD     		pop	{r3, pc}
+ 361              		.cfi_endproc
+ 362              	.LFE77:
+ 364              		.text
+ 365              	.Letext0:
+ 366              		.file 2 "c:\\arm_gcc\\arm-none-eabi\\include\\machine\\_default_types.h"
+ 367              		.file 3 "c:\\arm_gcc\\arm-none-eabi\\include\\sys\\_stdint.h"
+ 368              		.file 4 "Drivers/CMSIS/Include/core_cm3.h"
+ 369              		.file 5 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h"
+ 370              		.file 6 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xb.h"
+ 371              		.file 7 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h"
+ 372              		.file 8 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h"
+ 373              		.file 9 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h"
+ 374              		.file 10 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h"
+ 375              		.file 11 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h"
+ 376              		.file 12 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h"
+ 377              		.file 13 "Inc/spi.h"
+ 378              		.file 14 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h"
+ 379              		.file 15 "Inc/control.h"
+ARM GAS  C:\Users\ncer\AppData\Local\Temp\ccr1f3Ay.s 			page 12
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 stm32f1xx_it.c
-C:\Users\ncer\AppData\Local\Temp\cceYftsr.s:16     .text.NMI_Handler:00000000 $t
-C:\Users\ncer\AppData\Local\Temp\cceYftsr.s:24     .text.NMI_Handler:00000000 NMI_Handler
-C:\Users\ncer\AppData\Local\Temp\cceYftsr.s:38     .text.HardFault_Handler:00000000 $t
-C:\Users\ncer\AppData\Local\Temp\cceYftsr.s:45     .text.HardFault_Handler:00000000 HardFault_Handler
-C:\Users\ncer\AppData\Local\Temp\cceYftsr.s:62     .text.MemManage_Handler:00000000 $t
-C:\Users\ncer\AppData\Local\Temp\cceYftsr.s:69     .text.MemManage_Handler:00000000 MemManage_Handler
-C:\Users\ncer\AppData\Local\Temp\cceYftsr.s:86     .text.BusFault_Handler:00000000 $t
-C:\Users\ncer\AppData\Local\Temp\cceYftsr.s:93     .text.BusFault_Handler:00000000 BusFault_Handler
-C:\Users\ncer\AppData\Local\Temp\cceYftsr.s:110    .text.UsageFault_Handler:00000000 $t
-C:\Users\ncer\AppData\Local\Temp\cceYftsr.s:117    .text.UsageFault_Handler:00000000 UsageFault_Handler
-C:\Users\ncer\AppData\Local\Temp\cceYftsr.s:134    .text.SVC_Handler:00000000 $t
-C:\Users\ncer\AppData\Local\Temp\cceYftsr.s:141    .text.SVC_Handler:00000000 SVC_Handler
-C:\Users\ncer\AppData\Local\Temp\cceYftsr.s:154    .text.DebugMon_Handler:00000000 $t
-C:\Users\ncer\AppData\Local\Temp\cceYftsr.s:161    .text.DebugMon_Handler:00000000 DebugMon_Handler
-C:\Users\ncer\AppData\Local\Temp\cceYftsr.s:174    .text.PendSV_Handler:00000000 $t
-C:\Users\ncer\AppData\Local\Temp\cceYftsr.s:181    .text.PendSV_Handler:00000000 PendSV_Handler
-C:\Users\ncer\AppData\Local\Temp\cceYftsr.s:194    .text.SysTick_Handler:00000000 $t
-C:\Users\ncer\AppData\Local\Temp\cceYftsr.s:201    .text.SysTick_Handler:00000000 SysTick_Handler
-C:\Users\ncer\AppData\Local\Temp\cceYftsr.s:224    .text.DMA1_Channel4_IRQHandler:00000000 $t
-C:\Users\ncer\AppData\Local\Temp\cceYftsr.s:231    .text.DMA1_Channel4_IRQHandler:00000000 DMA1_Channel4_IRQHandler
-C:\Users\ncer\AppData\Local\Temp\cceYftsr.s:251    .text.DMA1_Channel4_IRQHandler:0000000c $d
-C:\Users\ncer\AppData\Local\Temp\cceYftsr.s:256    .text.DMA1_Channel5_IRQHandler:00000000 $t
-C:\Users\ncer\AppData\Local\Temp\cceYftsr.s:263    .text.DMA1_Channel5_IRQHandler:00000000 DMA1_Channel5_IRQHandler
-C:\Users\ncer\AppData\Local\Temp\cceYftsr.s:283    .text.DMA1_Channel5_IRQHandler:0000000c $d
-C:\Users\ncer\AppData\Local\Temp\cceYftsr.s:288    .text.USART1_IRQHandler:00000000 $t
-C:\Users\ncer\AppData\Local\Temp\cceYftsr.s:295    .text.USART1_IRQHandler:00000000 USART1_IRQHandler
-C:\Users\ncer\AppData\Local\Temp\cceYftsr.s:332    .text.USART1_IRQHandler:00000020 $d
+C:\Users\ncer\AppData\Local\Temp\ccr1f3Ay.s:16     .text.NMI_Handler:00000000 $t
+C:\Users\ncer\AppData\Local\Temp\ccr1f3Ay.s:24     .text.NMI_Handler:00000000 NMI_Handler
+C:\Users\ncer\AppData\Local\Temp\ccr1f3Ay.s:38     .text.HardFault_Handler:00000000 $t
+C:\Users\ncer\AppData\Local\Temp\ccr1f3Ay.s:45     .text.HardFault_Handler:00000000 HardFault_Handler
+C:\Users\ncer\AppData\Local\Temp\ccr1f3Ay.s:62     .text.MemManage_Handler:00000000 $t
+C:\Users\ncer\AppData\Local\Temp\ccr1f3Ay.s:69     .text.MemManage_Handler:00000000 MemManage_Handler
+C:\Users\ncer\AppData\Local\Temp\ccr1f3Ay.s:86     .text.BusFault_Handler:00000000 $t
+C:\Users\ncer\AppData\Local\Temp\ccr1f3Ay.s:93     .text.BusFault_Handler:00000000 BusFault_Handler
+C:\Users\ncer\AppData\Local\Temp\ccr1f3Ay.s:110    .text.UsageFault_Handler:00000000 $t
+C:\Users\ncer\AppData\Local\Temp\ccr1f3Ay.s:117    .text.UsageFault_Handler:00000000 UsageFault_Handler
+C:\Users\ncer\AppData\Local\Temp\ccr1f3Ay.s:134    .text.SVC_Handler:00000000 $t
+C:\Users\ncer\AppData\Local\Temp\ccr1f3Ay.s:141    .text.SVC_Handler:00000000 SVC_Handler
+C:\Users\ncer\AppData\Local\Temp\ccr1f3Ay.s:154    .text.DebugMon_Handler:00000000 $t
+C:\Users\ncer\AppData\Local\Temp\ccr1f3Ay.s:161    .text.DebugMon_Handler:00000000 DebugMon_Handler
+C:\Users\ncer\AppData\Local\Temp\ccr1f3Ay.s:174    .text.PendSV_Handler:00000000 $t
+C:\Users\ncer\AppData\Local\Temp\ccr1f3Ay.s:181    .text.PendSV_Handler:00000000 PendSV_Handler
+C:\Users\ncer\AppData\Local\Temp\ccr1f3Ay.s:194    .text.SysTick_Handler:00000000 $t
+C:\Users\ncer\AppData\Local\Temp\ccr1f3Ay.s:201    .text.SysTick_Handler:00000000 SysTick_Handler
+C:\Users\ncer\AppData\Local\Temp\ccr1f3Ay.s:224    .text.DMA1_Channel4_IRQHandler:00000000 $t
+C:\Users\ncer\AppData\Local\Temp\ccr1f3Ay.s:231    .text.DMA1_Channel4_IRQHandler:00000000 DMA1_Channel4_IRQHandler
+C:\Users\ncer\AppData\Local\Temp\ccr1f3Ay.s:251    .text.DMA1_Channel4_IRQHandler:0000000c $d
+C:\Users\ncer\AppData\Local\Temp\ccr1f3Ay.s:256    .text.DMA1_Channel5_IRQHandler:00000000 $t
+C:\Users\ncer\AppData\Local\Temp\ccr1f3Ay.s:263    .text.DMA1_Channel5_IRQHandler:00000000 DMA1_Channel5_IRQHandler
+C:\Users\ncer\AppData\Local\Temp\ccr1f3Ay.s:283    .text.DMA1_Channel5_IRQHandler:0000000c $d
+C:\Users\ncer\AppData\Local\Temp\ccr1f3Ay.s:288    .text.USART1_IRQHandler:00000000 $t
+C:\Users\ncer\AppData\Local\Temp\ccr1f3Ay.s:295    .text.USART1_IRQHandler:00000000 USART1_IRQHandler
+C:\Users\ncer\AppData\Local\Temp\ccr1f3Ay.s:332    .text.USART1_IRQHandler:00000020 $d
+C:\Users\ncer\AppData\Local\Temp\ccr1f3Ay.s:337    .text.EXTI15_10_IRQHandler:00000000 $t
+C:\Users\ncer\AppData\Local\Temp\ccr1f3Ay.s:344    .text.EXTI15_10_IRQHandler:00000000 EXTI15_10_IRQHandler
 
 UNDEFINED SYMBOLS
 HAL_IncTick
@@ -650,3 +695,4 @@ hdma_usart1_rx
 HAL_UART_IRQHandler
 HAL_UART_IDLECallback
 huart1
+HAL_GPIO_EXTI_IRQHandler

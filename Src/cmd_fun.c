@@ -127,6 +127,49 @@ void esc_test(int arg_num,char ** s,float * args){
   }
 }
 
+#include "pid.h"
+extern PID_S Pitch_PID;
+extern PID_S Theta_PID;
+extern PID_S Roll_PID;
+PID_S Pitch_Angle_Speed_PID;
+PID_S Roll_Angle_Speed_PID;
+PID_S Theta_Angle_Speed_PID;
+
+/*
+  eg: set_pid pitch p 5
+*/
+
+void set_PID(int arg_num,char ** s,float * args){
+  PID_S * pid_s;
+  float * kpkdki;
+  if(arg_num!=0x0201){
+    uprintf("error arg_num!\r\n");
+    return ;
+  }
+  if(compare_string(s[0],"pitch")){
+    pid_s=&Pitch_PID;
+  }else if(compare_string(s[0],"theta")){
+    pid_s=&Theta_PID;
+  }else if(compare_string(s[0],"roll")){
+    pid_s=&Roll_PID;
+  }else if(compare_string(s[0],"roll_a")){
+    pid_s=&Roll_Angle_Speed_PID;
+  }else if(compare_string(s[0],"theta_a")){
+    pid_s=&Theta_Angle_Speed_PID;
+  }else if(compare_string(s[0],"pitch_a")){
+    pid_s=&Pitch_Angle_Speed_PID;
+  }
+  
+  if(compare_string(s[1],"p")){
+    kpkdki=&(pid_s->KP);
+  }else if(compare_string(s[1],"d")){
+    kpkdki=&(pid_s->KD);
+  }else if(compare_string(s[1],"i")){
+    kpkdki=&(pid_s->KI);
+  }
+  *kpkdki=args[0];
+  uprintf("ok set %s 's %s = %f\r\n",s[0],s[1],args[0]);
+}
 /*
 将要增加的命令与函数写在这里
 */
@@ -135,6 +178,7 @@ void command_init(void){
   add_cmd("tim_test",TIM_test);
   add_cmd("ser_test",servor_test);
   add_cmd("esc_test",esc_test);
+  add_cmd("set_pid",set_PID);
 }
 
 

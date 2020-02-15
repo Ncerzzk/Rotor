@@ -1,4 +1,4 @@
-build/cmd_fun.o: mylib/cmd_fun.c mylib/cmd_fun.h mylib/command.h \
+build/cmd_fun.o: Src/cmd_fun.c mylib/cmd_fun.h mylib/command.h \
  mylib/uart_ext.h Inc/main.h \
  Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h \
  Inc/stm32f1xx_hal_conf.h \
@@ -26,7 +26,7 @@ build/cmd_fun.o: mylib/cmd_fun.c mylib/cmd_fun.h mylib/command.h \
  Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h \
  Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h \
  Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h Inc/tim.h \
- Inc/main.h Inc/control.h
+ Inc/main.h Inc/control.h mylib/pid.h
 
 mylib/cmd_fun.h:
 
@@ -97,3 +97,5 @@ Inc/tim.h:
 Inc/main.h:
 
 Inc/control.h:
+
+mylib/pid.h:

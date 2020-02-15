@@ -36,6 +36,8 @@
 #include "easy_angle.h"
 #include "control.h"
 #include "nrf24l01.h"
+
+uint8_t Init_OK=0;
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -133,7 +135,11 @@ int main(void)
   debug_uart_init(&huart1,BLOCK,DMA);
   Set_Servor(L_Servor,0);
   Set_Servor(R_Servor,0);
+
+  //NRF_Receive_IT();
   uprintf("hello,world!\r\n");
+
+  Init_OK=1;
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -146,7 +152,7 @@ int main(void)
       UART_Command_Analize_And_Call();
     }
 
-    NRF_Receive();
+    NRF_Receive(); 
     Control_Loop();
     /* USER CODE BEGIN 3 */
   }

@@ -36,7 +36,14 @@ BUILD_DIR = build
 ######################################
 # C sources
 C_SOURCES =  \
-$(wildcard mylib/*.c) \
+mylib/command.c \
+mylib/easy_angle.c \
+mylib/i2c_ext.c \
+mylib/icm20600.c \
+mylib/nrf24l01.c \
+mylib/pid.c \
+mylib/uart_ext.c \
+Src/cmd_fun.c \
 Src/control.c \
 Src/main.c \
 Src/gpio.c \
@@ -158,7 +165,7 @@ LDSCRIPT = STM32F103C8Tx_FLASH.ld
 LIBS = -lc -lm -lnosys 
 LIBDIR = 
 LDFLAGS = $(MCU) -specs=nano.specs -T$(LDSCRIPT) $(LIBDIR) $(LIBS) -Wl,-Map=$(BUILD_DIR)/$(TARGET).map,--cref -Wl,--gc-sections
-
+LDFLAGS += -lrdimon -u _printf_float
 # default action: build all
 all: $(BUILD_DIR)/$(TARGET).elf $(BUILD_DIR)/$(TARGET).hex $(BUILD_DIR)/$(TARGET).bin
 
